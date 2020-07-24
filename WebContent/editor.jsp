@@ -40,7 +40,8 @@ body {
 		%> <script type="text/javascript">
 		var code ="SE Editor"; 
 		var javaCode="// class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
-			</script>
+		var codeType=null;
+		</script>
 		
 		<input type="text" id="codeName" name="codeName" value= "codeName" />
 				
@@ -166,7 +167,8 @@ body {
     
     function getCode(){ // 코드를 배열에 저장해서 반환함
     	
-    	var codeType= getCodeType();
+    	if(codeType==null)
+    		codeType=getCodeType();
 		var code = new Array();
 		var splitCode="SE_uuugi_jjang_jjang";// splitcode 이것을 기점으로 나눌예정
 		
@@ -212,8 +214,10 @@ body {
         hiddenField.setAttribute("value", codeName);
         form.appendChild(hiddenField);
         
-        var codeType=getCodeType(); // codeType 넘기기 위해 form 생성
-        var hiddenField = document.createElement("input");
+        if(codeType==null){
+        codeType=getCodeType();
+        }
+        var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", "codeType");
         hiddenField.setAttribute("value", codeType);
@@ -232,7 +236,9 @@ body {
    
 	function play(){
 		var code= getCode();
-		var codeType = getCodeType(); // codeType 넘기기 위해 form 생성
+        if(codeType==null){
+            codeType=getCodeType();
+            }
 		
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
@@ -254,7 +260,7 @@ body {
 		form.appendChild(hiddenField);
 
 		
-		var hiddenField = document.createElement("input");
+		var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
 		hiddenField.setAttribute("type", "hidden");
 		hiddenField.setAttribute("name", "codeType");
 		hiddenField.setAttribute("value", codeType);
