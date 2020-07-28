@@ -31,11 +31,17 @@ function showOrHide(name){
 		else
 			codeListJava.style.display="none";
 	}
-	else{
+	else if(name=='python'){
 		if(codeListPython.style.display!='block')
 			codeListPython.style.display="block";
 		else
 			codeListPython.style.display="none";
+	}
+	else if(name=='javascript'){
+		if(codeListJavascript.style.display!='block')
+			codeListJavascript.style.display="block";
+		else
+			codeListJavascript.style.display="none";
 	}
 }
 </script>
@@ -50,10 +56,12 @@ function showOrHide(name){
 	ArrayList<String> codeListC = new ArrayList<String>(); 
 	ArrayList<String> codeListJava = new ArrayList<String>();
 	ArrayList<String> codeListPython = new ArrayList<String>();
+	ArrayList<String> codeListJavascript = new ArrayList<String>();
 	
 	codeListC= dao.getCodeListC(user_id);// ArrayList에 codeType별로 codList저장받음
 	codeListJava= dao.getCodeListJava(user_id);
 	codeListPython = dao.getCodeListPython(user_id);
+	codeListJavascript= dao.getCodeListJavascript(user_id);
 	
 	%>
 	<a href="#" onclick="showOrHide('c')">C</a> <!-- list 제목을 나타내는 부분 클릭시 list hide or show 실행 -->
@@ -87,6 +95,20 @@ function showOrHide(name){
 	<table id="codeListPython">
 	<a href="#" onclick="showOrHide('python')">python</a>
 	<% for(String i: codeListPython){%>
+		<tr>
+		<td> 
+		<form method="post" action="editor.jsp" id='<%=i %>' target="editor">
+		<input type="hidden" name="codeName" value=<%=i %>>
+		</form>
+		<a href="#" onclick="document.getElementById('<%=i %>').submit();"><%=i %> </a> </td>
+		 <td> drop</td> </tr>
+	<% } %>
+	</table>
+		
+	<hr>
+	<table id="codeListJavascript">
+	<a href="#" onclick="showOrHide('javascript')">javaScript</a>
+	<% for(String i: codeListJavascript){%>
 		<tr>
 		<td> 
 		<form method="post" action="editor.jsp" id='<%=i %>' target="editor">
