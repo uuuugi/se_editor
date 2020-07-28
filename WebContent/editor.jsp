@@ -32,6 +32,7 @@ body {
 	String codeName= (String)request.getParameter("codeName");
 	%> 
 	<nav>
+	<input type="button" name="new" value="new" onclick="newFile()" />
 	<input type="button" name="save" value="save" onclick="save()" /> 
 	<input type="button" name="run" value="Run" onclick="play()" />
 	
@@ -49,6 +50,7 @@ body {
 		<option value="c">c</option>
 		<option value="java">java</option>
 		<option value="python">python</option>
+		<option value="javascript">javascript</option>
 		</select>
 		<%
 	}else{// codeName이 있을경우 == workSpaceList를 이용하여 코드를 불러왔을때
@@ -86,6 +88,7 @@ body {
 	<div id="monacoC" style="height: 90vh;"></div> <!-- 언어별로 div를 생성하여 각각 ide를 넣어줄것이다 -->
 	<div id="monacoJava" style="height: 90vh; display:none;"></div>
 	<div id="monacoPython" style="height: 90vh; display:none;"></div>
+	<div id="monacoJavascript" style="height: 90vh; display: none;"></div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
@@ -93,21 +96,32 @@ body {
 	<script>
 
      function changeLanguage(value){ // select box 에서 언어를 변경하면 그에 맞는 ide 창을 보여준다
-    	 if(value=='c'){
-    		 document.getElementById("monacoC").style.display="block";
-    		 document.getElementById("monacoJava").style.display="none";
-    		 document.getElementById("monacoPython").style.display="none";
-    	 }
-    	 else if(value == 'java'){
-    		 document.getElementById("monacoC").style.display="none";
-    		 document.getElementById("monacoJava").style.display="block";
-    		 document.getElementById("monacoPython").style.display="none";
-    	 }
-    	 else if(value=='python'){
-    		 document.getElementById("monacoC").style.display="none";
-    		 document.getElementById("monacoJava").style.display="none";
-    		 document.getElementById("monacoPython").style.display="block";
-    	 }
+         if(value=='c'){
+             document.getElementById("monacoC").style.display="block";
+             document.getElementById("monacoJava").style.display="none";
+             document.getElementById("monacoPython").style.display="none";
+             document.getElementById("monacoJavascript").style.display="none";
+          }
+          else if(value == 'java'){
+             document.getElementById("monacoC").style.display="none";
+             document.getElementById("monacoJava").style.display="block";
+             document.getElementById("monacoPython").style.display="none";
+             document.getElementById("monacoJavascript").style.display="none";
+          }
+          else if(value=='python'){
+             document.getElementById("monacoC").style.display="none";
+             document.getElementById("monacoJava").style.display="none";
+             document.getElementById("monacoPython").style.display="block";
+             document.getElementById("monacoJavascript").style.display="none";
+          }
+
+         else if(value=='javascript'){
+             document.getElementById("monacoC").style.display="none";
+             document.getElementById("monacoJava").style.display="none";
+             document.getElementById("monacoPython").style.display="none";
+             document.getElementById("monacoJavascript").style.display="block";
+          }
+
      }
      
     var editorC;
@@ -158,17 +172,34 @@ body {
       });
     }); 
     
+    var editorJavascript;
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
+    require(['vs/editor/editor.main'], function() {
+       editorJavascript = monaco.editor.create(document.getElementById('monacoJavascript'), {
+        theme: 'vs-dark',
+        fontFamily: 'Nanum Gothic Coding',
+        automaticLayout: true,
+        EditorFindOptions:true,
+        EditorLightbulbOptions:true, //전구
+        language: 'javascript',
+        value: [
+           code
+        ].join('\n')
+      });
+    }); 
+
     function getCodeType()//select box에 있는 codeType을 가져오는 함수
     {
+    	if(codeType==null){
     	var target = document.getElementById("selectCodeType");
-        var language= target.options[target.selectedIndex].text;
-        return language;
+        codeType= target.options[target.selectedIndex].text;
+    	}
+        return codeType;
     }
     
     function getCode(){ // 코드를 배열에 저장해서 반환함
     	
-    	if(codeType==null)
-    		codeType=getCodeType();
+    	codeType=getCodeType();
 		var code = new Array();
 		var splitCode="SE_uuugi_jjang_jjang";// splitcode 이것을 기점으로 나눌예정
 		
@@ -182,12 +213,17 @@ body {
      			for(var i=0; i<line; i++)
    				code[i]=editorJava.getModel().getLineContent(i+1)+splitCode;
     	}
-    	else{
+    	else if(codeType=='python'){
         	var line= editorPython.getModel().getLineCount();
      			for(var i=0; i<line; i++)
    				code[i]=editorPython.getModel().getLineContent(i+1)+splitCode;
     	}
-		
+        else if(codeType=="javascript"){
+            var line= editorJavascript.getModel().getLineCount();
+            for(var i=0; i<line; i++)
+             code[i]=editorJavascript.getModel().getLineContent(i+1)+splitCode;
+        }
+
 		return code;
     }
 
@@ -214,9 +250,7 @@ body {
         hiddenField.setAttribute("value", codeName);
         form.appendChild(hiddenField);
         
-        if(codeType==null){
         codeType=getCodeType();
-        }
         var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", "codeType");
@@ -236,9 +270,8 @@ body {
    
 	function play(){
 		var code= getCode();
-        if(codeType==null){
-            codeType=getCodeType();
-            }
+        codeType=getCodeType();
+            
 		
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");

@@ -240,6 +240,42 @@ public class codeDAO {
 		return codeList;
 	}
 	
+	public ArrayList<String> getCodeListJavascript(String user_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> codeList = new ArrayList<String>();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select codeName from workspace where user_id=? AND codeType=?;";
+		      pstmt= conn.prepareStatement(sql);
+		      pstmt.setString(1, user_id);
+		      pstmt.setString(2, "javaScript");
+		      
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					codeList.add(rs.getString("codeName"));
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return codeList;
+	}
+	
 	public boolean updateCode(codeVO vo) {
 		boolean result = false;
 		Connection conn = null;
