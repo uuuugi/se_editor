@@ -27,6 +27,64 @@ public class memberDAO {
 		return conn;
 	}
 
+	public void dbinsert(memberVO vo) {         // 회원가입시 정보를  db에 입력하기 위한 메소드
+	      Connection conn=null;
+	       PreparedStatement pstmt = null;
+	       int rs = 0;
+	       
+	       try {
+	         conn= getConnection();
+	         
+	         String sql = "insert into user values (?, ?, ?, ?, ?, ?);";
+	         String sql2 = "insert into workspaceUserData values (?);";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1,vo.id);
+	         pstmt.setString(2,vo.pw);
+	         pstmt.setString(3,vo.name);
+	         pstmt.setString(4,vo.mail);
+	         pstmt.setString(5,vo.info);
+	         pstmt.setString(6,"user");
+	         
+	         rs = pstmt.executeUpdate();
+	         
+	         pstmt.close();
+	         
+	         pstmt = conn.prepareStatement(sql2);
+	         pstmt.setString(1,vo.id);
+	         rs = pstmt.executeUpdate();
+	         
+	         
+	         pstmt.close();
+	         conn.close();
+	         
+	         
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	   }
+	
+	public int idCheck(String id){   // id를 db에서 확인하여 중복 체크하기 위한 메소드
+        int rst = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+         conn = getConnection();
+         String sql = "select * from user where user_id=?";
+         ps = conn.prepareStatement(sql);
+         ps.setString(1, id);
+         rs = ps.executeQuery();
+         if(rs.next()){
+          rst = 1;
+         }
+        }catch(Exception e){
+         e.printStackTrace();
+        }
+        return rst;
+       }
+	
 	public int dologin(memberVO vo) {
 			Connection conn=null;
 		    PreparedStatement pstmt = null;
