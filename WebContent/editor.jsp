@@ -9,20 +9,16 @@
 <title>Editor For C</title>
 <link rel="stylesheet" href="cssForIde.css" />
 <style>
-
 nav {
 	width: 50vw;
 	color:white;
 	background-color: black;
 	padding:1vh;
 }
-
 body {
 	background-color: black;
 	margin: 0;
 }
-
-
 </style>
 </head>
 <body>
@@ -30,6 +26,8 @@ body {
 	<%	
 	request.setCharacterEncoding("utf-8"); 
 	String codeName= (String)request.getParameter("codeName");
+	if("SE_uuuugi_jjang".equals(codeName))
+		codeName=null;
 	%> 
 	<nav>
 	<input type="button" name="new" value="new" onclick="newFile()" />
@@ -39,6 +37,7 @@ body {
 	<%
 	if(codeName==null){ //codeName이 없을경우 == editor를 새로 열었을때
 		%> <script type="text/javascript">
+		var codeName= 'codeName';
 		var code ="SE Editor"; 
 		var javaCode="// class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
 		var codeType=null;
@@ -94,7 +93,6 @@ body {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
 
 	<script>
-
      function changeLanguage(value){ // select box 에서 언어를 변경하면 그에 맞는 ide 창을 보여준다
          if(value=='c'){
              document.getElementById("monacoC").style.display="block";
@@ -114,14 +112,12 @@ body {
              document.getElementById("monacoPython").style.display="block";
              document.getElementById("monacoJavascript").style.display="none";
           }
-
          else if(value=='javascript'){
              document.getElementById("monacoC").style.display="none";
              document.getElementById("monacoJava").style.display="none";
              document.getElementById("monacoPython").style.display="none";
              document.getElementById("monacoJavascript").style.display="block";
           }
-
      }
      
     var editorC;
@@ -187,7 +183,25 @@ body {
         ].join('\n')
       });
     }); 
+    
+    function newFile()
+    {
+        var form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "Post");  //Post 방식
+        form.setAttribute("target", "editor");//저장이되면 새창 출력
+        form.setAttribute("action", "editor.jsp"); //요청 보낼 주소
+        
+        var codeName= 'SE_uuuugi_jjang';// text창에 있는 value값 가져오기
+        var hiddenField = document.createElement("input"); // codeName 넘기기 위해 form 생성
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "codeName");
+        hiddenField.setAttribute("value", codeName);
+        form.appendChild(hiddenField);
 
+        document.body.appendChild(form);
+        form.submit(); 
+    }
     function getCodeType()//select box에 있는 codeType을 가져오는 함수
     {
     	if(codeType==null){
@@ -223,10 +237,8 @@ body {
             for(var i=0; i<line; i++)
              code[i]=editorJavascript.getModel().getLineContent(i+1)+splitCode;
         }
-
 		return code;
     }
-
     function reloadWorkSpaceList()//workSpaceList 새로고침
     {
     	parent.frames.workSpaceList.location.reload();
@@ -234,9 +246,7 @@ body {
     
      function save() { // value 전체 가져오는 방법  + post 전송 + test
 		var code=getCode();
-
 		var newWinForSave = window.open("save.jsp", "PopUpWin", "width=200,height=200");//저장완료 창을 위한 새창 만들기
-
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
         form.setAttribute("method", "Post");  //Post 방식
@@ -284,30 +294,25 @@ body {
         else(codeType=='c')
             form.setAttribute("action", "run.jsp"); //요청 보낼 주소3 */
         form.setAttribute("target", "run");
-
         var codeName= document.getElementById("codeName").value;
 		var hiddenField = document.createElement("input"); // codeName 넘기기 위해 form 생성
 		hiddenField.setAttribute("type", "hidden");
 		hiddenField.setAttribute("name", "codeName");
 		hiddenField.setAttribute("value", codeName);
 		form.appendChild(hiddenField);
-
 		
 		var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
 		hiddenField.setAttribute("type", "hidden");
 		hiddenField.setAttribute("name", "codeType");
 		hiddenField.setAttribute("value", codeType);
 		form.appendChild(hiddenField);
-
 		var hiddenField = document.createElement("input"); //code 넘기기 위해 form 생성
 		hiddenField.setAttribute("type", "hidden");
 		hiddenField.setAttribute("name", "code");
 		hiddenField.setAttribute("value", code);
 		form.appendChild(hiddenField);
-
 		document.body.appendChild(form);
 		form.submit();
-
 		}
 	</script>
 </body>
