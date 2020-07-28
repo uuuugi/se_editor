@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="member.memberVO" %>
-<%@ page import="member.memberDAO" %>
+<%@ page import="member.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +17,11 @@
 	String id=request.getParameter("id");
 	String pw=request.getParameter("pw");
 	
+	System.out.println(id + "  " + pw);
 	vo.setId(id);
 	vo.setPw(pw);
 
-	loginResult = dao.dologin(vo);// vo를 파라미터로 오버로딩
+	loginResult = dao.dologin(vo);
 	
 	if(loginResult==1){
 		session.setAttribute("id", vo.getId());

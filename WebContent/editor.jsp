@@ -26,7 +26,7 @@ body {
 	<%	
 	request.setCharacterEncoding("utf-8"); 
 	String codeName= (String)request.getParameter("codeName");
-	if("SE_uuuugi_jjang".equals(codeName))
+	if("SE_uuuugi_jjang".equals(codeName)) /* se_uuuugi_jjang는 newFile()을 실행시켰을 경우에 코드이름으로 지정된다 */
 		codeName=null;
 	%> 
 	<nav>
@@ -38,8 +38,10 @@ body {
 	if(codeName==null){ //codeName이 없을경우 == editor를 새로 열었을때
 		%> <script type="text/javascript">
 		var codeName= 'codeName';
-		var code ="SE Editor"; 
-		var javaCode="// class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
+		var cCode ="//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\n\n			int main(void)\n\n			{\n\n	\n			printf(\"Hello World\");\n				return 0;\n			}"; 
+		var javaCode="// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
+		var pythonCode="#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello, Python')";
+		var javascriptCode="//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
 		var codeType=null;
 		</script>
 		
@@ -59,7 +61,6 @@ body {
 		String codeType=dao.getCodeType(user_id,codeName);
 		String tmpCode= dao.getCode(user_id,codeName);// code 불러오기
 		String code="";
-		String javaCode="";		
 		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
 	 	String[] afterSplitCode = tmpCode.split(splitCode);//split해서 라인별로 배열에 저장
 				
@@ -67,15 +68,16 @@ body {
 			code += afterSplitCode[i]; 
 			code += "\\n";
 			}
-		javaCode=code;	
 			%>
 		
 		<script>
-		var code='<%=code%>' ; /* jsp data 를 js data로 옮김 */
-		var javaCode='<%=javaCode%>';
+		var cCode='<%=code%>' ; /* jsp data 를 js data로 옮김 */
+		var javaCode='<%=code%>';
+		var pythonCode='<%=code%>';
+		var javascriptCode='<%=code%>';
 		var codeType='<%= codeType%>';
 		
-		window.onload = function() {
+		window.onload = function() {// 불러온 언어에 맞게 editor변경
 			changeLanguage(codeType);
 			};
 		</script>
@@ -131,7 +133,7 @@ body {
         EditorLightbulbOptions:true, //전구
         language: 'c',
         value: [
-        	code
+        	cCode
         ].join('\n')
       });
     });
@@ -163,7 +165,7 @@ body {
         EditorLightbulbOptions:true, //전구
         language: 'python',
         value: [
-        	code
+        	pythonCode
         ].join('\n')
       });
     }); 
@@ -179,7 +181,7 @@ body {
         EditorLightbulbOptions:true, //전구
         language: 'javascript',
         value: [
-           code
+           javascriptCode
         ].join('\n')
       });
     }); 
