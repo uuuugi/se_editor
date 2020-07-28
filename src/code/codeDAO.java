@@ -64,6 +64,37 @@ public class codeDAO {
 		return result;
 	}
 	
+	public void del(String user_id, String codeName) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+				String sql = "delete from workspace where user_id=? and codeName=? ";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, user_id);
+				pstmt.setString(2, codeName);
+
+				pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
 	public String getCode(String id, String codeName) {
 		String code = "";
 		Connection conn = null;
