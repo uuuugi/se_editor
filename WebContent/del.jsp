@@ -21,11 +21,11 @@
 	codeDAO dao= new codeDAO();
 	dao.del(id,codeName);
  %>
-삭제 완료
  <script>
- window.onunload = function () {// 페이지를 닫을때 실행되는 함수 내용은 workspaceList.jsp를 초기화 시킴
-	    opener.reloadWorkSpaceList();
-	};
+window.onload = function () {// 페이지 로드 시 workSpace를 새로고침하고 페이지를 닫음
+	 opener.reloadWorkSpaceList();
+	window.close();
+}
  </script>
 </body>
 </html>
