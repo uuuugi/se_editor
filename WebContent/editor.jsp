@@ -38,9 +38,9 @@ body {
 	if(codeName==null){ //codeName이 없을경우 == editor를 새로 열었을때
 		%> <script type="text/javascript">
 		var codeName= 'codeName';
-		var cCode ="//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\n\n			int main(void)\n\n			{\n\n	\n			printf(\"Hello World\");\n				return 0;\n			}"; 
+		var cCode ="//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\nint main(void)\n{\n	printf(\"Hello World\");\n	return 0;\n}"; 
 		var javaCode="// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
-		var pythonCode="#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello, Python')";
+		var pythonCode="#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello World')";
 		var javascriptCode="//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
 		var codeType=null;
 		</script>
@@ -96,7 +96,7 @@ body {
 
 	<script>
      function changeLanguage(value){ // select box 에서 언어를 변경하면 그에 맞는 ide 창을 보여준다
-         if(value=='c'){
+          if(value=='c'){
              document.getElementById("monacoC").style.display="block";
              document.getElementById("monacoJava").style.display="none";
              document.getElementById("monacoPython").style.display="none";
@@ -119,7 +119,8 @@ body {
              document.getElementById("monacoJava").style.display="none";
              document.getElementById("monacoPython").style.display="none";
              document.getElementById("monacoJavascript").style.display="block";
-          }
+          } 
+
      }
      
     var editorC;
@@ -186,24 +187,57 @@ body {
       });
     }); 
     
-    function newFile()
-    {
-        var form = document.createElement("form");
-        form.setAttribute("charset", "UTF-8");
-        form.setAttribute("method", "Post");  //Post 방식
-        form.setAttribute("target", "editor");//저장이되면 새창 출력
-        form.setAttribute("action", "editor.jsp"); //요청 보낼 주소
-        
-        var codeName= 'SE_uuuugi_jjang';// text창에 있는 value값 가져오기
-        var hiddenField = document.createElement("input"); // codeName 넘기기 위해 form 생성
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "codeName");
-        hiddenField.setAttribute("value", codeName);
-        form.appendChild(hiddenField);
+    function createForm(targetName, actionURL, save, newFile){//targetName, actionURL, save버튼을 통한 호출인지, newFile버튼을 통한 호출인지 입력받고 form 생성 및 submit
+    	  var form = document.createElement("form");//폼 생성
 
-        document.body.appendChild(form);
-        form.submit(); 
+    	  if(save==true)// save 버튼을 통해서 호출햇을 경우 save유무를 위한 popUp창 생성
+    	  var newWinForSave = window.open("save.jsp", "PopUpWin", "width=200,height=200");//저장완료 창을 위한 새창 만들기
+    	  form.setAttribute("charset", "UTF-8");//인코딩 타입
+    	  form.setAttribute("method", "Post");  //전송 방식
+    	  form.setAttribute("target", targetName);//타겟의 이름
+    	  form.setAttribute("action", actionURL); //요청 보낼 주소
+    	  
+    	  var codeName= document.getElementById("codeName").value;// text창에 있는 value값 가져오기
+    	  if(newFile == true)// newFile 버튼을 통해 이 함수를 호출했을 경우 newFile code인 SE_uuuugi_jjang을 codeName으로 저장
+    		  codeName= 'SE_uuuugi_jjang';
+    	  
+    	  var hiddenField = document.createElement("input"); // input 버튼 생성
+    	  hiddenField.setAttribute("type", "hidden");
+    	  hiddenField.setAttribute("name", "codeName");
+    	  hiddenField.setAttribute("value", codeName);
+    	  form.appendChild(hiddenField);// form에 추가
+
+    	  if(newFile!=true){// newFile 버튼을 통해 호출하지 않았을 경우(save, run) 폼 추가 생성하여 codeType과 code를 저장
+    	  codeType=getCodeType();
+    	  var hiddenField = document.createElement("input");
+    	  hiddenField.setAttribute("type", "hidden");
+    	  hiddenField.setAttribute("name", "codeType");
+    	  hiddenField.setAttribute("value", codeType);
+    	  form.appendChild(hiddenField);
+
+    	  code=getCode();
+    	  var hiddenField = document.createElement("input");
+    	  hiddenField.setAttribute("type", "hidden");
+    	  hiddenField.setAttribute("name", "code");
+    	  hiddenField.setAttribute("value", code);
+    	  form.appendChild(hiddenField);
+    	  }
+    	  
+    	  document.body.appendChild(form);//form을 body에 생성
+    	  form.submit(); //submit
+    	}
+    
+    function newFile(){
+    	createForm('editor', 'editor.jsp', false, true)
     }
+    function save() { // value 전체 가져오는 방법  + post 전송 + test
+		createForm('PopUpWin', 'save.jsp', true, false);
+    }
+   
+	function play(){
+		createForm('run', 'run.jsp', false, false);
+	}
+	
     function getCodeType()//select box에 있는 codeType을 가져오는 함수
     {
     	if(codeType==null){
@@ -246,76 +280,6 @@ body {
     	parent.frames.workSpaceList.location.reload();
     }
     
-     function save() { // value 전체 가져오는 방법  + post 전송 + test
-		var code=getCode();
-		var newWinForSave = window.open("save.jsp", "PopUpWin", "width=200,height=200");//저장완료 창을 위한 새창 만들기
-        var form = document.createElement("form");
-        form.setAttribute("charset", "UTF-8");
-        form.setAttribute("method", "Post");  //Post 방식
-        form.setAttribute("target", "PopUpWin");//저장이되면 새창 출력
-        form.setAttribute("action", "save.jsp"); //요청 보낼 주소
-        
-        var codeName= document.getElementById("codeName").value;// text창에 있는 value값 가져오기
-        var hiddenField = document.createElement("input"); // codeName 넘기기 위해 form 생성
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "codeName");
-        hiddenField.setAttribute("value", codeName);
-        form.appendChild(hiddenField);
-        
-        codeType=getCodeType();
-        var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "codeType");
-        hiddenField.setAttribute("value", codeType);
-        form.appendChild(hiddenField);
-	
-        var hiddenField = document.createElement("input"); //code 넘기기 위해 form 생성
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "code");
-        hiddenField.setAttribute("value", code);
-        form.appendChild(hiddenField);
-        
-        document.body.appendChild(form);
-        form.submit(); 
-				
-    }
-   
-	function play(){
-		var code= getCode();
-        codeType=getCodeType();
-            
-		
-        var form = document.createElement("form");
-        form.setAttribute("charset", "UTF-8");
-        form.setAttribute("method", "Post");  //Post 방식
-        form.setAttribute("action", "run.jsp"); //요청 보낼 주소1
-/*         if(codeType=='c')
-        	form.setAttribute("action", "run.jsp"); //요청 보낼 주소1
-        else if(codeType=='c')
-            form.setAttribute("action", "run.jsp"); //요청 보낼 주소2
-        else(codeType=='c')
-            form.setAttribute("action", "run.jsp"); //요청 보낼 주소3 */
-        form.setAttribute("target", "run");
-        var codeName= document.getElementById("codeName").value;
-		var hiddenField = document.createElement("input"); // codeName 넘기기 위해 form 생성
-		hiddenField.setAttribute("type", "hidden");
-		hiddenField.setAttribute("name", "codeName");
-		hiddenField.setAttribute("value", codeName);
-		form.appendChild(hiddenField);
-		
-		var hiddenField = document.createElement("input");// codeType 넘기기 위해 form 생성
-		hiddenField.setAttribute("type", "hidden");
-		hiddenField.setAttribute("name", "codeType");
-		hiddenField.setAttribute("value", codeType);
-		form.appendChild(hiddenField);
-		var hiddenField = document.createElement("input"); //code 넘기기 위해 form 생성
-		hiddenField.setAttribute("type", "hidden");
-		hiddenField.setAttribute("name", "code");
-		hiddenField.setAttribute("value", code);
-		form.appendChild(hiddenField);
-		document.body.appendChild(form);
-		form.submit();
-		}
 	</script>
 </body>
 </html>
