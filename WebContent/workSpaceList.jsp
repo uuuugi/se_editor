@@ -67,6 +67,7 @@ function del(codeName){
 function reloadWorkSpaceList()//workSpaceList 새로고침
 {
 	 location.reload();
+	 alert("삭제완료");
 }
 </script>
 <title>Insert title here</title>

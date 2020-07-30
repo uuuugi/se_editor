@@ -28,11 +28,11 @@
 	else// 중복되는 코드 이름이 있다면 내용 변경
 		dao.updateCode(vo);
  %>
- 저장완료!
  <script>
- window.onunload = function () {// 페이지를 닫을때 실행되는 함수 내용은 workspaceList.jsp를 초기화 시킴
-	    opener.reloadWorkSpaceList();
-	};
+ window.onload = function () {// 페이지 로드 시 workSpace를 새로고침하고 페이지를 닫음
+	 opener.reloadWorkSpaceList();
+	 window.close();
+	}
  </script>
 <%-- 	<%=vo.getUser_id()%>
 	<%=vo.getCodeName()%>
