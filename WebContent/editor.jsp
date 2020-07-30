@@ -100,8 +100,7 @@ body {
      	var editorList = new Array('monacoC', 'monacoJava', 'monacoPython', 'monacoJavascript')
      	for(var i=0; i<4; i++)
      		{
-     			if(languageList[i]==value)
-     				{
+     			if(languageList[i]==value){
      				document.getElementById(editorList[i]).style.display="block";
      				continue;
      				}
