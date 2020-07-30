@@ -96,33 +96,19 @@ body {
 
 	<script>
      function changeLanguage(value){ // select box 에서 언어를 변경하면 그에 맞는 ide 창을 보여준다
-          if(value=='c'){
-             document.getElementById("monacoC").style.display="block";
-             document.getElementById("monacoJava").style.display="none";
-             document.getElementById("monacoPython").style.display="none";
-             document.getElementById("monacoJavascript").style.display="none";
-          }
-          else if(value == 'java'){
-             document.getElementById("monacoC").style.display="none";
-             document.getElementById("monacoJava").style.display="block";
-             document.getElementById("monacoPython").style.display="none";
-             document.getElementById("monacoJavascript").style.display="none";
-          }
-          else if(value=='python'){
-             document.getElementById("monacoC").style.display="none";
-             document.getElementById("monacoJava").style.display="none";
-             document.getElementById("monacoPython").style.display="block";
-             document.getElementById("monacoJavascript").style.display="none";
-          }
-         else if(value=='javascript'){
-             document.getElementById("monacoC").style.display="none";
-             document.getElementById("monacoJava").style.display="none";
-             document.getElementById("monacoPython").style.display="none";
-             document.getElementById("monacoJavascript").style.display="block";
-          } 
-
+    	var languageList = new Array('c','java','python','javascript');
+     	var editorList = new Array('monacoC', 'monacoJava', 'monacoPython', 'monacoJavascript')
+     	for(var i=0; i<4; i++)
+     		{
+     			if(languageList[i]==value)
+     				{
+     				document.getElementById(editorList[i]).style.display="block";
+     				continue;
+     				}
+     			document.getElementById(editorList[i]).style.display="none";
+     		}
      }
-
+     
     var editorC;
     require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
     require(['vs/editor/editor.main'], function() {
@@ -189,7 +175,6 @@ body {
     
     function createForm(targetName, actionURL, save, newFile){//targetName, actionURL, save버튼을 통한 호출인지, newFile버튼을 통한 호출인지 입력받고 form 생성 및 submit
     	  var form = document.createElement("form");//폼 생성
-
     	  if(save==true)// save 버튼을 통해서 호출햇을 경우 save유무를 위한 popUp창 생성
     	  var newWinForSave = window.open("save.jsp", "PopUpWin", "width=200,height=200");//저장완료 창을 위한 새창 만들기
     	  form.setAttribute("charset", "UTF-8");//인코딩 타입
@@ -206,7 +191,6 @@ body {
     	  hiddenField.setAttribute("name", "codeName");
     	  hiddenField.setAttribute("value", codeName);
     	  form.appendChild(hiddenField);// form에 추가
-
     	  if(newFile!=true){// newFile 버튼을 통해 호출하지 않았을 경우(save, run) 폼 추가 생성하여 codeType과 code를 저장
     	  codeType=getCodeType();
     	  var hiddenField = document.createElement("input");
@@ -214,7 +198,6 @@ body {
     	  hiddenField.setAttribute("name", "codeType");
     	  hiddenField.setAttribute("value", codeType);
     	  form.appendChild(hiddenField);
-
     	  code=getCode();
     	  var hiddenField = document.createElement("input");
     	  hiddenField.setAttribute("type", "hidden");
