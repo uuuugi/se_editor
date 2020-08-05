@@ -17,7 +17,6 @@
 	String id=request.getParameter("id");
 	String pw=request.getParameter("pw");
 	
-	System.out.println(id + "  " + pw);
 	vo.setId(id);
 	vo.setPw(pw);
 
