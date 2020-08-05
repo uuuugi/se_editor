@@ -15,7 +15,6 @@ header {
 	background-color: black;
 	padding: 1vh;
 }
-
 body {
 	background-color: black;
 	margin: 0;
@@ -27,14 +26,25 @@ body {
     
     function createEdtior(){
         var language=getCodeType(); // codeType 가져오기 codeType에 따라 editor의 언어 설정이 바뀜
+        if(codeName=='codeName')
+        	{
+        	if(language=='c')
+        		code= "//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\nint main(void)\n{\n	printf(\"Hello World\");\n	return 0;\n}"; 
+        	else if(language=='java')
+        		code= "// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
+        	else if(language=='python')
+        		code= "#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello World')";
+        	else if(language=='javascript')
+        		code= "//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
+        	}
 		var remove = document.getElementById('editorDiv');
 		if(remove!=null)// 만약 editor div가 있다면 삭제
-			body.remove(remove);
-
-   	    var editorDiv = document.createElement('div');
-   	    editorDiv.style.height= '90vh';
-   	    editorDiv.id= 'editorDiv';
-   	    document.body.appendChild(editorDiv);// editor div를 동적으로 생성
+			document.body.removeChild(remove);
+		
+   	    var newDiv = document.createElement('div');
+   	    newDiv.style.height= '90vh';
+   	 	newDiv.id= "editorDiv";
+   	    document.body.appendChild(newDiv);// editor div를 동적으로 생성
    	    // editor
         require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs' }});
         require(['vs/editor/editor.main'], function() {
@@ -50,6 +60,10 @@ body {
         });
     }
     
+    function createEdtiorInSelect(){// 셀렉트에서 editor 바꿀경우 바뀌지 않는 버그 수정을 위해 codeType을 초기화 시켜주는 함수를 하나 더 만듬
+    	codeType=null;
+    	createEdtior();
+    }
    function createForm(targetName, actionURL, save, newFile){//targetName, actionURL, save버튼을 통한 호출인지, newFile버튼을 통한 호출인지 입력받고 form 생성 및 submit
    	  var form = document.createElement("form");//폼 생성
    	  
@@ -111,7 +125,6 @@ body {
 		var line= editor.getModel().getLineCount();//라인수
  		 	for(var i=0; i<line; i++)
 				code[i]=editor.getModel().getLineContent(i+1)+splitCode;// 라인별 text에 splitcode 더해서 저장 
-
 		return code;
    }
    function reloadWorkSpaceList(){   //workSpaceList 새로고침
@@ -141,11 +154,7 @@ body {
 		%>
 		<script type="text/javascript">
 		var codeName= 'codeName';
-		var cCode ="//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\nint main(void)\n{\n	printf(\"Hello World\");\n	return 0;\n}"; 
-		var javaCode="// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
-		var pythonCode="#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello World')";
-		var javascriptCode="//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
-		var code='code sample';
+		var code;
 		var codeType=null;
 		
 		window.onload = function() {// defualt
@@ -155,8 +164,7 @@ body {
 
 		<input type="text" id="codeName" name="codeName" value="codeName" />
 
-		<select name="selectCodeType" id="selectCodeType"
-			onchange="createEdtior()">
+		<select name="selectCodeType" id="selectCodeType" onchange="createEdtiorInSelect()">
 			<option value="c">c</option>
 			<option value="java">java</option>
 			<option value="python">python</option>
@@ -166,14 +174,12 @@ body {
 		<%
 			} else {// codeName이 있을경우 == workSpaceList를 이용하여 코드를 불러왔을때
 		String user_id = (String) session.getAttribute("id");
-
 		codeDAO dao = new codeDAO();
 		String codeType = dao.getCodeType(user_id, codeName);
 		String tmpCode = dao.getCode(user_id, codeName);// code 불러오기
 		String code = "";
 		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
 		String[] afterSplitCode = tmpCode.split(splitCode);//split해서 라인별로 배열에 저장
-
 		for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
 			code += afterSplitCode[i];
 			code += "\\n";
