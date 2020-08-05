@@ -18,7 +18,6 @@
 <h2>메인화면</h2>
 <%
 request.setCharacterEncoding("utf-8");
-
 if(session.getAttribute("id")==null){// 세션이 없을경우에만 loginform 과 회원가입 생성
  %>
 <form method="post" action="join.jsp">
@@ -32,11 +31,10 @@ if(session.getAttribute("id")==null){// 세션이 없을경우에만 loginform �
 	<input type="password" name="pw" id="pw" placeholder="pw" required />
 	<input type="submit" value="로그인" />
 </form>
-<%} else {%>
-<input type="button" value="logout" onclick ="logOut()" > <!-- 로그인이 되어있다면 로그아웃과 editor창 생성 -->
-<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
-
-
+<%} 
+else {%>
+	<input type="button" value="logout" onclick ="logOut()" > <!-- 로그인이 되어있다면 로그아웃과 editor창 생성 -->
+	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
 <% } %>
 
 </body>
