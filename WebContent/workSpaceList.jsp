@@ -18,31 +18,11 @@ color:black;
 }
 </style>
 <script>
-function showOrHide(name){
-	if(name=='c'){
-		if(codeListC.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
-			codeListC.style.display="block";
+function showOrHide(codeList){
+		if(codeList.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
+			codeList.style.display="block";
 		else// block라면 none로 설정 == hide
-			codeListC.style.display="none";
-	}
-	else if(name =='java'){
-		if(codeListJava.style.display!='block')
-			codeListJava.style.display="block";
-		else
-			codeListJava.style.display="none";
-	}
-	else if(name=='python'){
-		if(codeListPython.style.display!='block')
-			codeListPython.style.display="block";
-		else
-			codeListPython.style.display="none";
-	}
-	else if(name=='javascript'){
-		if(codeListJavascript.style.display!='block')
-			codeListJavascript.style.display="block";
-		else
-			codeListJavascript.style.display="none";
-	}
+			codeList.style.display="none";
 }
 
 function del(codeName){
@@ -89,7 +69,7 @@ function reloadWorkSpaceList()//workSpaceList 새로고침
 	codeListJavascript= dao.getCodeListJavascript(user_id);
 	
 	%>
-	<a href="#" onclick="showOrHide('c')">C</a> <!-- list 제목을 나타내는 부분 클릭시 list hide or show 실행 -->
+	<a href="#" onclick="showOrHide(codeListC)">C</a> <!-- list 제목을 나타내는 부분 클릭시 list hide or show 실행 -->
 	<table id="codeListC">
 	<% for(String i: codeListC){%>
 	<tr>
@@ -104,7 +84,7 @@ function reloadWorkSpaceList()//workSpaceList 새로고침
 	</table>
 	
 	<hr>
-	<a href="#" onclick="showOrHide('java')">java</a>
+	<a href="#" onclick="showOrHide(codeListJava)">java</a>
 	<table id="codeListJava">
 	<% for(String i: codeListJava){%>
 		<tr>
@@ -119,7 +99,7 @@ function reloadWorkSpaceList()//workSpaceList 새로고침
 	
 	<hr>
 	<table id="codeListPython">
-	<a href="#" onclick="showOrHide('python')">python</a>
+	<a href="#" onclick="showOrHide(codeListPython)">python</a>
 	<% for(String i: codeListPython){%>
 		<tr>
 		<td> 
@@ -133,7 +113,7 @@ function reloadWorkSpaceList()//workSpaceList 새로고침
 		
 	<hr>
 	<table id="codeListJavascript">
-	<a href="#" onclick="showOrHide('javascript')">javaScript</a>
+	<a href="#" onclick="showOrHide(codeListJavascript)">javaScript</a>
 	<% for(String i: codeListJavascript){%>
 		<tr>
 		<td> 
