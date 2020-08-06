@@ -44,7 +44,7 @@ function del(codeName){
     form.submit(); 
 			
 }
-function reloadWorkSpaceList()//workSpaceList 새로고침
+function reloadWorkSpaceList()// 삭제시에만 사용되는 function workSpaceList 새로고친다.
 {
 	 location.reload();
 	 alert("삭제완료");
@@ -77,8 +77,8 @@ function reloadWorkSpaceList()//workSpaceList 새로고침
 		<form method="post" action="editor.jsp" id='<%=i %>' target="editor"> <!-- codeName별로 form 생성 form id는 CodeName으로 지정하여 유니크값 으로 생성 -->
 		<input type="hidden" name="codeName" value=<%=i %>> <!-- codeName의 value를 저장할 부분을 생성하나 사이트상에 표시하지는 않음 -->
 		</form>
-		<a href="#" onclick="document.getElementById('<%=i %>').submit();"><%=i %> </a></td>
-		<td><input type="button" value="del" onclick="del('<%=i %>')"> </td></tr>
+		<a href="#" onclick="document.getElementById('<%=i %>').submit();"><%=i %> </a></td> <!-- 클릭 시 editor로 코드 이름을 전송하여 editor에 코드 불러오기 -->
+		<td><input type="button" value="del" onclick="del('<%=i %>')"> </td></tr> <!-- 클릭시 del.jsp로 전송하여 DB에서 코드 삭제 -->
 		  <!-- codeName을 web에 띄워줌과 동시에 링크로 생성해줌 -->
 	<% } %>
 	</table>
