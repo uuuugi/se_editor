@@ -58,15 +58,10 @@ function reloadWorkSpaceList()// 삭제시에만 사용되는 function workSpace
 	String user_id=(String)session.getAttribute("id");
 	
 	codeDAO dao= new codeDAO();
-	ArrayList<String> codeListC = new ArrayList<String>(); 
-	ArrayList<String> codeListJava = new ArrayList<String>();
-	ArrayList<String> codeListPython = new ArrayList<String>();
-	ArrayList<String> codeListJavascript = new ArrayList<String>();
-	
-	codeListC= dao.getCodeList(user_id, "c");// ArrayList에 codeType별로 codList저장받음
-	codeListJava= dao.getCodeList(user_id, "java");
-	codeListPython = dao.getCodeList(user_id, "python");
-	codeListJavascript= dao.getCodeList(user_id, "javascript");
+	ArrayList<String> codeListC = new ArrayList<String>( dao.getCodeList(user_id, "c") ); // 언어별로 codeList 생성
+	ArrayList<String> codeListJava = new ArrayList<String>( dao.getCodeList(user_id, "java") );
+	ArrayList<String> codeListPython = new ArrayList<String>( dao.getCodeList(user_id, "python") );
+	ArrayList<String> codeListJavascript = new ArrayList<String>( dao.getCodeList(user_id, "javascript") );
 	
 	%>
 	<a href="#" onclick="showOrHide(codeListC)">C</a> <!-- list 제목을 나타내는 부분 클릭시 list hide or show 실행 -->
