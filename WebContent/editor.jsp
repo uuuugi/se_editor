@@ -146,9 +146,9 @@ body {
 		codeName = null;
 	%>
 	<header>
-		<input type="button" name="new" value="new" onclick="newFile()" /> <input
-			type="button" name="save" value="save" onclick="save()" /> <input
-			type="button" name="run" value="Run" onclick="play()" />
+		<input type="button" name="new" value="new" onclick="newFile()" /> 
+		<input type="button" name="save" value="save" onclick="save()" /> 
+		<input type="button" name="run" value="Run" onclick="play()" />
 
 		<% if (codeName == null) { //codeName이 없을경우 == editor를 새로 열었을때
 		%>
