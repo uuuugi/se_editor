@@ -19,11 +19,11 @@
 		//return;
 	
 	codeDAO dao= new codeDAO();
-	dao.del(id,codeName);
+	boolean result = dao.deleteCode(id,codeName);
  %>
  <script>
 window.onload = function () {// 페이지 로드 시 workSpace를 새로고침하고 페이지를 닫음
-	 opener.reloadWorkSpaceList();
+	 opener.reloadWorkSpaceList('<%=result%>');
 	window.close();
 }
  </script>

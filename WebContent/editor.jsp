@@ -127,9 +127,12 @@ body {
 				code[i]=editor.getModel().getLineContent(i+1)+splitCode;// 라인별 text에 splitcode 더해서 저장 
 		return code;
    }
-   function reloadWorkSpaceList(){   //workSpaceList 새로고침
+   function reloadWorkSpaceList(value){   //workSpaceList 새로고침
    	parent.frames.workSpaceList.location.reload();
-   	alert("저장 완료");
+   	if(value=='true')
+   		alert("저장 완료");
+   	else
+   		alert("error :: 관리자에게 문의주세요");
    }
 	</script>
 

@@ -44,10 +44,13 @@ function del(codeName){
     form.submit(); 
 			
 }
-function reloadWorkSpaceList()// 삭제시에만 사용되는 function workSpaceList 새로고친다.
+function reloadWorkSpaceList(value)// 삭제시에만 사용되는 function workSpaceList 새로고친다.
 {
 	 location.reload();
-	 alert("삭제완료");
+	 if(value=='true')
+	 	alert("삭제완료");
+	 else
+		 alert("error:: 관리자에게 문의주세요");
 }
 </script>
 <title>Insert title here</title>

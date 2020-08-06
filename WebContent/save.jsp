@@ -22,15 +22,16 @@
 		return;
 	
 	codeDAO dao= new codeDAO();
-	String result= dao.codeNameCheck(vo.getUser_id(), vo.getCodeName());
-	if(result.equals("true"))//중복되는 코드이름이 없다면 새로 저장
-		dao.insertCode(vo);
+	boolean result;
+	String checkResult= dao.codeNameCheck(vo.getUser_id(), vo.getCodeName());
+	if(checkResult.equals("true"))//중복되는 코드이름이 없다면 새로 저장
+		result = dao.insertCode(vo);
 	else// 중복되는 코드 이름이 있다면 내용 변경
-		dao.updateCode(vo);
+		result = dao.updateCode(vo);
  %>
  <script>
  window.onload = function () {// 페이지 로드 시 workSpace를 새로고침하고 페이지를 닫음
-	 opener.reloadWorkSpaceList();
+	 opener.reloadWorkSpaceList('<%= result %>');
 	 window.close();
 	}
  </script>

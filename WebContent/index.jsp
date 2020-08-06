@@ -21,7 +21,7 @@ request.setCharacterEncoding("utf-8");
 if(session.getAttribute("id")==null){// 세션이 없을경우에만 loginform 과 회원가입 생성
  %>
 <form method="post" action="join.jsp">
-	<input type="submit" value="회원가입 하러가기" />
+	<input type="submit" value="회원가입 하러가기" />`
 </form>
 
 <form method="post" action="doLogin.jsp">
