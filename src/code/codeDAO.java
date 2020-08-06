@@ -64,7 +64,8 @@ public class codeDAO {
 		return result;
 	}
 	
-	public void del(String user_id, String codeName) {
+	public boolean deleteCode(String user_id, String codeName) {
+		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -78,6 +79,7 @@ public class codeDAO {
 				pstmt.setString(2, codeName);
 
 				pstmt.executeUpdate();
+				result = true;
 
 			
 		} catch (SQLException e) {
@@ -92,7 +94,7 @@ public class codeDAO {
 				e.printStackTrace();
 			}
 		}
-
+		return result;
 	}
 	
 	public String getCode(String id, String codeName) {
