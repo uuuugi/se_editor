@@ -33,6 +33,8 @@ SE_editor의 front/back 제작
             중복확인 클릭시 idCheck.jsp에서 id가 중복되는지 확인
         + openIDE   
             새 탭에서 IDE를 엶
+        + modify   
+            회원정보 수정기능 index -> doModify(비밀번호 확인) -> 회원정보 수정창 노출
 
 * IDE
     - 구성
