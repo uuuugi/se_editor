@@ -120,4 +120,35 @@ public class memberDAO {
 		return result;
 	}
 
+	public memberVO getMemberVO(String id) { // 사용자의 정보를 반환함
+			memberVO user=new memberVO();
+			Connection conn=null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+	       
+	       try {
+	         conn= getConnection();
+	         
+	         String sql = "select user_name, user_Email, user_introduce from user where user_id=?";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1,id);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         rs.next();
+	         user.setName(rs.getString("user_name"));
+	         user.setMail(rs.getString("user_Email"));
+	         user.setInfo(rs.getString("user_introduce"));
+	         
+	         pstmt.close();
+	         conn.close();
+	         
+	         
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	       return user;
+	   }
 }
