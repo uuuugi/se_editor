@@ -38,22 +38,24 @@ constraint fk_workspaceUserData2workspace foreign key (user_id) references works
 
 -- insert
 insert into user -- user 값 add
-values ('id1', 'pw1', 'name1', 'email1', 'introduce1', 'authority1');
+values ('aa', 'password', 'name1', 'email1', 'introduce1', 'authority1');
 
 insert into workspaceUserData  -- workspaceUserData 값 add
-value('id1');
+value('aa');
 
 insert into workspace (user_id, codeName, codeType, code)-- workspace 값 add / num값은 auto
-values ('id1','codename3', 'codetype1', 'text3');
+values ('id2','codename3', 'codetype1', 'text3');
 
 -- delete
 set sql_safe_updates=0; -- workbench에서 delete를 막아둠 workspace del이 오류가 뜰 경우 실행
 
 delete from user -- 회원탈퇴시 삭제 / workspaceUserdata, workscpae 테이블도 같이 삭제됨
-where user_id = 'id1';
+where user_id = 'aa';
 
 delete from workspace -- workspace에 있는 내용만 선택 삭제 / code삭제
-where codeName='codename1';
+where codeName='testc';
+
+delete from workspace where user_id='id1' and codeName='test c';
 
 -- drop
 drop table user; 
