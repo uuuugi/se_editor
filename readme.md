@@ -49,6 +49,8 @@ SE_editor의 front/back 제작
         + openIDE
 >>>>>>> 92d6145c0b4078154998f5b6e219ffaa58d1f88c
             새 탭에서 IDE를 엶
+        + modify   
+            회원정보 수정기능 index -> doModify(비밀번호 확인) -> 회원정보 수정창 노출
 
 * IDE
     - 구성
