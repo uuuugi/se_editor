@@ -12,6 +12,9 @@
 	function openIDE(){
 		window.open("IDE.jsp");// editor 열기
 	}
+	function modify(){
+		location.href="doModify.jsp"; // modify.jsp로 이동
+	}
 </script>
 </head>
 <body>
@@ -35,6 +38,7 @@ if(session.getAttribute("id")==null){// 세션이 없을경우에만 loginform �
 else {%>
 	<input type="button" value="logout" onclick ="logOut()" > <!-- 로그인이 되어있다면 로그아웃과 editor창 생성 -->
 	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
+	<input type="button" value="회원정보 수정" onclick="modify()" >
 <% } %>
 
 </body>
