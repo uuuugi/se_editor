@@ -38,7 +38,7 @@ constraint fk_workspaceUserData2workspace foreign key (user_id) references works
 
 -- insert
 insert into user -- user 값 add
-values ('aa', 'password', 'name1', 'email1', 'introduce1', 'authority1');
+values ('id1', 'password', 'name1', 'email1', 'introduce1', 'authority1');
 
 insert into workspaceUserData  -- workspaceUserData 값 add
 value('aa');
@@ -66,6 +66,8 @@ drop table workspace;
 select * from user;
 select * from workspaceUserData;
 select * from workspace; 
+select user_name, user_Email, user_introduce from user where user_id='id1';
+select user_id from user where user_name='name1' and user_email='email1';
 
 select codeName, codeType from user -- id값을 통해 작성한 코드 목록 select 
 left join workspaceUserData on user.user_id=workspaceUserData.workspaceId
