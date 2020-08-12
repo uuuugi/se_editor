@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import code.codeVO;
+
 public class memberDAO {
 	private Connection getConnection() throws SQLException {
 	    Connection conn = null;
@@ -151,4 +153,38 @@ public class memberDAO {
 	      }
 	       return user;
 	   }
+	
+	public boolean modifyUserInfo(memberVO vo) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+			String sql="UPDATE user SET user_name=?, user_email=?, user_introduce=? WHERE user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getMail());
+			pstmt.setString(3, vo.getInfo());
+			pstmt.setString(4, vo.getId());
+			pstmt.executeUpdate();
+				
+			result= true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 }
