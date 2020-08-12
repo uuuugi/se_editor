@@ -13,7 +13,7 @@
 		window.open("IDE.jsp");// editor 열기
 	}
 	function modify(){
-		location.href="doModify.jsp"; // modify.jsp로 이동
+		location.href="pwCheckForModify.jsp"; // modify.jsp로 이동
 	}
 </script>
 </head>
