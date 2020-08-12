@@ -154,7 +154,7 @@ public class memberDAO {
 	       return user;
 	   }
 	
-	public boolean modifyUserInfo(memberVO vo) {
+	public boolean modifyUserInfo(memberVO vo) { // user의 정보를 수정하는 메소드
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -188,7 +188,7 @@ public class memberDAO {
 		return result;
 	}
 	
-	public String findId(memberVO vo) {
+	public String findId(memberVO vo) { // name과 eamil을 받아 id를 반환, 일치하는 id가 없다면 fail이라는 문자열 반환
 		String result="fail";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
