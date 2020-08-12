@@ -187,4 +187,40 @@ public class memberDAO {
 
 		return result;
 	}
+	
+	public String findId(memberVO vo) {
+		String result="fail";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+
+			String sql="select user_id from user where user_name=? and user_email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getMail());
+			
+			pstmt.executeQuery();
+			rs = pstmt.executeQuery();
+			
+			if(rs.next())
+				result= rs.getString("user_id");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 }
