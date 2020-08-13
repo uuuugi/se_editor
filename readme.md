@@ -57,6 +57,11 @@ SE_editor의 front/back 제작
             새 탭에서 IDE를 엶
         + modify   
             회원정보 수정기능 index -> doModify(비밀번호 확인) -> 회원정보 수정창 노출
+        + id찾기   
+            이름 + email을 입력받아 DB의 값과 같은지 확인하고 뒤의 세자리를 가린 후 출력 (id생성시 N자리 이상으로 만들게끔 보완 필요)
+        + pw찾기   
+            id와 mail을 입력받아 DB의 값과 비교한다 -> 같다면 DB의 주소로 pw변경 창으로 접속할 수 있는 mail을 전송한다   
+            -> session은 2분30초만 유지하며 그 시간 안에 pw를 변경하여야 한다. 
 
 * IDE
     - 구성
