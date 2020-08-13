@@ -9,8 +9,8 @@
 </head>
 <body>
 <%
-	if(session.getAttribute("id")==null)
-		out.println("<script>alert('세션이 만료되었습니다. '); location.href='index.jsp'</script>");
+	if(session.getAttribute("id")==null)//세션이 만료되었을 경우 DB에 접근 불가 창을 닫음
+		out.println("<script>alert('세션이 만료되었습니다. '); window.close(); </script>");
 	memberVO vo = new memberVO();
 	vo.setId((String)session.getAttribute("id"));
 	vo.setPw(request.getParameter("password"));
