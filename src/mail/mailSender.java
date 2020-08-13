@@ -19,6 +19,7 @@ import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 import member.*;
 
+
 public class mailSender {
 
   public static boolean sendMail(memberVO vo) {
@@ -39,7 +40,9 @@ public class mailSender {
     StringBuffer sb = new StringBuffer();
     sb.append("<h3>SE_HOMEPAGE입니다.</h3>\n");
     sb.append("<h4>아래의 링크로 이동하여 비밀번호를 변경해주세요</h4>\n");
-    sb.append("<a href='http://localhost:8080/se_editor/changePwForm.jsp?id="+vo.getId()+ "'> 비밀번호 변경</a>");
+    sb.append("<form action=\""+url+"\" name='id' method='post'>");//form post를 이용하여 data를 보이지 않게함
+    sb.append("<input type='submit' value='비밀번호 변경'>");
+    sb.append("</form>");
     
     String html = sb.toString();
     
