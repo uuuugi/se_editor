@@ -12,16 +12,20 @@
 	memberVO vo = new memberVO();
 	vo.setId((String)session.getAttribute("id"));
 	vo.setPw(request.getParameter("password"));
-	vo.setName(request.getParameter("name"));
-	vo.setMail(request.getParameter("mail"));
-	vo.setInfo(request.getParameter("info"));
-	memberDAO dao = new memberDAO();
-	boolean result = dao.modifyUserInfo(vo);
 	
+	memberDAO dao = new memberDAO();
+	
+	boolean result= dao.changePw(vo);
 	if(result==true)
-			out.println("<script>alert('회원정보가 수정되었습니다.'); location.href='index.jsp';</script>");
+	{
+		out.println("<script>alert('비밀번호가 변경되었습니다. 다시 로그인 해주세요'); location.href='index.jsp'</script>");
+		session.invalidate();
+	}
 	else
-			out.println("<script>alert('회원정보 수정에 실패하였습니다'); history.back();</script>");
+	{
+		out.println("<script>alert('비밀번호 변경 오류입니다. 다시 시도해주세요.'); history.back();</script>");
+	}
+	
 %>
 </body>
 </html>

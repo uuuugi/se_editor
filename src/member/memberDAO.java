@@ -161,13 +161,26 @@ public class memberDAO {
 
 		try {
 			conn = getConnection();
-
-			String sql="UPDATE user SET user_name=?, user_email=?, user_introduce=? WHERE user_id=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getMail());
-			pstmt.setString(3, vo.getInfo());
-			pstmt.setString(4, vo.getId());
+			
+			if(vo.getPw().isEmpty()==true)
+			{
+				String sql="UPDATE user SET user_name=?, user_email=?, user_introduce=? WHERE user_id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getMail());
+				pstmt.setString(3, vo.getInfo());
+				pstmt.setString(4, vo.getId());
+			}
+			else
+			{
+				String sql="UPDATE user SET user_name=?, user_pw=?, user_email=?, user_introduce=? WHERE user_id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getPw());
+				pstmt.setString(3, vo.getMail());
+				pstmt.setString(4, vo.getInfo());
+				pstmt.setString(5, vo.getId());
+			}
 			pstmt.executeUpdate();
 				
 			result= true;
@@ -207,6 +220,37 @@ public class memberDAO {
 			
 			if(rs.next())
 				result= rs.getString("user_id");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	public boolean changePw(memberVO vo) { // pw를 바꾸는 메소드
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+
+			String sql="UPDATE user SET user_pw=? WHERE user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPw());
+			pstmt.setString(2, vo.getId());
+			pstmt.executeUpdate();
+				
+			result= true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
