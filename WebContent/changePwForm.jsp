@@ -22,6 +22,10 @@ function checkValue()
 </script>
 </head>
 <body>
+<%
+	session.setMaxInactiveInterval(150);//세션의 저장시간은 2분30초
+	session.setAttribute("id", request.getParameter("id")); // url에 있는 id정보를 세션으로 저장
+%>
 	<form action="changePw.jsp" name="pwForm" onsubmit="return checkValue()">
 		<table>
 			<tr>
