@@ -215,7 +215,6 @@ public class memberDAO {
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getMail());
 			
-			pstmt.executeQuery();
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -236,6 +235,7 @@ public class memberDAO {
 
 		return result;
 	}
+	
 	public boolean changePw(memberVO vo) { // pw를 바꾸는 메소드
 		boolean result = false;
 		Connection conn = null;
@@ -267,4 +267,39 @@ public class memberDAO {
 
 		return result;
 	}
+	public boolean checkIdnEmail(memberVO vo) { // user의 정보를 수정하는 메소드
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+
+		try {
+			conn = getConnection();
+
+			String sql="select user_id from user where user_id=? and user_email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getMail());
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next())
+				result= true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
 }

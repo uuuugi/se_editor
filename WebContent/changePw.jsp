@@ -9,6 +9,8 @@
 </head>
 <body>
 <%
+	if(session.getAttribute("id")==null)
+		out.println("<script>alert('세션이 만료되었습니다. '); location.href='index.jsp'</script>");
 	memberVO vo = new memberVO();
 	vo.setId((String)session.getAttribute("id"));
 	vo.setPw(request.getParameter("password"));
@@ -19,7 +21,7 @@
 	if(result==true)
 	{
 		out.println("<script>alert('비밀번호가 변경되었습니다. 다시 로그인 해주세요'); location.href='index.jsp'</script>");
-		session.invalidate();
+		session.invalidate();// session을 초기화 하고 메인페이지로 이동
 	}
 	else
 	{
