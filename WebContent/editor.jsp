@@ -92,6 +92,7 @@ body {
    	  hiddenField.setAttribute("value", codeType);
    	  form.appendChild(hiddenField);
    	  
+   	  if(save!=true){
    	  if(codeType=="c")
    		form.setAttribute("action", urlForc); //요청 보낼 주소
    	  else if(codeType=="java")
@@ -100,7 +101,8 @@ body {
         form.setAttribute("action", urlForPython); //요청 보낼 주소
       else if(codeType=="javascript")
         form.setAttribute("action", urlForJavascript); //요청 보낼 주소
-   	  
+   		 
+   	  }
    	  code=getCode();
    	  var hiddenField = document.createElement("input");
    	  hiddenField.setAttribute("type", "hidden");
