@@ -141,7 +141,7 @@ public class bulletinBoardDAO {
 		return vo;
 	}
 	
-	public boolean deletePost(int num) {
+	public boolean deletePost(int postNum) {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -152,7 +152,40 @@ public class bulletinBoardDAO {
 				String sql = "delete from board where num=? ";
 				pstmt = conn.prepareStatement(sql);
 
-				pstmt.setInt(1, num);
+				pstmt.setInt(1, postNum);
+
+				pstmt.executeUpdate();
+				result = true;
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public boolean updatePost(int postNum, String text) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+				String sql = "UPDATE board SET text=? WHERE Num=?";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, text);
+				pstmt.setInt(2, postNum);
 
 				pstmt.executeUpdate();
 				result = true;

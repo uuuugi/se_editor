@@ -7,14 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	function createForm(url, target, postNum){
+	function createForm(url, postNum){
 		var form = document.createElement("form");//폼 생성
 		
-			if(target=="PopUpWin")
-	   	  		var newWin = window.open(url, "PopUpWin", "width=200,height=200");//저장완료 창을 위한 새창 만들기
 	   	  form.setAttribute("charset", "UTF-8");//인코딩 타입
 	   	  form.setAttribute("method", "Post");  //전송 방식
-	   	  form.setAttribute("target", target);//타겟의 이름
+	   	  form.setAttribute("target", "_self");//타겟의 이름
 	   	  form.setAttribute("action", url); //요청 보낼 주소
 	   	  
 	   	  var hiddenField = document.createElement("input"); // input 버튼 생성
@@ -28,10 +26,10 @@
 	}
 	function del(postNum)
 	{
-		createForm("postDel.jsp", "_self", postNum);
+		createForm("postDel.jsp", postNum);
 	}
 	function update(postNum){
-		createForm("postUpdate.jsp", " PopUpWin", postNum);
+		createForm("postUpdate.jsp", postNum);
 	}
 </script>
 </head>
@@ -53,7 +51,8 @@
  추천: <%= vo.getStar() %>
 <%
 	String id = (String)session.getAttribute("id");
-	if(id.equals( vo.getId() ) ){
+	if(id!=null)
+		if(id.equals( vo.getId() ) ){
 %>
 	<input type="button" value = "삭제" onclick="del('<%=vo.getNum()%>')">
 	<input type="button" value = "수정" onclick="update('<%=vo.getNum()%>')">
