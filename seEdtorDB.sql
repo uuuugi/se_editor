@@ -36,8 +36,25 @@ code text(100000) not null, -- code 내용
 constraint fk_workspaceUserData2workspace foreign key (user_id) references workspaceUserData (WorkspaceId) on update cascade on delete cascade
 );
 
+create table board( -- 게시판 테이블
+id varchar(20) not null,
+name varchar(20)  not null,
+text varchar(10000),
+star int default 0,
+num int auto_increment unique,
+constraint fk_user2board foreign key (id) references user (user_id) on update cascade on delete cascade
+);
+
+create table comment( -- 댓글 테이블
+id varchar(20) not null,
+text varchar(300) not null,
+num int auto_increment unique,
+constraint fk_board2comment foreign key(num) references board (num) on update cascade on delete cascade,
+constraint fk_comment2user foreign key(id) references user(user_id) on update cascade on delete cascade
+);
+
 -- insert
-insert into user -- user 값 add
+insert into user -- user에 insert
 values ('id1', 'password', 'name1', 'email1', 'introduce1', 'authority1');
 
 insert into workspaceUserData  -- workspaceUserData 값 add
@@ -45,6 +62,13 @@ value('aa');
 
 insert into workspace (user_id, codeName, codeType, code)-- workspace 값 add / num값은 auto
 values ('id2','codename3', 'codetype1', 'text3');
+
+insert into board(id, name, text) -- 게시판에 insert
+values('id1','test16', 'text2');
+
+insert into comment(id, text, num) -- comment 에 insert
+values('id2', 'comment', 1);
+
 
 -- delete
 set sql_safe_updates=0; -- workbench에서 delete를 막아둠 workspace del이 오류가 뜰 경우 실행
@@ -62,7 +86,7 @@ drop table user;
 drop table workspaceUserData;
 drop table workspace;
 
--- select *
+-- user및 IDE관련 select 
 select * from user;
 select * from workspaceUserData;
 select * from workspace; 
@@ -78,3 +102,10 @@ select codeName, codeType, code from user -- id값과 codeName을 이용하여 c
 left join workspaceUserData on user.user_id=workspaceUserData.workspaceId
 left join workspace on workspaceUserData.workspaceId = workspace.user_id
 where user.user_id='id1' and workspace.codeName= 'codename2'; 
+
+-- 게시판 관련 select 
+select * from board;
+select name from board where id='id'; -- id값으로 작성글 검색
+select name from board where name='name'; -- 글 이름으로 글 검색
+
+
