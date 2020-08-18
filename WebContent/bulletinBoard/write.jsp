@@ -9,6 +9,7 @@
 <body>
 <form action="doWrite.jsp" method="post">
 <input type="text" name="name" placeholder="제목">
+<br>
 <textarea name="text" cols="40" rows="8">
 </textarea>
 <input type="submit" value="작성">
