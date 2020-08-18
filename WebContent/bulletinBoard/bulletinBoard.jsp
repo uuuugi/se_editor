@@ -12,9 +12,9 @@
 </script>
 </head>
 <body>
-<input type="button" value="작성하기" onclick="goWrite()">
-<hr>
-<iframe name="list" src="bulletinBoardList.jsp" style="width:80vw; height:80vh"> </iframe>
 
+<iframe name="list" src="bulletinBoardList.jsp" style="width:80vw; height:80vh"> </iframe>
+<hr>
+<input type="button" value="작성하기" onclick="goWrite()">
 </body>
 </html>

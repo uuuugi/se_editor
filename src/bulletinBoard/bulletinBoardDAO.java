@@ -140,4 +140,36 @@ public class bulletinBoardDAO {
 
 		return vo;
 	}
+	
+	public boolean deletePost(int num) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+				String sql = "delete from board where num=? ";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, num);
+
+				pstmt.executeUpdate();
+				result = true;
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
