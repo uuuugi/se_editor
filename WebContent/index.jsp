@@ -15,6 +15,9 @@
 	function modify(){
 		location.href="pwCheckForModify.jsp"; // modify.jsp로 이동
 	}
+	function goBulletinBoard(){
+		location.href="bulletinBoard.jsp";
+	}
 </script>
 </head>
 <body>
@@ -39,6 +42,7 @@ else {%>
 	<input type="button" value="logout" onclick ="logOut()" > <!-- 로그인이 되어있다면 로그아웃과 editor창 생성 -->
 	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
 	<input type="button" value="회원정보 수정" onclick="modify()" >
+	<input type="button" value="게시판" onclick ="goBulletinBoard()" >
 <% } %>
 
 </body>
