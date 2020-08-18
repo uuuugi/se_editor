@@ -53,6 +53,14 @@ constraint fk_board2comment foreign key(num) references board (num) on update ca
 constraint fk_comment2user foreign key(id) references user(user_id) on update cascade on delete cascade
 );
 
+create table star(
+id varchar(20) not null,
+starCheck int default 0,
+postNum int not null,
+constraint fk_starId2userId foreign key(id) references user(user_id) on update cascade on delete cascade,
+constraint fk_star2postNum foreign key(postNum) references board(num) on update cascade on delete cascade
+);
+
 -- insert
 insert into user -- user에 insert
 values ('id1', 'password', 'name1', 'email1', 'introduce1', 'authority1');
@@ -105,6 +113,7 @@ where user.user_id='id1' and workspace.codeName= 'codename2';
 
 -- 게시판 관련 select 
 select * from board;
+select * from comment;
 select name from board where id='id'; -- id값으로 작성글 검색
 select name from board where name='name'; -- 글 이름으로 글 검색
 
