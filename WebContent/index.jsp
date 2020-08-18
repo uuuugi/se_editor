@@ -10,13 +10,13 @@
 		location.href="logout.jsp";//로그아웃 jsp로 이동해서 세션 삭제
 	}
 	function openIDE(){
-		window.open("IDE.jsp");// editor 열기
+		window.open("ide\\IDE.jsp");// editor 열기
 	}
 	function modify(){
-		location.href="pwCheckForModify.jsp"; // modify.jsp로 이동
+		location.href="userInfo\\pwCheckForModify.jsp"; // modify.jsp로 이동
 	}
 	function goBulletinBoard(){
-		location.href="bulletinBoard.jsp";
+		location.href="bulletinBoard\\bulletinBoard.jsp";
 	}
 </script>
 </head>
@@ -26,9 +26,9 @@
 request.setCharacterEncoding("utf-8");
 if(session.getAttribute("id")==null){// 세션이 없을경우에만 loginform 과 회원가입 생성
  %>
-	<input type="submit" value="회원가입 하러가기" onclick="location.href='join.jsp'" />
-	<input type="button" value="아이디 찾기" onclick="location.href='findId.jsp'" />
-	<input type="button" value="비밀번호 찾기" onclick="location.href='findPw.jsp'" />
+	<input type="submit" value="회원가입 하러가기" onclick="location.href='join\\join.jsp'" />
+	<input type="button" value="아이디 찾기" onclick="location.href='findIdPw\\findId.jsp'" />
+	<input type="button" value="비밀번호 찾기" onclick="location.href='findIdPw\\findPw.jsp'" />
 	
 <form method="post" action="doLogin.jsp">
 	<label for="id">아이디</label>
