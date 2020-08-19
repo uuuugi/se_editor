@@ -11,6 +11,9 @@
 #comment{
 	display:none;
 }
+#comment2{
+	background-color:gray;
+}
 </style>
 <script>
 	function createForm(url, postNum){
@@ -39,7 +42,7 @@
 	}
 	function openComment(){
 		var comment = document.getElementById("comment");
-		if(comment.style.display=='none')
+		if(comment.style.display!="block")
 			comment.style.display="block";
 		else
 			comment.style.display="none";
@@ -103,11 +106,31 @@
 	<br>
 	<%=commentList.get(i).getText() %>
 	<br>
-	<input type="button" value="댓글달기" onclick="openComment()">
-	<div id="comment">
-	<form action="comment2.jsp" method="post">
-		<textarea cols="40" rows="4" placeholder="대댓글을 입력해주세요"></textarea>
-		<input type="submit" value="작성">
+	<%
+		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++){%>
+			<div id="comment2">
+			 <%=commentList.get(i).getComment2List().get(j).getId() %>
+			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) {%>
+				<form action="delComment2.jsp" method="post" style="display:inline">
+				<input type="hidden" name ="comment2Num" value='<%=commentList.get(i).getComment2List().get(j).getComment2Num() %>'>
+				<input type="hidden" name="postNum" value='<%=postNum %>'>
+				<input type="submit" value="삭제">
+			</form>
+				<%}%>
+			
+			<br>
+			<%=commentList.get(i).getComment2List().get(j).getText() %>
+			</div>
+	<%} %>
+			<input type="button" value="댓글달기" onclick="openComment()">
+			<br><br>
+			<div id='comment'>
+			<form action="comment2.jsp" method="post">
+			<textarea cols="40" rows="4" name="comment2"placeholder="대댓글을 입력해주세요"></textarea>
+			<input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
+			<input type="hidden" name="postNum" value='<%=postNum %>'>
+			<input type="submit" value="작성">
+			
 	</form>
 	</div>
 <%} %>
