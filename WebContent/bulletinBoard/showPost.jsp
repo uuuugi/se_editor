@@ -104,7 +104,8 @@
 	<%=commentList.get(i).getText() %>
 	<br>
 	<%
-		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++){%>
+		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++)
+		 {%>
 			<div id="comment2Box">
 			 <%=commentList.get(i).getComment2List().get(j).getId() %>
 			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) {%>
@@ -117,7 +118,7 @@
 			<br>
 			<%=commentList.get(i).getComment2List().get(j).getText() %>
 			</div>
-	<%} %>
+		<%} %>
 			<input type="button" value="댓글달기" onclick="openCommentBox('<%=commentList.get(i).getCommentNum() %>')">
 			<br><br>
 			<div id ='<%=commentList.get(i).getCommentNum()%>' style="display:none">
