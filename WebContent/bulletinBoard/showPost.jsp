@@ -40,7 +40,7 @@
 	bulletinBoardDAO dao = new bulletinBoardDAO();
 	
 	int postNum= Integer.parseInt( (String)request.getParameter("postNum").substring(1) );
-	
+	String id = (String)session.getAttribute("id");
 	vo = dao.getPost(postNum);
 	
 %>
@@ -48,9 +48,11 @@
 <hr>
 작성자: <%= vo.getId() %> 
  글 번호:<%= vo.getNum() %>
- 추천: <%= vo.getStar() %>
+<form action="star.jsp" method="post">
+<input type="hidden" name="postNum" value='<%=postNum %>'>
+<input type="submit" value="star" onclick="star()"> <%= vo.getStar() %>
+</form>
 <%
-	String id = (String)session.getAttribute("id");
 	if(id!=null)
 		if(id.equals( vo.getId() ) ){
 %>
