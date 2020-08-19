@@ -188,5 +188,35 @@ public class commentDAO {
 		}
 		return result;
 	}
-	
+	public boolean deleteComment2(int comment2Num) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = getConnection();
+
+				String sql = "delete from comment2 where comment2Num=? ";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, comment2Num);
+
+				pstmt.executeUpdate();
+				result = true;
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 }
