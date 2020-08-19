@@ -73,7 +73,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = getConnection();
 
-			String sql = "select name, num from board";
+			String sql = "select name, postNum from board";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      rs = pstmt.executeQuery();
@@ -81,7 +81,7 @@ public class bulletinBoardDAO {
 				while(rs.next()){
 					forPostList tmp = new forPostList();
 					tmp.setName(rs.getString("Name"));
-					tmp.setNum(Integer.parseInt(rs.getString("num")));
+					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
 					postList.add(tmp);
 					}
 			
@@ -110,7 +110,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = getConnection();
 
-			String sql = "select id, name, text, star, num from board where num=?";
+			String sql = "select id, name, text, star, postNum from board where postNum=?";
 		      
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -121,7 +121,7 @@ public class bulletinBoardDAO {
 					vo.setId(rs.getString("id"));
 					vo.setName(rs.getString("name"));
 					vo.setText(rs.getString("text"));
-					vo.setNum(rs.getInt("num"));
+					vo.setNum(rs.getInt("postNum"));
 					vo.setStar(rs.getInt("star"));
 					}
 			
@@ -149,7 +149,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = getConnection();
 
-				String sql = "delete from board where num=? ";
+				String sql = "delete from board where postNum=? ";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setInt(1, postNum);
@@ -181,7 +181,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = getConnection();
 
-				String sql = "UPDATE board SET text=? WHERE Num=?";
+				String sql = "UPDATE board SET text=? WHERE postNum=?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, text);
@@ -191,6 +191,95 @@ public class bulletinBoardDAO {
 				result = true;
 
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int checkStar(int postNum, String id) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+
+				String sql = "select id from star where postNum=? and id=?";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setInt(1, postNum);
+				pstmt.setString(2, id);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()==false){
+					sql = "insert into star(id, postNum) values(?,?)";
+					result = 1;
+				}
+				else{
+					sql = "delete from star where id=? and postNum=?";
+					result = -1;
+				}
+				pstmt2 = conn.prepareStatement(sql);
+				
+				pstmt2.setString(1, id);
+				pstmt2.setInt(2, postNum);
+				pstmt2.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int star(int postNum, String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result= 0;
+		try {
+			conn = getConnection();
+
+				String sql = "select star from board where postNum=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, postNum);
+				
+				rs = pstmt.executeQuery();
+				rs.next();
+				int star = rs.getInt("star");
+				int checkStar=checkStar(postNum, id);
+				result = checkStar;
+				star +=checkStar;
+				
+				sql = "update board set star=? where Postnum=?";
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, star);
+				pstmt.setInt(2, postNum);
+				pstmt.executeUpdate();
+			
+				
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
