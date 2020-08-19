@@ -100,6 +100,80 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
+	public ArrayList<forPostList> getPostList(String id, int n) { // PostName과 PostNum을담은 객체 arrayList를 반환
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<forPostList> postList = new ArrayList<forPostList>();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select name, postNum from board where id=?";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, id);
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					forPostList tmp = new forPostList();
+					tmp.setName(rs.getString("Name"));
+					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
+					postList.add(tmp);
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return postList;
+	}
+	public ArrayList<forPostList> getPostList(String title) { // PostName과 PostNum을담은 객체 arrayList를 반환
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<forPostList> postList = new ArrayList<forPostList>();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select name, postNum from board where name=?";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, title);
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					forPostList tmp = new forPostList();
+					tmp.setName(rs.getString("Name"));
+					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
+					postList.add(tmp);
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return postList;
+	}
 	public bulletinBoardVO getPost(int num) { // PostName과 PostNum을담은 객체 arrayList를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;

@@ -23,7 +23,14 @@ color:black;
 		pageNum=Integer.parseInt(request.getParameter("pageNum"));
 	
 	bulletinBoardDAO dao = new bulletinBoardDAO();
-	ArrayList<forPostList> postList	= new ArrayList <forPostList> ( dao.getPostList() ); // 게시글 목록을 불러옴
+	ArrayList<forPostList> postList	= new ArrayList <forPostList> ();
+	
+	if(request.getParameter("text")==null)
+		postList=dao.getPostList();
+	else if( "id".equals(request.getParameter("search") ) )
+		postList=dao.getPostList(request.getParameter("text"),1);
+	else 
+		postList=dao.getPostList(request.getParameter("text"));
 %>
 	<table id="postList">
 	<% 
@@ -59,6 +66,14 @@ color:black;
 		</form>
 		<a href="#" onclick="document.getElementById('<%=j %>').submit();"><%=j %> </a></td> <!-- 클릭시 page 이동하여 text 출력 -->
 	<% } %>
+	<td><form action= "bulletinBoardList.jsp" method="post" target="_self">
+		<select name="search">
+			<option value="title">제목</option>
+			<option value="id">id</option>
+		</select>
+		<input type="text" name="text">
+		<input type="submit" value="검색">
+	</form></td>
 	</tr>
 	</table>
 </body>
