@@ -8,10 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-#comment{
-	display:none;
-}
-#comment2{
+#comment2Box{
 	background-color:gray;
 }
 </style>
@@ -40,8 +37,8 @@
 	function update(postNum){
 		createForm("postUpdate.jsp", postNum);
 	}
-	function openComment(){
-		var comment = document.getElementById("comment");
+	function openCommentBox(id){
+		var comment = document.getElementById(id);
 		if(comment.style.display!="block")
 			comment.style.display="block";
 		else
@@ -108,7 +105,7 @@
 	<br>
 	<%
 		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++){%>
-			<div id="comment2">
+			<div id="comment2Box">
 			 <%=commentList.get(i).getComment2List().get(j).getId() %>
 			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) {%>
 			<form action="delComment2.jsp" method="post" style="display:inline">
@@ -121,9 +118,9 @@
 			<%=commentList.get(i).getComment2List().get(j).getText() %>
 			</div>
 	<%} %>
-			<input type="button" value="댓글달기" onclick="openComment()">
+			<input type="button" value="댓글달기" onclick="openCommentBox('<%=commentList.get(i).getCommentNum() %>')">
 			<br><br>
-			<div id='comment'>
+			<div id ='<%=commentList.get(i).getCommentNum()%>' style="display:none">
 			<form action="comment2.jsp" method="post">
 			<textarea cols="40" rows="4" name="comment2"placeholder="대댓글을 입력해주세요"></textarea>
 			<input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
