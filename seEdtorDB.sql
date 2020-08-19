@@ -41,24 +41,32 @@ id varchar(20) not null,
 name varchar(20)  not null,
 text varchar(10000),
 star int default 0,
-num int auto_increment unique,
+postNum int auto_increment unique,
 constraint fk_user2board foreign key (id) references user (user_id) on update cascade on delete cascade
 );
 
 create table comment( -- 댓글 테이블
 id varchar(20) not null,
 text varchar(300) not null,
-num int auto_increment unique,
-constraint fk_board2comment foreign key(num) references board (num) on update cascade on delete cascade,
+postNum int,
+commentNum int not null auto_increment unique,
+constraint fk_board2comment foreign key(postNum) references board (postNum) on update cascade on delete cascade,
 constraint fk_comment2user foreign key(id) references user(user_id) on update cascade on delete cascade
+);
+
+create table comment2(
+id varchar(20) not null,
+text varchar(300) not null,
+commentNum int not null auto_increment unique,
+constraint fi_comment22user foreign key(id) references user(user_id) on update cascade on delete cascade,
+constraint fk_comment22comment foreign key(commentNum) references comment (commentNum) on update cascade on delete cascade
 );
 
 create table star(
 id varchar(20) not null,
-starCheck int default 0,
 postNum int not null,
 constraint fk_starId2userId foreign key(id) references user(user_id) on update cascade on delete cascade,
-constraint fk_star2postNum foreign key(postNum) references board(num) on update cascade on delete cascade
+constraint fk_star2postNum foreign key(postNum) references board(postNum) on update cascade on delete cascade
 );
 
 -- insert
@@ -93,6 +101,9 @@ delete from workspace where user_id='id1' and codeName='test c';
 drop table user; 
 drop table workspaceUserData;
 drop table workspace;
+drop table board;
+drop table comment;
+drop table star;
 
 -- user및 IDE관련 select 
 select * from user;
@@ -114,7 +125,7 @@ where user.user_id='id1' and workspace.codeName= 'codename2';
 -- 게시판 관련 select 
 select * from board;
 select * from comment;
+select * from comment2;
+select * from star;
 select name from board where id='id'; -- id값으로 작성글 검색
 select name from board where name='name'; -- 글 이름으로 글 검색
-
-
