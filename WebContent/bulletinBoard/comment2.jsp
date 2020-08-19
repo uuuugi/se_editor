@@ -20,7 +20,7 @@
 	if(dao.insertComment2(id, text, commentNum))
 		out.println("<script> alert('댓글이 작성되었습니다.'); location.href='showPost.jsp?postNum=t" +postNum+ "'; </script>");
 	else
-		out.println("<script> alert('댓글이 작성되었습니다.'); location.href='showPost.jsp?postNum=t" +postNum+ "'; </script>");
+		out.println("<script> alert('오류::잠시후 다시 시도해주세요.'); location.href='showPost.jsp?postNum=t" +postNum+ "'; </script>");
 %>
 </body>
 </html>

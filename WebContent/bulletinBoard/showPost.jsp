@@ -111,13 +111,12 @@
 			<div id="comment2">
 			 <%=commentList.get(i).getComment2List().get(j).getId() %>
 			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) {%>
-				<form action="delComment2.jsp" method="post" style="display:inline">
+			<form action="delComment2.jsp" method="post" style="display:inline">
 				<input type="hidden" name ="comment2Num" value='<%=commentList.get(i).getComment2List().get(j).getComment2Num() %>'>
 				<input type="hidden" name="postNum" value='<%=postNum %>'>
 				<input type="submit" value="삭제">
 			</form>
 				<%}%>
-			
 			<br>
 			<%=commentList.get(i).getComment2List().get(j).getText() %>
 			</div>
