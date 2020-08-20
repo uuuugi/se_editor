@@ -57,7 +57,8 @@ constraint fk_comment2user foreign key(id) references user(user_id) on update ca
 create table comment2(
 id varchar(20) not null,
 text varchar(300) not null,
-commentNum int not null auto_increment unique,
+commentNum int not null,
+comment2Num int not null auto_increment unique,
 constraint fi_comment22user foreign key(id) references user(user_id) on update cascade on delete cascade,
 constraint fk_comment22comment foreign key(commentNum) references comment (commentNum) on update cascade on delete cascade
 );
@@ -104,6 +105,7 @@ drop table workspace;
 drop table board;
 drop table comment;
 drop table star;
+drop table comment2;
 
 -- user및 IDE관련 select 
 select * from user;

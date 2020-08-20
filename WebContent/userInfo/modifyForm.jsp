@@ -23,13 +23,16 @@ function checkValue()
 	vo.setId((String) session.getAttribute("id"));
 	vo.setPw((String) request.getParameter("pw"));
 
-	int loginResult = dao.dologin(vo);
+	String loginResult = dao.dologin(vo);
 
-	if (loginResult == 0) {
+	if ("pwMiss".equals(loginResult)) {
 	%>
 	out.println("<script>alert('비밀번호가 틀렸습니다.'); history.back();</script>");
 	<%
-		} else {
+		} else if("idMiss".equals(loginResult)){
+			out.println("<script>alert('아이디가 틀렸습니다.'); history.back();</script>");
+		}
+		else{
 	vo = dao.getMemberVO(vo.getId());
 	%>
 	<form action="doModify.jsp" name="modifyForm" method="post" onsubmit="return checkValue()">
