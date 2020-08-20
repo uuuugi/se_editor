@@ -158,7 +158,7 @@ public class inquiryDAO {
 		try {
 			conn = getConnection();
 
-			String sql = "select id, title, text, inquiryNum from inquiry where id=?";
+			String sql = "select * from inquiry where id=?";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      pstmt.setString(1, id);
@@ -171,6 +171,7 @@ public class inquiryDAO {
 					tmp.setTitle(rs.getString("title"));
 					tmp.setText(rs.getString("text"));
 					tmp.setNum(rs.getInt("inquiryNum"));
+					tmp.setComment(rs.getInt("comment"));
 					
 					inquiryList.add(tmp);
 					}
