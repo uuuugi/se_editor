@@ -70,15 +70,32 @@ constraint fk_starId2userId foreign key(id) references user(user_id) on update c
 constraint fk_star2postNum foreign key(postNum) references board(postNum) on update cascade on delete cascade
 );
 
+create table inquiry(
+id varchar(20) not null,
+inquiryNum int not null auto_increment unique,
+title varchar(20) not null,
+text varchar(10000) not null,
+constraint fk_inquiry2User foreign key(id) references user(user_id) on update cascade on delete cascade
+);
+
+create table inquiryComment(
+id varchar(20) not null,
+inquiryNum int not null,
+title varchar(20) not null,
+text varchar(10000) not null,
+constraint fk_inquiryComment2inquiry foreign key(inquiryNum) references inquiry(inquiryNum) on update cascade on delete cascade,
+constraint fk_inquiryComment2User foreign key(id) references user(user_id) on update cascade on delete cascade
+);
+
 -- insert
 insert into user -- user에 insert
-values ('id1', 'password', 'name1', 'email1', 'introduce1', 'authority1');
+values ('id2', 'password', 'name1', 'email1', 'introduce1', 'user');
 
 insert into workspaceUserData  -- workspaceUserData 값 add
-value('aa');
+value('id2');
 
 insert into workspace (user_id, codeName, codeType, code)-- workspace 값 add / num값은 auto
-values ('id2','codename3', 'codetype1', 'text3');
+values ('id1','codename3', 'codetype1', 'text3');
 
 insert into board(id, name, text) -- 게시판에 insert
 values('id1','test16', 'text2');
