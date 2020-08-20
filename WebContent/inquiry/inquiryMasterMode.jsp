@@ -32,12 +32,12 @@ function box(id){
 	
 	for(int i=0; i<inquiryList.size(); i++){%>
 		<div class="inquiryBox">
-			<span id='<%=i %>' onclick="box('<%=inquiryList.get(i).getNum()%>')"> <%=inquiryList.get(i).getTitle() %> || <%=inquiryList.get(i).getId() %></span>
-			<div>
+			<span onclick="box('<%=i%>')"> <%=inquiryList.get(i).getTitle() %> || <%=inquiryList.get(i).getId() %></span>
+			<div id='<%=i %>'>
 				<%= inquiryList.get(i).getText() %>
 				<hr>
 				<form action="" method="post">
-					<input type="text" name="title">
+					<input type="text" name="title" placeholder="제목"><br>
 					<textarea cols="40" rows="8" name = "text"></textarea>
 					<input type="submit" value="작성">
 				</form>

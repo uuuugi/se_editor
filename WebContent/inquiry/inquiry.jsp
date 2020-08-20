@@ -34,7 +34,10 @@ display:none;
 	
 	for(int i=0; i<inquiryList.size(); i++){%>
 		<div class ="inquiryBox" onclick="openText('<%=inquiryList.get(i).getNum() %>')">
-			제목: <%=inquiryList.get(i).getTitle() %> || id: <%=inquiryList.get(i).getId() %>
+			제목: <%=inquiryList.get(i).getTitle() %> 
+			<% if(inquiryList.get(i).getComment()==1) 
+				out.print("답변완료");
+			%>
 			<div id='<%=inquiryList.get(i).getNum() %>'>
 				<%=inquiryList.get(i).getText() %>
 				<hr>
