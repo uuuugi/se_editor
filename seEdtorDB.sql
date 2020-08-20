@@ -40,6 +40,7 @@ create table board( -- 게시판 테이블
 id varchar(20) not null,
 name varchar(20)  not null,
 text varchar(10000),
+time timestamp not null default current_timestamp,
 star int default 0,
 postNum int auto_increment unique,
 constraint fk_user2board foreign key (id) references user (user_id) on update cascade on delete cascade
@@ -75,6 +76,7 @@ id varchar(20) not null,
 inquiryNum int not null auto_increment unique,
 title varchar(20) not null,
 text varchar(10000) not null,
+comment int not null default 0,
 constraint fk_inquiry2User foreign key(id) references user(user_id) on update cascade on delete cascade
 );
 
@@ -86,7 +88,7 @@ text varchar(10000) not null,
 constraint fk_inquiryComment2inquiry foreign key(inquiryNum) references inquiry(inquiryNum) on update cascade on delete cascade,
 constraint fk_inquiryComment2User foreign key(id) references user(user_id) on update cascade on delete cascade
 );
-
+select * from inquiry;
 -- insert
 insert into user -- user에 insert
 values ('id2', 'password', 'name1', 'email1', 'introduce1', 'user');
@@ -121,8 +123,9 @@ drop table workspaceUserData;
 drop table workspace;
 drop table board;
 drop table comment;
-drop table star;
 drop table comment2;
+drop table star;
+
 
 -- user및 IDE관련 select 
 select * from user;
