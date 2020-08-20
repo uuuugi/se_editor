@@ -18,6 +18,12 @@
 	function goBulletinBoard(){
 		location.href="bulletinBoard\\bulletinBoard.jsp";
 	}
+	function goInquiry(){
+		location.href="inquiry\\inquiry.jsp"
+	}
+	function goInquiryMasterMode(){
+		location.href="inquiry\\inquiryMasterMode.jsp"
+	}
 </script>
 </head>
 <body>
