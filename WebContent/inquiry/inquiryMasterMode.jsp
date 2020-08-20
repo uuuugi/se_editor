@@ -36,9 +36,10 @@ function box(id){
 			<div id='<%=i %>'>
 				<%= inquiryList.get(i).getText() %>
 				<hr>
-				<form action="" method="post">
+				<form action="writeInquiryComment.jsp" method="post">
 					<input type="text" name="title" placeholder="제목"><br>
 					<textarea cols="40" rows="8" name = "text"></textarea>
+					<input type="hidden" name="inquiryNum" value='<%=inquiryList.get(i).getNum() %>'>
 					<input type="submit" value="작성">
 				</form>
 			</div>
