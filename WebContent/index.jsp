@@ -43,6 +43,11 @@ else {%>
 	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
 	<input type="button" value="회원정보 수정" onclick="modify()" >
 	<input type="button" value="게시판" onclick ="goBulletinBoard()" >
+	<input type="button" value="문의하기" onclick="goInquiry()">
+<% 
+	if("master".equals( (String)session.getAttribute("authority")) ){%>
+		<input type ="button" value="문의보기" onclick="goInquiryMasterMode()">
+	<%}%>
 <% } %>
 
 </body>
