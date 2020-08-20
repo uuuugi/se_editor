@@ -72,16 +72,18 @@ public class bulletinBoardDAO {
 		
 		try {
 			conn = getConnection();
-
-			String sql = "select name, postNum from board";
+			
+			String sql = "select id, name, postNum, time from board";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      rs = pstmt.executeQuery();
 		      
 				while(rs.next()){
 					forPostList tmp = new forPostList();
+					tmp.setId(rs.getString("id"));
 					tmp.setName(rs.getString("Name"));
 					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
+					tmp.setTime(rs.getString("time"));
 					postList.add(tmp);
 					}
 			

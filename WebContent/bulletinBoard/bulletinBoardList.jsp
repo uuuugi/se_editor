@@ -44,7 +44,10 @@ color:black;
 		<form method="post" action="showPost.jsp" id='<%="t"+postList.get(i).getNum()%>'> <!-- postName별로 form 생성 form id는 postNum으로 지정하여 유니크값 으로 생성  앞에 t를 붙여주는 이유는 아래의 pageNum과 구분하기 위함-->
 		<input type="hidden" name="postNum" value=<%="t"+postList.get(i).getNum()%>> <!-- postNum의 value를 저장할 부분을 생성하나 사이트상에 표시하지는 않음 -->
 		</form>
-		<a href="#" onclick="document.getElementById('<%="t"+postList.get(i).getNum()%>').submit();"><%=postList.get(i).getName() %> </a></td> <!-- 클릭시 page 이동하여 text 출력 -->
+		<a href="#" onclick="document.getElementById('<%="t"+postList.get(i).getNum()%>').submit();"><%=postList.get(i).getName() %> </a>
+		&nbsp;<%=postList.get(i).getId() %>
+		<%=postList.get(i).getTime() %>
+		</td> <!-- 클릭시 page 이동하여 text 출력 -->
 	<% } %>
 	</table>
 	<hr>
