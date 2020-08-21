@@ -24,7 +24,7 @@ body {
 <script>
 	var editor;
     
-    function createEdtior(){
+    function createEdtior(ocr, ocrCode){
         var language=getCodeType(); // codeType 가져오기 codeType에 따라 editor의 언어 설정이 바뀜
         if(codeName=='codeName')
         	{
@@ -37,6 +37,8 @@ body {
         	else if(language=='javascript')
         		code= "//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
         	}
+        if(ocr == 1)//ocr을 이용해서 코드를 불러왔을 경우  코드를 불러옴
+        	code = ocrCode;
 		var remove = document.getElementById('editorDiv');
 		if(remove!=null)// 만약 editor div가 있다면 삭제
 			document.body.removeChild(remove);
@@ -159,6 +161,14 @@ body {
 	String codeName = (String) request.getParameter("codeName");
 	if ("SE_uuuugi_jjang".equals(codeName)) /* se_uuuugi_jjang는 newFile()을 실행시켰을 경우에 코드이름으로 지정된다 */
 		codeName = null;
+	
+	int ocr=0;
+	String ocrCode="";
+		if(request.getParameter("ocr")!=null)
+			{	
+				ocr = Integer.parseInt(request.getParameter("ocr"));
+				ocrCode=request.getParameter("ocrCode");
+			}
 	%>
 	<header>
 		<input type="button" name="new" value="new" onclick="newFile()" /> 
@@ -171,9 +181,11 @@ body {
 		var codeName= 'codeName';
 		var code;
 		var codeType=null;
+		var ocr = '<%= ocr%>';
+		var ocrCode = '<%= ocrCode%>';
 		
-		window.onload = function() {// defualt
-			createEdtior();
+		window.onload = function() {// defualt editor 생성 or OCR을 이용해서 코드를 불러왔을 경우 출력해줌
+			createEdtior(ocr,ocrCode);
 			};
 		</script>
 
@@ -204,7 +216,7 @@ body {
 		var code='<%=code%>';
 		var codeType= '<%=codeType%>';
 			window.onload = function() {// 불러온 언어에 맞게 editor변경
-				createEdtior();
+				createEdtior(0,"");
 			};
 		</script>
 		<input type="text" id="codeName" name="codeName" value='<%=codeName%>' />
