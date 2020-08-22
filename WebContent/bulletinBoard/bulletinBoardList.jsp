@@ -25,12 +25,12 @@ color:black;
 	bulletinBoardDAO dao = new bulletinBoardDAO();
 	ArrayList<forPostList> postList	= new ArrayList <forPostList> ();
 	
-	if(request.getParameter("text")==null)
+	if(request.getParameter("text")==null) // 검색하기 기능을 이용하지 않았을때
 		postList=dao.getPostList();
 	else if( "id".equals(request.getParameter("search") ) )
-		postList=dao.getPostList(request.getParameter("text"),1);
+		postList=dao.getPostList(request.getParameter("text"),1); // id를 통해 검색했을때
 	else 
-		postList=dao.getPostList(request.getParameter("text"));
+		postList=dao.getPostList(request.getParameter("text")); // 제목을 통해 검색했을때
 %>
 	<table id="postList">
 	<% 

@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+	// 댓글을 저장하는 page
 	request.setCharacterEncoding("UTF-8");
 	commentDAO dao = new commentDAO();
 	

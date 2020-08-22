@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 게시즐 작성 form  page -->
 <form action="doWrite.jsp" method="post">
 <input type="text" name="name" placeholder="제목">
 <br>

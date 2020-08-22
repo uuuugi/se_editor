@@ -102,7 +102,7 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	public ArrayList<forPostList> getPostList(String id, int n) { // PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forPostList> getPostList(String id, int n) { // id를 통해 검색했을때 int n 은 그냥 오버라이드를 위함 PostName과 PostNum을담은 객체 arrayList를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -139,7 +139,7 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	public ArrayList<forPostList> getPostList(String title) { // PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forPostList> getPostList(String title) { // 제목을 통해 검색 했을때 PostName과 PostNum을담은 객체 arrayList를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -176,7 +176,7 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	public bulletinBoardVO getPost(int num) { // PostName과 PostNum을담은 객체 arrayList를 반환
+	public bulletinBoardVO getPost(int num) { // 글 번호를 받아 글의 모든정보를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -217,7 +217,7 @@ public class bulletinBoardDAO {
 		return vo;
 	}
 	
-	public boolean deletePost(int postNum) {
+	public boolean deletePost(int postNum) { // 글의 번호를 받아 게시글을 삭제
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -249,7 +249,7 @@ public class bulletinBoardDAO {
 		return result;
 	}
 	
-	public boolean updatePost(int postNum, String text) {
+	public boolean updatePost(int postNum, String text) { // 글의 번호와 내용을 받아 글의 내용을 변경
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -282,7 +282,7 @@ public class bulletinBoardDAO {
 		return result;
 	}
 	
-	public int checkStar(int postNum, String id) {
+	public int checkStar(int postNum, String id) { // 게시글의 추천을 누르는 메소드
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -300,11 +300,11 @@ public class bulletinBoardDAO {
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()==false){
+				if(rs.next()==false){//해당 id가 추천이 안눌러 져있다면 DB에 id를 기록하고 1을 반환
 					sql = "insert into star(id, postNum) values(?,?)";
 					result = 1;
 				}
-				else{
+				else{//해당 id가 추천을 눌렀다면 id를 DB에서 삭제하고 -1을 반환
 					sql = "delete from star where id=? and postNum=?";
 					result = -1;
 				}
@@ -328,7 +328,8 @@ public class bulletinBoardDAO {
 		}
 		return result;
 	}
-	public int star(int postNum, String id) {
+	
+	public int star(int postNum, String id) {// 게시글의 추천수를 변경하는 메소드
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -342,11 +343,11 @@ public class bulletinBoardDAO {
 				
 				rs = pstmt.executeQuery();
 				rs.next();
-				int star = rs.getInt("star");
-				int checkStar=checkStar(postNum, id);
+				int star = rs.getInt("star"); // 해당 게시글의 추천수를 받아온다.
+				int checkStar=checkStar(postNum, id);//checkStar을 이용하여 해당 id가 추천을 했는지 안했는지 확인
 				result = checkStar;
 				star +=checkStar;
-				
+				//check로 부터 return 받은 값을 더해 DB에 다시 넣어줌
 				sql = "update board set star=? where Postnum=?";
 				
 				pstmt = conn.prepareStatement(sql);

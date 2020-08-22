@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+//user의 정보를 수정하여 DB에 저장하는 page
 	memberVO vo = new memberVO();
 	vo.setId((String)session.getAttribute("id"));
 	vo.setPw(request.getParameter("password"));

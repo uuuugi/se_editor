@@ -96,7 +96,7 @@ public class commentDAO {
 
 		return result;
 	}
-	public ArrayList<forCommentList> getCommentList(int postNum) { // PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forCommentList> getCommentList(int postNum) { // 게시글 번호를 받아 해당 게시글에 대한 댓글을 ArrayList로 반환 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -129,7 +129,7 @@ public class commentDAO {
 					
 					ArrayList <forComment2List> tmpComment2List = new ArrayList<forComment2List>();
 					while(rs2.next())
-					{
+					{//댓글에 대한 대댓글이 있을경우 저장
 						 forComment2List tmpComment2 = new forComment2List();
 						 tmpComment2.setId(rs2.getString("id"));
 						 tmpComment2.setText(rs2.getString("text"));
@@ -157,7 +157,7 @@ public class commentDAO {
 
 		return commentList;
 	}
-	public boolean deleteComment(int commentNum) {
+	public boolean deleteComment(int commentNum) { // 댓글 삭제
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -188,7 +188,7 @@ public class commentDAO {
 		}
 		return result;
 	}
-	public boolean deleteComment2(int comment2Num) {
+	public boolean deleteComment2(int comment2Num) {//대댓글 삭제
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

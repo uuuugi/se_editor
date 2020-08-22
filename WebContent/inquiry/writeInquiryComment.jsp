@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+//문의에 대한 답변이 DB에 저장되는 page
 request.setCharacterEncoding("UTF-8");
 
 String id = (String) session.getAttribute("id");

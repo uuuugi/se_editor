@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+//게시글의 내용을 변경하는 page
 request.setCharacterEncoding("utf-8");
 
 bulletinBoardDAO dao = new bulletinBoardDAO();

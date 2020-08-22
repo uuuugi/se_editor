@@ -55,7 +55,7 @@ constraint fk_board2comment foreign key(postNum) references board (postNum) on u
 constraint fk_comment2user foreign key(id) references user(user_id) on update cascade on delete cascade
 );
 
-create table comment2(
+create table comment2( -- 대댓글 테이블
 id varchar(20) not null,
 text varchar(300) not null,
 commentNum int not null,
@@ -64,14 +64,14 @@ constraint fi_comment22user foreign key(id) references user(user_id) on update c
 constraint fk_comment22comment foreign key(commentNum) references comment (commentNum) on update cascade on delete cascade
 );
 
-create table star(
+create table star( -- 게시글에 대한 추천수 테이블
 id varchar(20) not null,
 postNum int not null,
 constraint fk_starId2userId foreign key(id) references user(user_id) on update cascade on delete cascade,
 constraint fk_star2postNum foreign key(postNum) references board(postNum) on update cascade on delete cascade
 );
 
-create table inquiry(
+create table inquiry( -- 문의하기 기능에 대한 테이블
 id varchar(20) not null,
 inquiryNum int not null auto_increment unique,
 title varchar(20) not null,
@@ -80,7 +80,7 @@ comment int not null default 0,
 constraint fk_inquiry2User foreign key(id) references user(user_id) on update cascade on delete cascade
 );
 
-create table inquiryComment(
+create table inquiryComment( -- 문의하기 답변에 대한 테이블
 id varchar(20) not null,
 inquiryNum int not null,
 title varchar(20) not null,
@@ -88,6 +88,8 @@ text varchar(10000) not null,
 constraint fk_inquiryComment2inquiry foreign key(inquiryNum) references inquiry(inquiryNum) on update cascade on delete cascade,
 constraint fk_inquiryComment2User foreign key(id) references user(user_id) on update cascade on delete cascade
 );
+
+
 select * from inquiry;
 -- insert
 insert into user -- user에 insert

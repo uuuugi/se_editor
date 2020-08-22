@@ -64,7 +64,7 @@ public class inquiryDAO {
 		return result;
 	}
 	
-	public inquiryVO getInquiry(int num) {
+	public inquiryVO getInquiry(int num) {// 문의하기 글에 대한 모든정보를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -104,7 +104,7 @@ public class inquiryDAO {
 		return vo;
 	}
 	
-	public ArrayList<inquiryVO> getInquiryList() { 
+	public ArrayList<inquiryVO> getInquiryList() { // 문의하기의 글 중 답글이 안달린 것을 모두 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -149,7 +149,7 @@ public class inquiryDAO {
 		return inquiryList;
 	}
 	
-	public ArrayList<inquiryVO> getInquiryList(String id) { 
+	public ArrayList<inquiryVO> getInquiryList(String id) { // 해당 id가 작성한 문의내용을 모두 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -192,7 +192,7 @@ public class inquiryDAO {
 		return inquiryList;
 	}
 	
-	public boolean insertInquiryComment(String id, String title, String text, int inquiryNum) { 
+	public boolean insertInquiryComment(String id, String title, String text, int inquiryNum) { //문의에 대한 답변 작성
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -236,7 +236,7 @@ public class inquiryDAO {
 
 		return result;
 	}
-	public inquiryCommentVO getInquiryComment(int inquiryNum) {
+	public inquiryCommentVO getInquiryComment(int inquiryNum) { // 문의에 달린 답변을 불러오는 메소드
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

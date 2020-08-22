@@ -11,6 +11,7 @@
 </head>
 <body>
 <%
+	//입력받은값과 DB의 값이 같다면 해당 주소로 session이 저장된 링크를 전송해준다.
 	request.setCharacterEncoding("utf-8");
 	memberVO vo = new memberVO();
 	vo.setId((String) request.getParameter("id"));

@@ -28,7 +28,7 @@ public class codeDAO {
 		return conn;
 	}
 
-	public boolean insertCode(codeVO vo) {
+	public boolean insertCode(codeVO vo) {//코드 저장
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -64,7 +64,7 @@ public class codeDAO {
 		return result;
 	}
 	
-	public boolean deleteCode(String user_id, String codeName) {
+	public boolean deleteCode(String user_id, String codeName) {//코드 삭제
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -97,7 +97,7 @@ public class codeDAO {
 		return result;
 	}
 	
-	public String getCode(String id, String codeName) {
+	public String getCode(String id, String codeName) {//코드를 불러옴
 		String code = "";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -131,7 +131,7 @@ public class codeDAO {
 		return code;
 	}
 	
-	public String getCodeType(String id, String codeName) {
+	public String getCodeType(String id, String codeName) {// 해당 코드의 언어를 반환
 		String codeType = "";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -165,7 +165,7 @@ public class codeDAO {
 		return codeType;
 	}
 	
-	public ArrayList<String> getCodeList(String user_id, String codeType) {
+	public ArrayList<String> getCodeList(String user_id, String codeType) { // codeType에 맞는 코드들을 불러옴
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -201,7 +201,7 @@ public class codeDAO {
 		return codeList;
 	}
 	
-	public boolean updateCode(codeVO vo) {
+	public boolean updateCode(codeVO vo) { // 코드내용 수정
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+	//추천 증가 or 감소 page
 	request.setCharacterEncoding("UTF-8");
 	bulletinBoardDAO dao = new bulletinBoardDAO();
 	

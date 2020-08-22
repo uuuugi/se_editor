@@ -37,7 +37,7 @@
 	function update(postNum){
 		createForm("postUpdate.jsp", postNum);
 	}
-	function openCommentBox(id){
+	function openCommentBox(id){ // 대댓글 작성 form을 show or hidden으로 바꿔주는 함수
 		var comment = document.getElementById(id);
 		if(comment.style.display!="block")
 			comment.style.display="block";
@@ -48,6 +48,7 @@
 </head>
 <body>
 <%
+	//게시글을 보여주는 페이지
 	request.setCharacterEncoding("utf-8");
 	bulletinBoardVO vo = new bulletinBoardVO();
 	bulletinBoardDAO dao = new bulletinBoardDAO();
@@ -61,23 +62,23 @@
 <hr>
 작성자: <%= vo.getId() %> 
  글 번호:<%= vo.getNum() %>
-<form action="star.jsp" method="post" >
+<form action="star.jsp" method="post" ><!-- 추천하기 form -->
 <input type="hidden" name="postNum" value='<%=postNum %>'>
 <input type="submit" value="star" onclick="star()"> <%= vo.getStar() %>
 </form>
 <%
 	if(id!=null)
-		if(id.equals( vo.getId() ) ){
+		if(id.equals( vo.getId() ) ){ // 작성자가 해당 게시글을 클릭했을 경우 삭제 or 수정버튼 출력
 %>
 	<input type="button" value = "삭제" onclick="del('<%=vo.getNum()%>')">
 	<input type="button" value = "수정" onclick="update('<%=vo.getNum()%>')">
 	
 <%} %>
 <hr>
-<%= vo.getText() %>
+<%= vo.getText() %> <!-- 내용 출력 -->
 
 <hr>
-<%if(id!=null){%>
+<%if(id!=null){ //로그인 했을경우 댓글달기 form 상생 %>
 	<form action="comment.jsp" method="post">
 	<textarea cols="40" rows="4" name ="comment" placeholder="댓글을 입력하세요."></textarea>
 	<input type="hidden" name="postNum" value='<%=postNum %>'> 
@@ -90,9 +91,9 @@
 	commentDAO cdao = new commentDAO();
 	ArrayList<forCommentList> commentList = new ArrayList<forCommentList>(cdao.getCommentList(postNum));
 	
-	for(int i=0; i<commentList.size(); i++){
-		out.print(commentList.get(i).getId());
-		if(id.equals(commentList.get(i).getId()))
+	for(int i=0; i<commentList.size(); i++){//댓글 출력 loop
+		out.print(commentList.get(i).getId());//id출력
+		if(id.equals(commentList.get(i).getId()))//댓글 작성자만 삭제버튼 생성
 		{%>
 			<form action="delComment.jsp" method="post" style="display:inline">
 				<input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
@@ -101,14 +102,14 @@
 			</form>
 		<%} %>
 	<br>
-	<%=commentList.get(i).getText() %>
+	<%=commentList.get(i).getText() %> <!-- 댓글 내용 출력 -->
 	<br>
 	<%
-		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++)
+		 for(int j=0; j<commentList.get(i).getComment2List().size(); j++) // 대댓글이 있을경우
 		 {%>
 			<div id="comment2Box">
-			 <%=commentList.get(i).getComment2List().get(j).getId() %>
-			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) {%>
+			 <%=commentList.get(i).getComment2List().get(j).getId() %><!-- 대댓글 작성자 id 출력 -->
+			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) { // 대댓글 작성자만 삭제버튼 생성%>
 			<form action="delComment2.jsp" method="post" style="display:inline">
 				<input type="hidden" name ="comment2Num" value='<%=commentList.get(i).getComment2List().get(j).getComment2Num() %>'>
 				<input type="hidden" name="postNum" value='<%=postNum %>'>
@@ -116,9 +117,10 @@
 			</form>
 				<%}%>
 			<br>
-			<%=commentList.get(i).getComment2List().get(j).getText() %>
+			<%=commentList.get(i).getComment2List().get(j).getText() %> <!-- 대댓글 내용 출력 -->
 			</div>
 		<%} %>
+		<!-- 대댓글 달기 버튼 -->
 			<input type="button" value="댓글달기" onclick="openCommentBox('<%=commentList.get(i).getCommentNum() %>')">
 			<br><br>
 			<div id ='<%=commentList.get(i).getCommentNum()%>' style="display:none">
