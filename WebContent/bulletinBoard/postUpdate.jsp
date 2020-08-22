@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+	//게시글 수정 form page
 	request.setCharacterEncoding("utf-8");
 	int postNum= Integer.parseInt( (String)request.getParameter("postNum").substring(0) );
 	

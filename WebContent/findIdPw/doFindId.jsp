@@ -10,6 +10,7 @@
 </head>
 <body>
 <%
+	// DB에서 이름과 email이 일치하는 id를 찾아 뒤의 세자리를 *로 바꾼후 출력해준다
 	memberVO vo = new memberVO();
 	vo.setName(request.getParameter("name"));
 	vo.setMail(request.getParameter("email"));

@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+//게시글을 삭제하는 page
 request.setCharacterEncoding("utf-8");
 
 bulletinBoardDAO dao = new bulletinBoardDAO();

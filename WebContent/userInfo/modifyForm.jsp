@@ -17,8 +17,9 @@ function checkValue()
 }</script>
 </head>
 <body>
-	<%
-		memberVO vo = new memberVO();
+<%
+	// 회원정보 수정 form page
+	memberVO vo = new memberVO();
 	memberDAO dao = new memberDAO();
 	vo.setId((String) session.getAttribute("id"));
 	vo.setPw((String) request.getParameter("pw"));

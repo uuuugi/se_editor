@@ -9,6 +9,7 @@
 </head>
 <body>
 <%
+	//게시글을 저장하는 page
 	request.setCharacterEncoding("utf-8");
 
 	bulletinBoardVO vo = new bulletinBoardVO();

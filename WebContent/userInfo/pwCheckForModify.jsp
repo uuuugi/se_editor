@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 회원정보 수정 전에 pw를 입력받는 page -->
 비밀번호를 입력해 주세요
 <form action="modifyForm.jsp" target="_self" method ="post">
 <input type="password" name= "pw" >
