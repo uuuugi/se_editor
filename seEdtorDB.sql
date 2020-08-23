@@ -92,6 +92,7 @@ constraint fk_inquiryComment2User foreign key(id) references user(user_id) on up
 create table algorithm( -- 알고리즘 테이블
 algorithmNum int not null auto_increment unique,
 category varchar(20),
+name varchar(20) not null,
 explanation varchar(10000),
 input varchar(1000),
 output varchar(1000)
