@@ -69,8 +69,6 @@ function showOrHide(id){
 			out.println(vo.getInput());
 			out.println(vo.getOutput());
 			
-			
-			// 시도한적이 있는지 체크
 			// 있다면 결과 출력
 			// 코드리스트 출력
 		}
