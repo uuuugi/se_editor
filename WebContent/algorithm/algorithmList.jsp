@@ -39,12 +39,27 @@ function showOrHide(id){
 	<div id="listA">
 	<%
 	for(int i=0; i<algorithmListA.size(); i++){%>
-		<form action="algorithmList.jsp" target="_self" id='<%= algorithmListA.get(i).getNum()%>'>
+		<form action="algorithmList.jsp" target="_self" id='<%= algorithmListA.get(i).getNum()%>' method='post'>
 		<input type="hidden" name ="num" value='<%=algorithmListA.get(i).getNum() %>'>
-		<a href="" onclick="document.getElementById('<%= algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName() %></a>
+		<a href="#" onclick="document.getElementById('<%= algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName() %></a>
 		</form>
 		<%}%>
 		</div>
 	</div>
+<% 
+	int algorithmNum;
+	
+	if(request.getParameter("num")!=null)
+		{
+			algorithmNum=Integer.parseInt(request.getParameter("num"));
+			algorithmVO vo = new algorithmVO();
+			vo=dao.getAlgorithm(algorithmNum);
+			
+			out.println(vo.getName());
+			out.println(vo.getExplanation());
+			out.println(vo.getInput());
+			out.println(vo.getOutput());
+		}
+%>
 </body>
 </html>

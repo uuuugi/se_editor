@@ -29,6 +29,48 @@ public class algorithmDAO {
 		return conn;
 	}
 	
+	public algorithmVO getAlgorithm(int num) { // algorithm 내용 불러오기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		algorithmVO vo = new algorithmVO();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select * from algorithm where algorithmNum=?;";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setInt(1, num);
+		      
+		      rs = pstmt.executeQuery();
+		      
+				if(rs.next()){
+					
+					vo.setName(rs.getString("name"));
+					vo.setExplanation(rs.getString("explanation"));
+					vo.setInput(rs.getString("input"));
+					vo.setOutput(rs.getString("output"));
+					
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return vo;
+	}
+	
 	public ArrayList<algorithmVO> getAlgorithmList() { // algorithm 전체 불러오기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
