@@ -37,8 +37,8 @@ iframe{
 </style>
 </head>
 <body>
-<iframe src= "algorithmList.jsp" id="algorithmList"></iframe>
-<iframe src="../ide/editor.jsp" id = "editor"></iframe>
-<iframe src= ../ide/run.jsp id = "run"></iframe>
+<iframe src= "algorithmList.jsp" id = "algorithmList" name="algorithmList"></iframe>
+<iframe src= "editorForAlgorithm.jsp" id = "editor" name = "editor"></iframe>
+<iframe src= ../ide/run.jsp id = "run" name = "run"></iframe>
 </body>
 </html>

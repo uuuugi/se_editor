@@ -24,7 +24,7 @@ body {
 <script>
 	var editor;
     
-    function createEdtior(){
+    function createEdtior(code1){
         var language=getCodeType(); // codeType 가져오기 codeType에 따라 editor의 언어 설정이 바뀜
         
         if(language=='c')
@@ -35,7 +35,10 @@ body {
         	code= "#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello World')";
         else if(language=='javascript')
         	code= "//SE Editor\n//제목에 공백을 입력하지 말아주세요 \nconsol.log(\"Hello World\")";
-        	
+        
+        if(code1!=null)
+        	code = code1;
+        
 		var remove = document.getElementById('editorDiv');
 		if(remove!=null)// 만약 editor div가 있다면 삭제
 			document.body.removeChild(remove);
@@ -61,7 +64,7 @@ body {
     
     function createEdtiorInSelect(){// 셀렉트에서 editor 바꿀경우 바뀌지 않는 버그 수정을 위해 codeType을 초기화 시켜주는 함수를 하나 더 만듬
     	codeType=null;
-    	createEdtior();
+    	createEdtior(code);
     }
    function createForm(){//form 생성 및 submit
    	  var form = document.createElement("form");//폼 생성
@@ -162,7 +165,7 @@ body {
 		var code='<%=code%>';
 		var codeType= '<%=codeType%>';
 			window.onload = function() {// 불러온 언어에 맞게 editor변경
-				createEdtior();
+				createEdtior(code);
 			};
 		</script>
 		
@@ -172,7 +175,7 @@ body {
 		var codeType=null;
 		
 		window.onload = function() {// defualt editor 생성 
-			createEdtior();
+			createEdtior(code);
 			};
 		</script>
 <% } %>
