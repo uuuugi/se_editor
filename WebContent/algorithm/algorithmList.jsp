@@ -88,6 +88,10 @@ function showOrHide(id){
 							사용언어 : <%=userCodeList.get(i).getCodeType() %> 
 							<br>
 							<%= userCodeList.get(i).getCode() %>
+							<form action="editorForAlgorithm.jsp" target="editor" method="post">
+							<input type ="hidden" name="codeNum" value='<%=userCodeList.get(i).getCodeNum() %>'>
+							<input type ="submit" value="에디터로 옮기기">
+							</form>
 						</div>
 					</div>
 				<%}
