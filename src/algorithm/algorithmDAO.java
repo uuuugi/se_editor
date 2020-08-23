@@ -227,4 +227,43 @@ public class algorithmDAO {
 
 		return algoritymCodeList;
 	}
+	
+	public userAlgorithmCodeVO getAlgorithmCode(String id, int codeNum) { // algorithm 내용 불러오기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		userAlgorithmCodeVO vo = new userAlgorithmCodeVO();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select * from user_algorithm_code where id=? and codeNum=?;";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, id);
+		      pstmt.setInt(2, codeNum);
+		      
+		      rs = pstmt.executeQuery();
+		      
+				if(rs.next()){
+					vo.setCodeType(rs.getString("codeType"));
+					vo.setCode(rs.getNString("code"));
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return vo;
+	}
 }
