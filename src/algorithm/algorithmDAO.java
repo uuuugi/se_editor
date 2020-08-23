@@ -148,4 +148,41 @@ public class algorithmDAO {
 
 		return algoritymList;
 	}
+	
+	public int doesUserTry(String id, int num) { // user가 해당 알고리즘을 시도했는지 결과 확인
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = -1;
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select * from user_algorithm_data where id=? and algorithmNum=?;";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setString(1, id);
+		      pstmt.setInt(2, num);
+		      
+		      rs = pstmt.executeQuery();
+		      
+				if(rs.next()){
+					result = rs.getInt("result");
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 }
