@@ -89,8 +89,40 @@ constraint fk_inquiryComment2inquiry foreign key(inquiryNum) references inquiry(
 constraint fk_inquiryComment2User foreign key(id) references user(user_id) on update cascade on delete cascade
 );
 
+create table algorithm( -- 알고리즘 테이블
+algorithmNum int not null auto_increment unique,
+category varchar(20),
+explanation varchar(10000),
+input varchar(1000),
+output varchar(1000)
+);
 
-select * from inquiry;
+create table algorithm_data( -- 알고리즘 데이터 테이블
+algorithmNum int not null unique,
+input varchar(1000),
+output varchar(1000),
+constraint fk_algorithm_data2algorithm foreign key(algorithmNum) references algorithm(algorithmNum) on update cascade on delete cascade
+);
+
+create table user_algorithm_data( -- user가 도전한 알고리즘 리스트 성공/실패 결과값을 들고있음 
+id varchar(20) not null,
+algorithmNum int not null,
+result int not null,
+constraint fk_user_algorithm_data2user foreign key(id) references user(user_id) on update cascade on delete cascade,
+constraint fk_user_algorithm_data2algorithm foreign key(algorithmNum) references algorithm(algorithmNum) on update cascade on delete cascade
+);
+
+create table user_algorithm_code(-- user가 알고리즘을 풀면서 작성한 코드들
+id varchar(20) not null,
+algorithmNum int not null,
+codeNum int not null auto_increment unique,
+code varchar(10000),
+codeType varchar(100),
+result int,
+constraint fk_user_algorithm_code2user foreign key(id) references user(user_id) on update cascade on delete cascade,
+constraint fk_user_algorithm_code2algorithm foreign key(algorithmNum) references algorithm (algorithmNum) on update cascade on delete cascade
+);
+
 -- insert
 insert into user -- user에 insert
 values ('id2', 'password', 'name1', 'email1', 'introduce1', 'user');
