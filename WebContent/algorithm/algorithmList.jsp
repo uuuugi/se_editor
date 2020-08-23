@@ -42,9 +42,9 @@ function showOrHide(id){
 	for(int i=0; i<algorithmListA.size(); i++){//코드 리스트 출력
 		int result = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
 	%>
-		<form action="algorithmList.jsp" target="_self" id='<%= algorithmListA.get(i).getNum()%>' method='post'>
+		<form action="algorithmList.jsp" target="_self" id='list<%= algorithmListA.get(i).getNum()%>' method='post'>
 		<input type="hidden" name ="num" value='<%=algorithmListA.get(i).getNum() %>'>
-		<a href="#" onclick="document.getElementById('<%= algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName() %></a>
+		<a href="#" onclick="document.getElementById('list<%= algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName() %></a>
 		<%
 			if(result==0)
 				out.println("실패");
@@ -69,8 +69,29 @@ function showOrHide(id){
 			out.println(vo.getInput());
 			out.println(vo.getOutput());
 			
-			// 있다면 결과 출력
-			// 코드리스트 출력
+			if(dao.doesUserTry(id,algorithmNum)!= -1) // user가 시도한적이 있다면 작성했었던 코드리스트 출력
+			{
+				ArrayList<userAlgorithmCodeVO> userCodeList = new ArrayList<userAlgorithmCodeVO>();
+				userCodeList = dao.getAlgorithmCodeList(id,algorithmNum);
+				
+				for(int i=0; i<userCodeList.size(); i++)
+				{%>
+					<div class="list"><!-- 소스보기 옆에 결과를 같이 출력해줌 소스보기 클릭시 코드내용 출력 -->
+					<span onclick="showOrHide('<%=userCodeList.get(i).getCodeNum()%>')"> 소스보기  </span>
+					<%
+					if(userCodeList.get(i).getResult()==1) 
+						out.println("성공");
+						else
+						out.println("실패");
+					%>
+						<div id ='<%=userCodeList.get(i).getCodeNum()%>'>
+							사용언어 : <%=userCodeList.get(i).getCodeType() %> 
+							<br>
+							<%= userCodeList.get(i).getCode() %>
+						</div>
+					</div>
+				<%}
+			}
 		}
 	
 %>

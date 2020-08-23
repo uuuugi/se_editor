@@ -185,4 +185,46 @@ public class algorithmDAO {
 
 		return result;
 	}
+	
+	public ArrayList<userAlgorithmCodeVO> getAlgorithmCodeList(String id, int num) { // user가 작성한 algorithmCode 불러오기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<userAlgorithmCodeVO> algoritymCodeList = new ArrayList<userAlgorithmCodeVO>();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select * from user_algorithm_code where id=? and algorithmNum=?;";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      pstmt.setNString(1, id);
+		      pstmt.setInt(2, num);
+		      
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					userAlgorithmCodeVO tmp = new userAlgorithmCodeVO();
+					tmp.setCodeNum(rs.getInt("codeNum"));
+					tmp.setCode(rs.getString("code"));
+					tmp.setCodeType(rs.getNString("codeType"));
+					tmp.setResult(rs.getInt("result"));
+					algoritymCodeList.add(tmp);
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return algoritymCodeList;
+	}
 }
