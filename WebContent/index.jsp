@@ -37,10 +37,11 @@ else {%>
 	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
 	<input type="button" value="회원정보 수정" onclick="go('userInfo\\pwCheckForModify.jsp')" >
 	<input type="button" value="게시판" onclick ="go('bulletinBoard\\bulletinBoard.jsp')" >
+	<input type="button" value="알고리즘" onclick="go('algorithm\\algorithm.jsp')">
 	<input type="button" value="문의하기" onclick="go('inquiry\\inquiry.jsp')">
 <% 
 	if("master".equals( (String)session.getAttribute("authority")) ){%>
-		<input type ="button" value="문의보기" onclick="go(inquiry\\inquiryMasterMode.jsp)">
+		<input type ="button" value="문의보기" onclick="go('inquiry\\inquiryMasterMode.jsp')">
 	<%}%>
 <% } %>
 
