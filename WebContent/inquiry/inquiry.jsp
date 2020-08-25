@@ -23,6 +23,7 @@ display:none;
 </script>
 </head>
 <body>
+<input type="button" value="home" onclick="location.href='../index.jsp'">
 <%
 	//문의하기 페이지 자신이 문의한 내용 및 답변보기 , 문의하기 기능이 있다
 	request.setCharacterEncoding("UTF-8");
