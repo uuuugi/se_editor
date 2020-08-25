@@ -5,29 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import code.codeVO;
+import DBconnection.DBconnection;
 
 public class memberDAO {
-	private Connection getConnection() throws SQLException {
-	    Connection conn = null;
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			//드라이버 로딩
-			String url = "jdbc:mysql://localhost/seEditor?serverTimezone=UTC";
-			//DB url 설정 및 시간설정
-			//?serverTimezone=UTC시간설정부분
-			conn = DriverManager.getConnection(url, "root", "1324");
-			//DB url +id + pw
-		}
-		catch(ClassNotFoundException e){
-            System.out.println("드라이버 로딩 실패");
-        }
-        catch(SQLException e){
-            System.out.println("오류: " + e);
-        }
-		return conn;
-	}
+	
 
 	public void dbinsert(memberVO vo) {         // 회원가입시 정보를  db에 입력하기 위한 메소드
 	      Connection conn=null;
@@ -35,7 +16,7 @@ public class memberDAO {
 	       int rs = 0;
 	       
 	       try {
-	         conn= getConnection();
+	    	   conn = DBconnection.getConnection();
 	         
 	         String sql = "insert into user values (?, ?, ?, ?, ?, ?);";
 	         String sql2 = "insert into workspaceUserData values (?);";
@@ -73,7 +54,7 @@ public class memberDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-         conn = getConnection();
+        	conn = DBconnection.getConnection();
          String sql = "select * from user where user_id=?";
          ps = conn.prepareStatement(sql);
          ps.setString(1, id);
@@ -94,7 +75,7 @@ public class memberDAO {
 			String result = "fail"; 
 			
 			try {
-				conn= getConnection();
+				conn = DBconnection.getConnection();
 				
 				String sql = "select user_pw , user_authority from user where user_id=?";
 			    
@@ -129,7 +110,7 @@ public class memberDAO {
 			ResultSet rs = null;
 	       
 	       try {
-	         conn= getConnection();
+	    	   conn = DBconnection.getConnection();
 	         
 	         String sql = "select user_name, user_Email, user_introduce from user where user_id=?";
 	         
@@ -160,7 +141,7 @@ public class memberDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 			
 			if(vo.getPw().isEmpty()==true)
 			{
@@ -208,7 +189,7 @@ public class memberDAO {
 		ResultSet rs = null;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql="select user_id from user where user_name=? and user_email=?";
 			pstmt = conn.prepareStatement(sql);
@@ -242,7 +223,7 @@ public class memberDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql="UPDATE user SET user_pw=? WHERE user_id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -274,7 +255,7 @@ public class memberDAO {
 		ResultSet rs;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql="select user_id from user where user_id=? and user_email=?";
 			pstmt = conn.prepareStatement(sql);
