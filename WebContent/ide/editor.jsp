@@ -197,7 +197,7 @@ body {
 			<option value="python">python</option>
 			<option value="javascript">javascript</option>
 		</select>
-
+		
 		<%
 			} else {// codeName이 있을경우 == workSpaceList를 이용하여 코드를 불러왔을때
 		String user_id = (String) session.getAttribute("id");

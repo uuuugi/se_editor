@@ -30,16 +30,21 @@ iframe{
 	display:block;
 }
 #editor{
-	width: 82vw;
+	width: 62vw;
 	height: 79vh;
 	display: inline-block;
 }
-
+#ocr{
+	width: 20vw;
+	height: 79vh;
+	display: inline-block;
+}
 </style>
 </head>
 <body>
 <iframe id="workSpaceList" name = "workSpaceList" src="workSpaceList.jsp"> </iframe>
 <iframe id="editor" name = "editor" src="editor.jsp"> </iframe>
+<iframe id="ocr" name ="ocr" src="../ocr/ocr.jsp"> </iframe>
 <iframe id="run" name = "run"> run</iframe>
 </body>
 </html>
