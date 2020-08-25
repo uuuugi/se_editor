@@ -7,7 +7,87 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import DBconnection.*;
+import code.codeVO;
 public class algorithmDAO {
+	
+	public boolean updateAlgorithm(algorithmVO vo, int num) {//알고리즘 업데이트
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = DBconnection.getConnection();
+
+				String sql = "update algorithm set category=?, name=?, explanation=?, exinput=?, exoutput=?, input=?, output=? where algorithmNum=?";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, vo.getCategory());
+				pstmt.setString(2, vo.getName());
+				pstmt.setString(3, vo.getExplanation());
+				pstmt.setString(4, vo.getExInput());
+				pstmt.setString(5, vo.getExOutput());
+				pstmt.setString(6, vo.getInput());
+				pstmt.setString(7, vo.getOutput());
+				pstmt.setInt(8, num);
+
+				pstmt.executeUpdate();
+
+				result = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
+	public boolean insertAlgorithm(algorithmVO vo) {//알고리즘 저장
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = DBconnection.getConnection();
+
+				String sql = "INSERT INTO algorithm (category,name,explanation,exinput,exoutput,input,output) VALUES (?,?,?,?,?,?,?)";
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, vo.getCategory());
+				pstmt.setString(2, vo.getName());
+				pstmt.setString(3, vo.getExplanation());
+				pstmt.setString(4, vo.getExInput());
+				pstmt.setString(5, vo.getExOutput());
+				pstmt.setString(6, vo.getInput());
+				pstmt.setString(7, vo.getOutput());
+
+				pstmt.executeUpdate();
+
+				result = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 	
 	public algorithmVO getAlgorithm(int num) { // algorithm 내용 불러오기
 		Connection conn = null;
@@ -30,9 +110,10 @@ public class algorithmDAO {
 					
 					vo.setName(rs.getString("name"));
 					vo.setExplanation(rs.getString("explanation"));
+					vo.setExInput(rs.getString("Exinput"));
+					vo.setExOutput(rs.getString("Exoutput"));
 					vo.setInput(rs.getString("input"));
 					vo.setOutput(rs.getString("output"));
-					
 					}
 			
 		} catch (SQLException e) {

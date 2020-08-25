@@ -5,6 +5,8 @@ public class algorithmVO {
 	String category;
 	String name;
 	String explanation;
+	String exInput;
+	String exOutput;
 	String input;
 	String output;
 	public int getNum() {
@@ -30,6 +32,18 @@ public class algorithmVO {
 	}
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;
+	}
+	public String getExInput() {
+		return exInput;
+	}
+	public void setExInput(String exInput) {
+		this.exInput = exInput;
+	}
+	public String getExOutput() {
+		return exOutput;
+	}
+	public void setExOutput(String exOutput) {
+		this.exOutput = exOutput;
 	}
 	public String getInput() {
 		return input;
