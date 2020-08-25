@@ -34,7 +34,7 @@
 		ServletFileUpload upload = new ServletFileUpload(factory);
 
 		//업로드 가능한 사이즈 지정
-		upload.setSizeMax(2000 * 1024);
+		upload.setSizeMax(3652 * 2739);
 
 		//사용자의 요청 중 일반요소(Form field)와 file로 온 것 분리
 		List<FileItem> items = upload.parseRequest(request);
