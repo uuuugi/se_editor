@@ -6,28 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import DBconnection.*;
 public class algorithmDAO {
-	private Connection getConnection() throws SQLException {
-	    Connection conn = null;
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			//드라이버 로딩
-			String url = "jdbc:mysql://localhost/seeditor?serverTimezone=UTC";
-			//DB url 설정 및 시간설정
-			//?serverTimezone=UTC시간설정부분
-			conn = DriverManager.getConnection(url, "root", "1324");
-			//DB url +id + pw
-		}
-		catch(ClassNotFoundException e){
-            System.out.println("드라이버 로딩 실패");
-        }
-        catch(SQLException e){
-            System.out.println("오류: " + e);
-        }
-		return conn;
-	}
 	
 	public algorithmVO getAlgorithm(int num) { // algorithm 내용 불러오기
 		Connection conn = null;
@@ -37,7 +17,7 @@ public class algorithmDAO {
 		algorithmVO vo = new algorithmVO();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from algorithm where algorithmNum=?;";
 		      pstmt= conn.prepareStatement(sql);
@@ -78,7 +58,7 @@ public class algorithmDAO {
 		ArrayList<algorithmVO> algoritymList = new ArrayList<algorithmVO>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from algorithm ;";
 		      pstmt= conn.prepareStatement(sql);
@@ -116,7 +96,7 @@ public class algorithmDAO {
 		ArrayList<algorithmVO> algoritymList = new ArrayList<algorithmVO>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from algorithm where category=?;";
 		      pstmt= conn.prepareStatement(sql);
@@ -156,7 +136,7 @@ public class algorithmDAO {
 		int result = -1;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from user_algorithm_data where id=? and algorithmNum=?;";
 		      pstmt= conn.prepareStatement(sql);
@@ -193,7 +173,7 @@ public class algorithmDAO {
 		ArrayList<userAlgorithmCodeVO> algoritymCodeList = new ArrayList<userAlgorithmCodeVO>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from user_algorithm_code where id=? and algorithmNum=?;";
 		      pstmt= conn.prepareStatement(sql);
@@ -236,7 +216,7 @@ public class algorithmDAO {
 		userAlgorithmCodeVO vo = new userAlgorithmCodeVO();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select * from user_algorithm_code where id=? and codeNum=?;";
 		      pstmt= conn.prepareStatement(sql);

@@ -6,36 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import DBconnection.*;
 public class bulletinBoardDAO {
-	private Connection getConnection() throws SQLException {
-	    Connection conn = null;
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			//드라이버 로딩
-			String url = "jdbc:mysql://localhost/seeditor?serverTimezone=UTC";
-			//DB url 설정 및 시간설정
-			//?serverTimezone=UTC시간설정부분
-			conn = DriverManager.getConnection(url, "root", "1324");
-			//DB url +id + pw
-		}
-		catch(ClassNotFoundException e){
-            System.out.println("드라이버 로딩 실패");
-        }
-        catch(SQLException e){
-            System.out.println("오류: " + e);
-        }
-		return conn;
-	}
-	
+
 	public boolean insertPost(bulletinBoardVO vo) { // 게시글 저장
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "INSERT INTO board (id, Name, text) VALUES (?,?,?)";
 				pstmt = conn.prepareStatement(sql);
@@ -71,7 +51,7 @@ public class bulletinBoardDAO {
 		ArrayList<forPostList> postList = new ArrayList<forPostList>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 			
 			String sql = "select id, name, postNum, time from board";
 		      pstmt= conn.prepareStatement(sql);
@@ -109,7 +89,7 @@ public class bulletinBoardDAO {
 		ArrayList<forPostList> postList = new ArrayList<forPostList>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select name, postNum from board where id=?";
 		      pstmt= conn.prepareStatement(sql);
@@ -146,7 +126,7 @@ public class bulletinBoardDAO {
 		ArrayList<forPostList> postList = new ArrayList<forPostList>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select name, postNum from board where name=?";
 		      pstmt= conn.prepareStatement(sql);
@@ -184,7 +164,7 @@ public class bulletinBoardDAO {
 		bulletinBoardVO vo = new bulletinBoardVO();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select id, name, text, star, postNum from board where postNum=?";
 		      
@@ -223,7 +203,7 @@ public class bulletinBoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "delete from board where postNum=? ";
 				pstmt = conn.prepareStatement(sql);
@@ -255,7 +235,7 @@ public class bulletinBoardDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "UPDATE board SET text=? WHERE postNum=?";
 				pstmt = conn.prepareStatement(sql);
@@ -290,7 +270,7 @@ public class bulletinBoardDAO {
 		ResultSet rs = null;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "select id from star where postNum=? and id=?";
 				pstmt = conn.prepareStatement(sql);
@@ -335,7 +315,7 @@ public class bulletinBoardDAO {
 		ResultSet rs = null;
 		int result= 0;
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "select star from board where postNum=?";
 				pstmt = conn.prepareStatement(sql);

@@ -7,26 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DBconnection.*;
+
 public class codeDAO {
-
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			// 드라이버 로딩
-			String url = "jdbc:mysql://localhost/seEditor?serverTimezone=UTC";
-			// DB url 설정 및 시간설정
-			// ?serverTimezone=UTC시간설정부분
-			conn = DriverManager.getConnection(url, "root", "1324");
-			// DB url +id + pw
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패");
-		} catch (SQLException e) {
-			System.out.println("오류: " + e);
-		}
-		return conn;
-	}
 
 	public boolean insertCode(codeVO vo) {//코드 저장
 		boolean result = false;
@@ -34,7 +17,7 @@ public class codeDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "INSERT INTO workspace (user_id, codeName, codeType, code) VALUES (?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
@@ -70,7 +53,7 @@ public class codeDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "delete from workspace where user_id=? and codeName=? ";
 				pstmt = conn.prepareStatement(sql);
@@ -104,7 +87,7 @@ public class codeDAO {
 		ResultSet rs = null;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "SELECT code FROM workspace WHERE user_id=? AND codeName=?";
 				pstmt = conn.prepareStatement(sql);
@@ -138,7 +121,7 @@ public class codeDAO {
 		ResultSet rs = null;
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 				String sql = "SELECT codetype FROM workspace WHERE user_id=? AND codeName=?";
 				pstmt = conn.prepareStatement(sql);
@@ -172,7 +155,7 @@ public class codeDAO {
 		ArrayList<String> codeList = new ArrayList<String>();
 		
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select codeName from workspace where user_id=? AND codeType=?;";
 		      pstmt= conn.prepareStatement(sql);
@@ -207,7 +190,7 @@ public class codeDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql="UPDATE workspace SET code=?, codeType=? WHERE user_id=? AND codeName=?";
 			pstmt = conn.prepareStatement(sql);
@@ -243,7 +226,7 @@ public class codeDAO {
 		ResultSet rs = null;
 
 		try {
-			conn = getConnection();
+			conn = DBconnection.getConnection();
 
 			String sql = "select codeName from workspace where user_id=?";
 			pstmt = conn.prepareStatement(sql);
