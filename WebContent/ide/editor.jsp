@@ -203,14 +203,8 @@ body {
 		String user_id = (String) session.getAttribute("id");
 		codeDAO dao = new codeDAO();
 		String codeType = dao.getCodeType(user_id, codeName);
-		String tmpCode = dao.getCode(user_id, codeName);// code 불러오기
-		String code = "";
-		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
-		String[] afterSplitCode = tmpCode.split(splitCode);//split해서 라인별로 배열에 저장
-		for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
-			code += afterSplitCode[i];
-			code += "\\n";
-		} %>
+		String code = dao.getCode(user_id, codeName);// code 불러오기
+		%>
 
 		<script>
 		var code='<%=code%>';

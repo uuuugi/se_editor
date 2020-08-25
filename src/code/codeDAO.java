@@ -81,7 +81,8 @@ public class codeDAO {
 	}
 	
 	public String getCode(String id, String codeName) {//코드를 불러옴
-		String code = "";
+		String tmpCode = "";
+		String code="";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -96,8 +97,14 @@ public class codeDAO {
 				pstmt.setString(2, codeName);
 				rs = pstmt.executeQuery();
 				if(rs.next())
-					code = rs.getString("code");
+					tmpCode = rs.getString("code");
 			
+			String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
+			String[] afterSplitCode = tmpCode.split(splitCode);//split해서 라인별로 배열에 저장
+			for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
+				code += afterSplitCode[i];
+				code += "\\n";
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
