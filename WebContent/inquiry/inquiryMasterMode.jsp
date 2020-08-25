@@ -23,6 +23,7 @@ function box(id){
 </script>
 </head>
 <body>
+<input type="button" value="home" onclick="location.href='../index.jsp'">
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = (String)session.getAttribute("id");
