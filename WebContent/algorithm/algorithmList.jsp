@@ -66,8 +66,8 @@ function showOrHide(id){
 			
 			out.println(vo.getName());
 			out.println(vo.getExplanation());
-			out.println(vo.getInput());
-			out.println(vo.getOutput());
+			out.println(vo.getExInput());
+			out.println(vo.getExOutput());
 			
 			if(dao.doesUserTry(id,algorithmNum)!= -1) // user가 시도한적이 있다면 작성했었던 코드리스트 출력
 			{

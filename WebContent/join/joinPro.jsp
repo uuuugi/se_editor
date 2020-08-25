@@ -16,7 +16,7 @@
 	<script type="text/javascript">
     	 // 취소 버튼 클릭시 로그인 화면으로 이동
         function goIndex() {
-            location.href="index.jsp";
+            location.href="../index.jsp";
         }
     	        
     </script>

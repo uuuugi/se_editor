@@ -42,6 +42,7 @@ else {%>
 <% 
 	if("master".equals( (String)session.getAttribute("authority")) ){%>
 		<input type ="button" value="문의보기" onclick="go('inquiry\\inquiryMasterMode.jsp')">
+		<input type ="button" value="알고리즘 추가" onclick="go('algorithm\\algorithmBoard.jsp')">
 	<%}%>
 <% } %>
 
