@@ -12,10 +12,17 @@ import DBconnection.*;
 public class codeDAO {
 
 	public boolean insertCode(codeVO vo) {//코드 저장
+		String code="";
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
+		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
+		String[] afterSplitCode = vo.getCode().split(splitCode);//split해서 라인별로 배열에 저장
+		for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
+			code += afterSplitCode[i];
+			code += "\\n";
+		}
 		try {
 			conn = DBconnection.getConnection();
 
@@ -25,7 +32,7 @@ public class codeDAO {
 				pstmt.setString(1, vo.getUser_id());
 				pstmt.setString(2, vo.getCodeName());
 				pstmt.setString(3, vo.getCodeType());
-				pstmt.setString(4, vo.getCode());
+				pstmt.setString(4, code);
 
 				pstmt.executeUpdate();
 
@@ -81,7 +88,6 @@ public class codeDAO {
 	}
 	
 	public String getCode(String id, String codeName) {//코드를 불러옴
-		String tmpCode = "";
 		String code="";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -97,14 +103,9 @@ public class codeDAO {
 				pstmt.setString(2, codeName);
 				rs = pstmt.executeQuery();
 				if(rs.next())
-					tmpCode = rs.getString("code");
+					code = rs.getString("code");
 			
-			String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
-			String[] afterSplitCode = tmpCode.split(splitCode);//split해서 라인별로 배열에 저장
-			for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
-				code += afterSplitCode[i];
-				code += "\\n";
-			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
