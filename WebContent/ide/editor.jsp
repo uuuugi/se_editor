@@ -87,31 +87,31 @@ body {
    	  form.appendChild(hiddenField);// form에 추가
    	  
    	  if(newFile!=true){// newFile 버튼을 통해 호출하지 않았을 경우(save, run) 폼 추가 생성하여 codeType과 code를 저장
-   	  	codeType=getCodeType();
-   	  var hiddenField = document.createElement("input");
-   	  hiddenField.setAttribute("type", "hidden");
-   	  hiddenField.setAttribute("name", "codeType");
-   	  hiddenField.setAttribute("value", codeType);
-   	  form.appendChild(hiddenField);
+   	  	 codeType=getCodeType();
+   	 	 var hiddenField = document.createElement("input");
+   	 	 hiddenField.setAttribute("type", "hidden");
+   		 hiddenField.setAttribute("name", "codeType");
+   	 	 hiddenField.setAttribute("value", codeType);
+   	 	 form.appendChild(hiddenField);
    	  
-   	  if(save!=true){
-   	  if(codeType=="c")
-   		form.setAttribute("action", urlForc); //요청 보낼 주소
-   	  else if(codeType=="java")
-     	form.setAttribute("action", urlForJava); //요청 보낼 주소
-      else if(codeType=="python")
-        form.setAttribute("action", urlForPython); //요청 보낼 주소
-      else if(codeType=="javascript")
-        form.setAttribute("action", urlForJavascript); //요청 보낼 주소
+   	 	 if(save!=true){
+   	  		if(codeType=="c")
+   				form.setAttribute("action", urlForc); //요청 보낼 주소
+   	 		else if(codeType=="java")
+     			form.setAttribute("action", urlForJava); //요청 보낼 주소
+     		else if(codeType=="python")
+       			form.setAttribute("action", urlForPython); //요청 보낼 주소
+      		else if(codeType=="javascript")
+        		form.setAttribute("action", urlForJavascript); //요청 보낼 주소
    		 
-   	  }
-   	  code=getCode();
-   	  var hiddenField = document.createElement("input");
-   	  hiddenField.setAttribute("type", "hidden");
-   	  hiddenField.setAttribute("name", "code");
-   	  hiddenField.setAttribute("value", code);
-   	  form.appendChild(hiddenField);
-   	  }
+   	 	 }
+   	  	code=getCode();
+   	  	var hiddenField = document.createElement("input");
+   	  	hiddenField.setAttribute("type", "hidden");
+   	  	hiddenField.setAttribute("name", "code");
+   	  	hiddenField.setAttribute("value", code);
+   	  	form.appendChild(hiddenField);
+   	 	 }
    	  
    	  document.body.appendChild(form);//form을 body에 생성
    	  form.submit(); //submit
@@ -127,8 +127,8 @@ body {
 	}
    function getCodeType(){  //select box에 있는 codeType을 가져오는 함수
    	if(codeType==null){
-   	var target = document.getElementById("selectCodeType");
-       codeType= target.options[target.selectedIndex].text;
+   		var target = document.getElementById("selectCodeType");
+      	codeType= target.options[target.selectedIndex].text;
    	}
        return codeType;
    }
@@ -168,8 +168,8 @@ body {
 			{	
 				ocr = Integer.parseInt(request.getParameter("ocr"));
 				ocrCode=request.getParameter("ocrCode");
-			}
-	%>
+			}%>
+			
 	<header>
 		<input type="button" name="new" value="new" onclick="newFile()" /> 
 		<input type="button" name="save" value="save" onclick="save()" /> 
@@ -199,23 +199,22 @@ body {
 		</select>
 		
 		<%
-			} else {// codeName이 있을경우 == workSpaceList를 이용하여 코드를 불러왔을때
-		String user_id = (String) session.getAttribute("id");
-		codeDAO dao = new codeDAO();
-		String codeType = dao.getCodeType(user_id, codeName);
-		String code = dao.getCode(user_id, codeName);// code 불러오기
-		%>
+		} else {// codeName이 있을경우 == workSpaceList를 이용하여 코드를 불러왔을때
+			String user_id = (String) session.getAttribute("id");
+			codeDAO dao = new codeDAO();
+			String codeType = dao.getCodeType(user_id, codeName);
+			String code = dao.getCode(user_id, codeName);// code 불러오기 %>
 
-		<script>
-		var code='<%=code%>';
-		var codeType= '<%=codeType%>';
-			window.onload = function() {// 불러온 언어에 맞게 editor변경
-				createEdtior(0,"");
-			};
-		</script>
-		<input type="text" id="codeName" name="codeName" value='<%=codeName%>' />
-		<%=codeType%>
-		<% } %>
+			<script>
+			var code='<%=code%>';
+			var codeType= '<%=codeType%>';
+				window.onload = function() {// 불러온 언어에 맞게 editor변경
+					createEdtior(0,"");
+				};
+			</script>
+			<input type="text" id="codeName" name="codeName" value='<%=codeName%>' />
+			<%=codeType%>
+	<% } %>
 	</header>
 </body>
 </html>
