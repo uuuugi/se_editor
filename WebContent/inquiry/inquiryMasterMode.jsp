@@ -13,12 +13,12 @@ display:none;
 }
 </style>
 <script>
-function box(id){
-	var box= document.getElementById(id);
-	if(box.style.display!='block')
-		box.style.display='block';
-	else
-		box.style.display='none';		
+function showOrHide(id){
+	var box = document.getElementById(id);
+	if(box.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
+		box.style.display="block";
+	else// block라면 none로 설정 == hide
+		box.style.display="none";
 }
 </script>
 </head>
@@ -33,7 +33,7 @@ function box(id){
 	
 	for(int i=0; i<inquiryList.size(); i++){%>
 		<div class="inquiryBox">
-			<span onclick="box('<%=i%>')"> <%=inquiryList.get(i).getTitle() %> || <%=inquiryList.get(i).getId() %></span><!-- 문의제목과 id출력 -->
+			<span onclick="showOrHide('<%=i%>')"> <%=inquiryList.get(i).getTitle() %> || <%=inquiryList.get(i).getId() %></span><!-- 문의제목과 id출력 -->
 			<div id='<%=i %>'>
 				<%= inquiryList.get(i).getText() %><!-- 문의내용 -->
 				<hr>

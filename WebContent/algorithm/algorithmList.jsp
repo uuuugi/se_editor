@@ -62,13 +62,16 @@ function showOrHide(id){
 		{//코드 설명 input ouput 출력
 			algorithmNum=Integer.parseInt(request.getParameter("num"));
 			algorithmVO vo = new algorithmVO();
-			vo=dao.getAlgorithm(algorithmNum);
+			vo=dao.getAlgorithm(algorithmNum); %>
 			
-			out.println(vo.getName());
-			out.println(vo.getExplanation());
-			out.println(vo.getExInput());
-			out.println(vo.getExOutput());
+			<div> <!-- 알고리즘 설명 div -->
+			<%=vo.getName() %>
+			<%=vo.getExplanation() %>
+			<%=vo.getExInput() %>
+			<%=vo.getExOutput() %>
+			</div>
 			
+			<%
 			if(dao.doesUserTry(id,algorithmNum)!= -1) // user가 시도한적이 있다면 작성했었던 코드리스트 출력
 			{
 				ArrayList<userAlgorithmCodeVO> userCodeList = new ArrayList<userAlgorithmCodeVO>();

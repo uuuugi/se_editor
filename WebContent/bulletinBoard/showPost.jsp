@@ -37,12 +37,12 @@
 	function update(postNum){
 		createForm("postUpdate.jsp", postNum);
 	}
-	function openCommentBox(id){ // 대댓글 작성 form을 show or hidden으로 바꿔주는 함수
-		var comment = document.getElementById(id);
-		if(comment.style.display!="block")
-			comment.style.display="block";
-		else
-			comment.style.display="none";
+	function showOrHide(id){
+		var box = document.getElementById(id);
+		if(box.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
+			box.style.display="block";
+		else// block라면 none로 설정 == hide
+			box.style.display="none";
 	}
 </script>
 </head>
@@ -109,7 +109,7 @@
 		 {%>
 			<div id="comment2Box">
 			 <%=commentList.get(i).getComment2List().get(j).getId() %><!-- 대댓글 작성자 id 출력 -->
-			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) { // 대댓글 작성자만 삭제버튼 생성%>
+			<% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) { // 대댓글 작성자만 삭제버튼 생성 %>
 			<form action="delComment2.jsp" method="post" style="display:inline">
 				<input type="hidden" name ="comment2Num" value='<%=commentList.get(i).getComment2List().get(j).getComment2Num() %>'>
 				<input type="hidden" name="postNum" value='<%=postNum %>'>
@@ -121,7 +121,7 @@
 			</div>
 		<%} %>
 		<!-- 대댓글 달기 버튼 -->
-			<input type="button" value="댓글달기" onclick="openCommentBox('<%=commentList.get(i).getCommentNum() %>')">
+			<input type="button" value="댓글달기" onclick="showOrHide('<%=commentList.get(i).getCommentNum() %>')">
 			<br><br>
 			<div id ='<%=commentList.get(i).getCommentNum()%>' style="display:none">
 			<form action="comment2.jsp" method="post">

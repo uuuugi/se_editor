@@ -13,13 +13,13 @@ display:none;
 }
 </style>
 <script>
-	function openText(id){ // 문의 내용을 show or hidden으로 바꿔주는 함수
-		var box= document.getElementById(id);
-		if(box.style.display!='block')
-			box.style.display='block';
-		else
-			box.style.display='none';		
-	}
+function showOrHide(id){
+	var box = document.getElementById(id);
+	if(box.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
+		box.style.display="block";
+	else// block라면 none로 설정 == hide
+		box.style.display="none";
+}
 </script>
 </head>
 <body>
@@ -35,7 +35,7 @@ display:none;
 	ArrayList <inquiryVO> inquiryList= new ArrayList<inquiryVO>(dao.getInquiryList(id));
 	
 	for(int i=0; i<inquiryList.size(); i++){//본인이 문의한 질문들 출력%>
-		<div class ="inquiryBox" onclick="openText('<%=inquiryList.get(i).getNum() %>')">
+		<div class ="inquiryBox" onclick="showOrHide('<%=inquiryList.get(i).getNum() %>')">
 			제목: <%=inquiryList.get(i).getTitle() %> 
 			<% if(inquiryList.get(i).getComment()==1) //답변이 있다면 제목옆에 답변완료라고 출력
 				out.print("답변완료");
