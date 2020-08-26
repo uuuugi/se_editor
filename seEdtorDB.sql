@@ -99,8 +99,6 @@ exoutput varchar(1000),
 input varchar(1000),
 output varchar(1000)
 );
-insert into algorithm(category,name,explanation,exinput,exoutput,input,output)
-values('test','test3','ex','exinput','exoutput','realinput','realoutput');
 
 create table user_algorithm_data( -- user가 도전한 알고리즘 리스트 성공/실패 결과값을 들고있음 
 id varchar(20) not null,
