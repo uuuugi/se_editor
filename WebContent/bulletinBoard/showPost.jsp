@@ -125,13 +125,12 @@
 			<br><br>
 			<div id ='<%=commentList.get(i).getCommentNum()%>' style="display:none">
 			<form action="comment2.jsp" method="post">
-			<textarea cols="40" rows="4" name="comment2"placeholder="대댓글을 입력해주세요"></textarea>
-			<input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
-			<input type="hidden" name="postNum" value='<%=postNum %>'>
-			<input type="submit" value="작성">
-			
-	</form>
-	</div>
+				<textarea cols="40" rows="4" name="comment2"placeholder="대댓글을 입력해주세요"></textarea>
+				<input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
+				<input type="hidden" name="postNum" value='<%=postNum %>'>
+				<input type="submit" value="작성">
+			</form>
+		</div>
 <%} %>
 </body>
 </html>

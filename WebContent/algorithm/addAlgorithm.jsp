@@ -10,6 +10,10 @@
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	if((String)session.getAttribute("authority")==null)//관리자가 아닐경우 index로 돌아감
+		 response.sendRedirect("../index.jsp");
+	
 	algorithmVO vo = new algorithmVO();
 	algorithmDAO dao = new algorithmDAO();
 	int algorithmNum;
