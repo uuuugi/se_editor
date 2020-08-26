@@ -26,6 +26,10 @@ function showOrHide(id){
 <input type="button" value="home" onclick="location.href='../index.jsp'">
 <%
 	request.setCharacterEncoding("UTF-8");
+	
+	if((String)session.getAttribute("authority")==null)//관리자가 아닐경우 index로 돌아감
+		response.sendRedirect("../index.jsp");
+
 	String id = (String)session.getAttribute("id");
 	inquiryDAO dao = new inquiryDAO();
 	
