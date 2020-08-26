@@ -66,13 +66,13 @@ body {
     	codeType=null;
     	createEdtior();
     }
-   function createForm(algorithmNum){//form 생성 및 submit
+   function paly(algorithmNum){//form 생성 및 submit
    	  var form = document.createElement("form");//폼 생성
    	  
    	  form.setAttribute("charset", "UTF-8");//인코딩 타입
    	  form.setAttribute("method", "Post");  //전송 방식
    	  form.setAttribute("target", "run");//타겟의 이름
-   	  form.setAttribute("action", actionURL); //요청 보낼 주소
+   	  form.setAttribute("action", "test.jsp"); //요청 보낼 주소
    	  
    	  var hiddenField = document.createElement("input"); // input 버튼 생성
    	  hiddenField.setAttribute("type", "hidden");
@@ -87,13 +87,13 @@ body {
    	  form.appendChild(hiddenField);
    	  
    	  if(codeType=="c")
-   		form.setAttribute("action", urlForc); //요청 보낼 주소
+   		form.setAttribute("action", "test.jsp"); //요청 보낼 주소
    	  else if(codeType=="java")
-     	form.setAttribute("action", urlForJava); //요청 보낼 주소
+     	form.setAttribute("action", "test.jsp"); //요청 보낼 주소
       else if(codeType=="python")
-        form.setAttribute("action", urlForPython); //요청 보낼 주소
+        form.setAttribute("action", "test.jsp"); //요청 보낼 주소
       else if(codeType=="javascript")
-        form.setAttribute("action", urlForJavascript); //요청 보낼 주소
+        form.setAttribute("action", "test.jsp"); //요청 보낼 주소
    		 
    	  code=getCode();
    	  var hiddenField = document.createElement("input");
@@ -105,9 +105,6 @@ body {
    	  document.body.appendChild(form);//form을 body에 생성
    	  form.submit(); //submit
    	}
-	function play(){
-		createForm();
-	}
    function getCodeType(){  //select box에 있는 codeType을 가져오는 함수
    	if(codeType==null){
    	var target = document.getElementById("selectCodeType");
@@ -139,12 +136,13 @@ body {
 	int algorithmNum=-1;
 	if(request.getParameter("algorithmNum")!=null)
 		algorithmNum = Integer.parseInt(request.getParameter("algorithmNum"));
-%>
+	%>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
 
 	<header>
-		<input type="button" name="run" value="Run" onclick="play('<%=algorithmNum %>')" />
+		<input type="button" name="run" value="Run" onclick="paly('<%=algorithmNum%>')" />
 
 		<% if (request.getParameter("codeNum")!=null) //codeNum이 null이 아닐때 == 코드를 불러왔을때
 		{ 
