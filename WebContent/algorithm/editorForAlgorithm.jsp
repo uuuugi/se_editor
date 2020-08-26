@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Editor For C</title>
-<link rel="stylesheet" href="cssForIde.css" />
+<link rel="stylesheet" href="../cssForIde.css" />
 <style>
 header {
 	width: 50vw;
@@ -64,9 +64,9 @@ body {
     
     function createEdtiorInSelect(){// 셀렉트에서 editor 바꿀경우 바뀌지 않는 버그 수정을 위해 codeType을 초기화 시켜주는 함수를 하나 더 만듬
     	codeType=null;
-    	createEdtior(code);
+    	createEdtior();
     }
-   function createForm(){//form 생성 및 submit
+   function createForm(algorithmNum){//form 생성 및 submit
    	  var form = document.createElement("form");//폼 생성
    	  
    	  form.setAttribute("charset", "UTF-8");//인코딩 타입
@@ -76,8 +76,8 @@ body {
    	  
    	  var hiddenField = document.createElement("input"); // input 버튼 생성
    	  hiddenField.setAttribute("type", "hidden");
-   	  hiddenField.setAttribute("name", "codeName");
-   	  hiddenField.setAttribute("value", codeName);
+   	  hiddenField.setAttribute("name", "algorithmNum");
+   	  hiddenField.setAttribute("value", algorithmNum);
    	  form.appendChild(hiddenField);// form에 추가
    	  
    	  var hiddenField = document.createElement("input");
@@ -135,12 +135,16 @@ body {
 
 </head>
 <body>
-<% request.setCharacterEncoding("utf-8"); %>
+<% request.setCharacterEncoding("utf-8"); 
+	int algorithmNum=-1;
+	if(request.getParameter("algorithmNum")!=null)
+		algorithmNum = Integer.parseInt(request.getParameter("algorithmNum"));
+%>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
 
 	<header>
-		<input type="button" name="run" value="Run" onclick="play()" />
+		<input type="button" name="run" value="Run" onclick="play('<%=algorithmNum %>')" />
 
 		<% if (request.getParameter("codeNum")!=null) //codeNum이 null이 아닐때 == 코드를 불러왔을때
 		{ 
@@ -151,7 +155,6 @@ body {
 		algorithmDAO dao = new algorithmDAO();
 		userAlgorithmCodeVO vo = new userAlgorithmCodeVO();
 		vo = dao.getAlgorithmCode(user_id, codeNum);
-		String codeType = vo.getCodeType();
 		String tmpCode = vo.getCode();// code 불러오기
 		String code = "";
 		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
@@ -162,10 +165,10 @@ body {
 		} %>
 
 		<script>
-		var code='<%=code%>';
-		var codeType= '<%=codeType%>';
+		var tmpCode="<%=code%>";
+		var codeType= null;
 			window.onload = function() {// 불러온 언어에 맞게 editor변경
-				createEdtior(code);
+				createEdtior(tmpCode);
 			};
 		</script>
 		
@@ -175,7 +178,7 @@ body {
 		var codeType=null;
 		
 		window.onload = function() {// defualt editor 생성 
-			createEdtior(code);
+			createEdtior();
 			};
 		</script>
 <% } %>

@@ -69,6 +69,11 @@ function showOrHide(id){
 			<%=vo.getExplanation() %>
 			<%=vo.getExInput() %>
 			<%=vo.getExOutput() %>
+			
+			<form action="editorForAlgorithm.jsp" target="editor" method="post">
+			<input type="hidden" name="algorithmNum" value='<%=algorithmNum %>'>
+			<input type="submit" value="도전">
+			</form>
 			</div>
 			
 			<%

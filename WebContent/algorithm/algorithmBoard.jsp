@@ -45,5 +45,6 @@ function showOrHide(id){
 	<%} %>
 	</div>
 	</div>
+	<input type="button" value="알고리즘 추가" onclick="loacation.href='addAlgorithm.jsp'">
 </body>
 </html>
