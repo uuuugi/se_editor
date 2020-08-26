@@ -44,7 +44,7 @@ public class bulletinBoardDAO {
 		return result;
 	}
 	
-	public ArrayList<forPostList> getPostList() { // PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forPostList> getPostList() { // name,id,postNum,time 을담은 객체 List를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -82,7 +82,8 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	public ArrayList<forPostList> getPostList(String id, int n) { // id를 통해 검색했을때 int n 은 그냥 오버라이드를 위함 PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forPostList> getPostList(String id, int n) { 
+		// id를 통해 검색했을때 사용 , / int n 은 그냥 오버라이드를 위함  / 객체 List를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -99,8 +100,10 @@ public class bulletinBoardDAO {
 		      
 				while(rs.next()){
 					forPostList tmp = new forPostList();
+					tmp.setId(rs.getString("id"));
 					tmp.setName(rs.getString("Name"));
 					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
+					tmp.setTime(rs.getString("time"));
 					postList.add(tmp);
 					}
 			
@@ -119,7 +122,7 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	public ArrayList<forPostList> getPostList(String title) { // 제목을 통해 검색 했을때 PostName과 PostNum을담은 객체 arrayList를 반환
+	public ArrayList<forPostList> getPostList(String title) { // 제목을 통해 검색 했을때 사용/ 객체 List를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -136,8 +139,10 @@ public class bulletinBoardDAO {
 		      
 				while(rs.next()){
 					forPostList tmp = new forPostList();
+					tmp.setId(rs.getString("id"));
 					tmp.setName(rs.getString("Name"));
 					tmp.setNum(Integer.parseInt(rs.getString("postNum")));
+					tmp.setTime(rs.getString("time"));
 					postList.add(tmp);
 					}
 			

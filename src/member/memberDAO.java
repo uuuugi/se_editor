@@ -29,13 +29,13 @@ public class memberDAO {
 	         pstmt.setString(5,vo.info);
 	         pstmt.setString(6,"user");
 	         
-	         rs = pstmt.executeUpdate();
+	         rs = pstmt.executeUpdate();//DB - user table 에 정보 저장
 	         
 	         pstmt.close();
 	         
 	         pstmt = conn.prepareStatement(sql2);
 	         pstmt.setString(1,vo.id);
-	         rs = pstmt.executeUpdate();
+	         rs = pstmt.executeUpdate();//DB - workSpaceUserData 에 user Id 저장
 	         
 	         
 	         pstmt.close();
@@ -48,7 +48,7 @@ public class memberDAO {
 	      }
 	   }
 	
-	public int idCheck(String id){   // id를 db에서 확인하여 중복 체크하기 위한 메소드
+	public int idCheck(String id){   //id를 db에서 확인하여 중복 체크하기 위한 메소드
         int rst = 0;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -68,7 +68,7 @@ public class memberDAO {
         return rst;
        }
 	
-	public String dologin(memberVO vo) {
+	public String dologin(memberVO vo) {// id와 pw를 체크해서 로그인 기능을 하는 함수 반환값은 스트링이며 유저의 권한을 반환한다.
 			Connection conn=null;
 		    PreparedStatement pstmt = null;
 		    ResultSet rs = null;
@@ -143,8 +143,7 @@ public class memberDAO {
 		try {
 			conn = DBconnection.getConnection();
 			
-			if(vo.getPw().isEmpty()==true)
-			{
+			if(vo.getPw().isEmpty()==true) { // 비밀번호 변경 없이 다른 정보만 변경하였을 경우
 				String sql="UPDATE user SET user_name=?, user_email=?, user_introduce=? WHERE user_id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getName());
@@ -152,8 +151,7 @@ public class memberDAO {
 				pstmt.setString(3, vo.getInfo());
 				pstmt.setString(4, vo.getId());
 			}
-			else
-			{
+			else{// 비밀번호를 변경하였을 경우
 				String sql="UPDATE user SET user_name=?, user_pw=?, user_email=?, user_introduce=? WHERE user_id=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, vo.getName());
@@ -248,7 +246,7 @@ public class memberDAO {
 
 		return result;
 	}
-	public boolean checkIdnEmail(memberVO vo) { // user의 정보를 수정하는 메소드
+	public boolean checkIdnEmail(memberVO vo) { // email 정보를 체크하는 메소드
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

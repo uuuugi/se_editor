@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DBconnection.DBconnection;
-import DBconnection.*;
+
 public class inquiryDAO {
 
 	public boolean insertInquiry(String id, String title, String text) { // 문의하기 저장
@@ -46,7 +46,7 @@ public class inquiryDAO {
 		return result;
 	}
 	
-	public inquiryVO getInquiry(int num) {// 문의하기 글에 대한 모든정보를 반환
+	public inquiryVO getInquiry(int num) {// 번호를 입력받아 문의하기 글에 대한 정보를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -86,7 +86,7 @@ public class inquiryDAO {
 		return vo;
 	}
 	
-	public ArrayList<inquiryVO> getInquiryList() { // 문의하기의 글 중 답글이 안달린 것을 모두 반환
+	public ArrayList<inquiryVO> getInquiryList() { // 문의하기의 글 중 답글이 안달린 것을 모두 반환 -> 관리자가 사용할 것
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -131,7 +131,7 @@ public class inquiryDAO {
 		return inquiryList;
 	}
 	
-	public ArrayList<inquiryVO> getInquiryList(String id) { // 해당 id가 작성한 문의내용을 모두 반환
+	public ArrayList<inquiryVO> getInquiryList(String id) { // 해당 id가 작성한 문의내용을 List로 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -190,7 +190,7 @@ public class inquiryDAO {
 				pstmt.setString(3, text);
 				pstmt.setInt(4, inquiryNum);
 
-				pstmt.executeUpdate();
+				pstmt.executeUpdate();//답변을 DB에 저장
 				
 				sql = "update inquiry set comment=? where inquiryNum=?";
 				
@@ -199,7 +199,7 @@ public class inquiryDAO {
 				pstmt.setInt(1, 1);
 				pstmt.setInt(2, inquiryNum);
 				
-				pstmt.executeUpdate();
+				pstmt.executeUpdate();// 해당 문의글의 상태를 답변완료로 변경
 				
 				result = true;
 			

@@ -11,7 +11,7 @@ import DBconnection.*;
 
 public class codeDAO {
 
-	public boolean insertCode(codeVO vo) {//코드 저장
+	public boolean insertCode(codeVO vo) {// 스플릿 코드 분리 후 코드 저장
 		String code="";
 		boolean result = false;
 		Connection conn = null;
