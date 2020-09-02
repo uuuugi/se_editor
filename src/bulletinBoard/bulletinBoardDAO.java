@@ -271,7 +271,6 @@ public class bulletinBoardDAO {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		
 		try {
@@ -285,7 +284,40 @@ public class bulletinBoardDAO {
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()==false){//해당 id가 추천이 안눌러 져있다면 DB에 id를 기록하고 1을 반환
+				if(rs.next()==false)//해당 id가 추천이 안눌러 져있다면  -1을 반환
+					result = -1;
+				
+				else//해당 id가 추천을 눌렀다면  1을 반환
+					result = 1;
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public int changeStar(int postNum, String id) { // 게시글의 추천을 변경하는 메소드
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBconnection.getConnection();
+
+			int check = checkStar(postNum,id);
+			String sql="";
+			
+				if(check==-1){//해당 id가 추천이 안눌러 져있다면 DB에 id를 기록하고 1을 반환
 					sql = "insert into star(id, postNum) values(?,?)";
 					result = 1;
 				}
@@ -293,11 +325,12 @@ public class bulletinBoardDAO {
 					sql = "delete from star where id=? and postNum=?";
 					result = -1;
 				}
-				pstmt2 = conn.prepareStatement(sql);
+				pstmt = conn.prepareStatement(sql);
+
+				pstmt.setString(1, id);
+				pstmt.setInt(2, postNum);
 				
-				pstmt2.setString(1, id);
-				pstmt2.setInt(2, postNum);
-				pstmt2.executeUpdate();
+				pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -314,7 +347,7 @@ public class bulletinBoardDAO {
 		return result;
 	}
 	
-	public int star(int postNum, String id) {// 게시글의 추천수를 변경하는 메소드
+	public int star(int postNum, String id) {// 게시글의 추천수를 변경하여 DB에 저장하는 메소드
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -329,7 +362,7 @@ public class bulletinBoardDAO {
 				rs = pstmt.executeQuery();
 				rs.next();
 				int star = rs.getInt("star"); // 해당 게시글의 추천수를 받아온다.
-				int checkStar=checkStar(postNum, id);//checkStar을 이용하여 해당 id가 추천을 했는지 안했는지 확인
+				int checkStar=changeStar(postNum, id);//checkStar을 이용하여 해당 id가 추천을 했는지 안했는지 확인
 				result = checkStar;
 				star +=checkStar;
 				//check로 부터 return 받은 값을 더해 DB에 다시 넣어줌
@@ -357,3 +390,4 @@ public class bulletinBoardDAO {
 		return result;
 	}
 }
+
