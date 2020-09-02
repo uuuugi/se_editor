@@ -251,7 +251,7 @@ public class algorithmDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<userAlgorithmCodeVO> algoritymCodeList = new ArrayList<userAlgorithmCodeVO>();
+		ArrayList<userAlgorithmCodeVO> algorithmCodeList = new ArrayList<userAlgorithmCodeVO>();
 		
 		try {
 			conn = DBconnection.getConnection();
@@ -270,7 +270,7 @@ public class algorithmDAO {
 					tmp.setCode(rs.getString("code"));
 					tmp.setCodeType(rs.getNString("codeType"));
 					tmp.setResult(rs.getInt("result"));
-					algoritymCodeList.add(tmp);
+					algorithmCodeList.add(tmp);
 					}
 			
 		} catch (SQLException e) {
@@ -286,7 +286,7 @@ public class algorithmDAO {
 			}
 		}
 
-		return algoritymCodeList;
+		return algorithmCodeList;
 	}
 	
 	public userAlgorithmCodeVO getAlgorithmCode(String id, int codeNum) { // algorithm 내용 불러오기
