@@ -57,6 +57,7 @@
 	String id = (String)session.getAttribute("id");
 	vo = dao.getPost(postNum);
 	
+	int star = dao.checkStar(postNum, id);
 %>
 <h2><%= vo.getName() %></h2>
 <hr>
@@ -64,7 +65,7 @@
  글 번호:<%= vo.getNum() %>
 <form action="star.jsp" method="post" ><!-- 추천하기 form -->
 <input type="hidden" name="postNum" value='<%=postNum %>'>
-<input type="submit" value="star" onclick="star()"> <%= vo.getStar() %>
+<input type="submit" value="star"> <%= vo.getStar() %>
 </form>
 <%
 	if(id!=null)
