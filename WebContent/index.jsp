@@ -36,7 +36,7 @@ else {%>
 	<input type="button" value="logout" onclick ="go('logout.jsp')" > <!-- 로그인이 되어있다면 로그아웃과 editor창 생성 -->
 	<input type="button" value="IDE 열기" onclick ="openIDE()" > <!-- editor 오픈버튼 -->
 	<input type="button" value="회원정보 수정" onclick="go('userInfo\\pwCheckForModify.jsp')" >
-	<input type="button" value="게시판" onclick ="go('bulletinBoard\\bulletinBoard.jsp')" >
+	<input type="button" value="게시판" onclick ="go('bulletinBoard\\bulletinBoardList.jsp')" >
 	<input type="button" value="알고리즘" onclick="go('algorithm\\algorithm.jsp')">
 	<input type="button" value="문의하기" onclick="go('inquiry\\inquiry.jsp')">
 <% 

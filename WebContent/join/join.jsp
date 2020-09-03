@@ -5,9 +5,11 @@
     <title>회원가입 화면</title>
     <%@ page import="member.memberDAO" %> 
     
-    <!-- css 파일 분리 -->
-    <link href='../../css/join_style.css' rel='stylesheet' style='text/css'/>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
     <script type="text/javascript">
     
         // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
@@ -36,18 +38,21 @@
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
         function goIndex() {
-            location.href="index.jsp";
+            location.href="../index.jsp";
         }
         
         function idCheck(){
         	 var id = document.userInfo.id.value;
-        	 if(id.length<1 || id==null){
+        	 if(id.length<8){
+        		 alert("아이디를 8글자 이상으로 입력하십시오");
+        		 return false;
+        	 }
+        	 if(id.length=0 || id==null){
         	  alert("중복체크할 아이디를 입력하십시오");
         	  return false;
         	 }
         	 var url = "idCheck.jsp?id=" + id;
         	 window.open(url, "get", "height = 180, width = 300");
-        	 
         	}
 
         function inputIdChk(){		// id 체크되지 않았음을 값에 저장
@@ -55,70 +60,66 @@
         }
 
     </script>
-    
 </head>
 <body>
-    <!-- div 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
-    <div id="wrap">
-        <br><br>
-        <b><font size="6" color="gray">회원가입</font></b>
-        <br><br><br>
-        
-        <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
-        <!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-        <form method="post" action="joinPro.jsp" name="userInfo" 
+		<div class="container-login100">
+			<div class="wrap-Join p-t-50 p-b-90">
+					<span class="login100-form-title p-b-51">
+						Register
+					</span> 
+       		 <form method="post" action="joinPro.jsp" name="userInfo" 
                 onsubmit="return checkValue()">
             <table>
+
                 <tr>
-                    <td id="title">아이디</td>
-                    <td>
-                     
-                        <input type="text" name="id" maxlength="50" onkeydown="inputIdChk()">
-                        <input type="button" value="중복확인" onclick="idCheck()">
-                        <input type="hidden" name="idDuplication" value="idUncheck">
-                        </td>
+                                <td>ID</td>
+								<td><input type="text" name="id" id="id" onkeydown="inputIdChk()" class="joininput" style="text-decoration:underline;"></td>
+								<input type="button" value="ID check" onclick="idCheck()" class="checkbtn" style="float:right;">
+								<input type="hidden" name="idDuplication" value="idUncheck">
                 </tr>
-                        
                 <tr>
-                    <td id="title">비밀번호</td>
+                    <td id="title">Password</td>
                     <td>
-                        <input type="password" name="password" maxlength="50">
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td id="title">비밀번호 확인</td>
-                    <td>
-                        <input type="password" name="passwordcheck" maxlength="50">
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">이름</td>
-                    <td>
-                        <input type="text" name="name" maxlength="50">
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">이메일</td>
-                    <td>
-                        <input type="text" name="mail" maxlength="60">
-                    </td>
-                </tr>
-                    
-                <tr>
-                    <td id="title">자기소개</td>
-                    <td>
-                        <input type="text" name="info" size="80" />
+                        <input type="password" name="password" class="joininput" style="text-decoration:underline;">
                     </td>
                 </tr>
 
+                <tr>
+                
+                    <td id="title">Password again</td>
+                    <td>
+                        <input type="password" name="passwordcheck" class="joininput" style="text-decoration:underline;">
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td id="title">Name</td>
+                    <td>
+                        <input type="text" name="name" class="joininput">
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td id="title">Email</td>
+                    <td>
+                        <input type="text" name="mail" class="joininput">
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td id="title">My Infomation</td>
+                    <td>
+                        <input type="text" name="info" class="joininput"/>
+                    </td>
+                </tr>
             </table>
             <br>
-            <input type="submit" value="가입"/>  
-            <input type="button" value="취소" onclick="goIndex()">
+            <span class="login100-form-title p-b-51">
+            <input type="submit" value="Join" class="joinbtn"/>  
+            <input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+            </span>
         </form>
+    </div>
     </div>
 </body>
 </html>

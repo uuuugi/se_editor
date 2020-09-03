@@ -4,15 +4,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ID 찾기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+<script type="text/javascript">
+function goIndex() {
+    location.href="../index.jsp";
+}
+</script>
+
 </head>
 <body>
-<!-- 이름과 email을 입력받는 form -->
-이름과 회원가입시 사용했던 이메일을 입력해주세요
-<form action="doFindId.jsp" method="post">
-<input type="text" name="name" placeholder="name">
-<input type="text" name="email" placeholder="Email@hs.ac.kr">
-<input type="submit" value="완료">
-</form>
+<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+					<span class="login100-form-title p-b-51">
+						Find ID
+					</span> 
+       		 <form action="doFindId.jsp" method="post">
+            <table>
+                <tr>
+                <td id="title">Name</td>
+                    <td>
+                        <input type="text" name="name" class="input100" placeholder="name">
+                    </td>
+                </tr>
+
+				<tr>
+                <td id="title">Email</td>
+                    <td>
+                        <input type="text" name="email" class="input100" placeholder="Email@hs.ac.kr">
+                    </td>
+                </tr>
+                </table>
+
+				<br/>
+				<span class="login100-form-title p-b-51">
+           	 	<input type="submit" value="go Email" class="joinbtn"/>  
+           	 	<input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+            	</span>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
