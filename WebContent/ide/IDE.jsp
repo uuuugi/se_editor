@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <style>
 body{
+	background-color:#1e1e1e;
 	margin:0,0,0,0;
 	padding:0,0,0,0;
 }
@@ -17,24 +18,27 @@ iframe{
 	border-image:0;
 }
 #workSpaceList{
-	background-color:red;
+	background-color:#1e1e1e;
 	width : 15vw;
 	height : 79vh;
 	float : left;
 	display : inline-block;
 }
 #run{
-	background-color:gray;
+	background-color:#1e1e1e;
 	width: 99vw;
 	height: 20vh;
 	display:block;
 }
 #editor{
+	background-color:#1e1e1e;
 	width: 62vw;
 	height: 79vh;
 	display: inline-block;
+	
 }
 #ocr{
+	background-color:#1e1e1e;
 	width: 20vw;
 	height: 79vh;
 	display: inline-block;

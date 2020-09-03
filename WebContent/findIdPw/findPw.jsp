@@ -4,17 +4,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Pw 찾기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+<script type="text/javascript">
+function goIndex() {
+    location.href="../index.jsp";
+}
+</script>
 </head>
 <body>
-<!-- id와 email을 입력받아 mail을 전송하기 위한 form -->
-<form action ="mailSend.jsp">
-id를 입력하세요
-<input type ="text" id ="id" name = "id" placeholder="id"> <br>
-입력시 사용했던 email을 입력하세요
-<input type ="text" id ="Email" name = "Email" placeholder="email@SE.com"><br>
-<input type ="submit" value ="발송">
-</form>
-
+	<div class="container-login100">
+		<div class="wrap-login100 p-t-50 p-b-90">
+			<span class="login100-form-title p-b-51">
+				Find Pw
+			</span> 
+			<form action ="mailSend.jsp">
+				 <table>
+                <tr>
+                <td id="title">Id</td>
+                    <td>
+                        <input type="text" id="id" name="id" class="input100" placeholder="Id">
+                    </td>
+                </tr>
+                
+				<tr>
+                <td id="title">Email</td>
+                    <td>
+                        <input type="text" name="Email" class="input100" placeholder="Email@SE.com">
+                    </td>
+                </tr>
+                </table>
+                
+				<br/>
+				<span class="login100-form-title p-b-51">
+           	 	<input type="submit" value="go Email" class="joinbtn"/>  
+           	 	<input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+            	</span>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
