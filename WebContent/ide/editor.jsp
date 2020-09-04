@@ -12,7 +12,7 @@
 header {
 	width: 50vw;
 	color: white;
-	background-color: black;
+	background-color: #1e1e1e;
 	padding: 1vh;
 }
 body {

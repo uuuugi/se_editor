@@ -6,6 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+*{
+color : white;
+}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,9 +24,6 @@
 	vo.setCode(request.getParameter("code"));
 	
 	%>
-<%= vo.getUser_id() %>
-<%= vo.getCodeName() %>
-<%= vo.getCodeType() %>
-<%= vo.getCode() %>
+	Hello World
 </body>
 </html>
