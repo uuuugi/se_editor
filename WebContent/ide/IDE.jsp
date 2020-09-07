@@ -69,8 +69,7 @@ iframe {
 <body>
 	<div id ="frame">
 		<div id="top">
-			<iframe id="workSpaceList" name="workSpaceList"
-				src="workSpaceList.jsp"> </iframe>
+			<iframe id="workSpaceList" name="workSpaceList" src="workSpaceList.jsp"> </iframe>
 			<iframe id="editor" name="editor" src="editor.jsp"> </iframe>
 			<iframe id="ocr" name="ocr" src="../ocr/ocr.jsp"> </iframe>
 		</div>

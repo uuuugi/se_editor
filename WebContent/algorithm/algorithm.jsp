@@ -1,44 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body{
-	margin:0,0,0,0;
-	padding:0,0,0,0;
+* {
+
+	margin: 0;
+	padding: 0;
+	border: 1;
 }
-iframe{
-	margin:0;
-	padding:0;
-	border:0;
-	border-image:0;
+
+body {
+	background-color: #1e1e1e;
+	width: 100%;
+	height: 100%;
 }
-#algorithmList{
-	background-color:red;
-	width : 15vw;
-	height : 79vh;
-	float : left;
-	display : inline-block;
+
+iframe {
+	margin: 0;
+	padding: 0;
+	border-width: thin;
+	border-radius: 1px;
 }
-#run{
-	background-color:gray;
-	width: 99vw;
-	height: 20vh;
-	display:block;
-}
-#editor{
-	width: 82vw;
-	height: 79vh;
+
+#algorithmList {
+	background-color:white;
+	width: 35vw;
+	height: 98vh;
+	float: left;
 	display: inline-block;
 }
+
+#editor {
+	background-color: #1e1e1e;
+	width: 64vw;
+	height: 98vh;
+	display: inline-block;
+}
+
+#frame {
+	position: absolute;
+}
+
+#top {
+	position: relative;
+	width: 100vw;
+	height: 98vh;
+}
+
 </style>
 </head>
 <body>
-<iframe src= "algorithmList.jsp" id = "algorithmList" name="algorithmList"></iframe>
-<iframe src= "editorForAlgorithm.jsp" id = "editor" name = "editor"></iframe>
-<iframe src= ../ide/run.jsp id = "run" name = "run"></iframe>
+	<div id="top">
+		<iframe src="algorithmList.jsp" id="algorithmList" name="algorithmList"></iframe>
+		<iframe src="editorForAlgorithm.jsp" id="editor" name="editor"></iframe>
+	</div>
+
 </body>
 </html>

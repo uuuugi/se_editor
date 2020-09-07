@@ -20,6 +20,9 @@ function showOrHide(id){
 	else
 		box.style.display='none';		
 }
+function go(){
+	location.href="./addAlgorithm.jsp"
+}
 </script>
 </head>
 <body>
@@ -45,6 +48,6 @@ function showOrHide(id){
 	<%} %>
 	</div>
 	</div>
-	<input type="button" value="알고리즘 추가" onclick="loacation.href='addAlgorithm.jsp'">
+	<input type="button" value="알고리즘 추가" onclick="go()">
 </body>
 </html>

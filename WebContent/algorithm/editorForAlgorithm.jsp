@@ -10,14 +10,18 @@
 <link rel="stylesheet" href="../cssForIde.css" />
 <style>
 header {
-	width: 50vw;
+	width: 95vw;
+	height:3vh;
 	color: white;
-	background-color: black;
+	background-color: #1e1e1e;
 	padding: 1vh;
 }
 body {
-	background-color: black;
+	background-color: #1e1e1e;
 	margin: 0;
+}
+.head1{
+float:right;
 }
 </style>
 
@@ -142,7 +146,6 @@ body {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
 
 	<header>
-		<input type="button" name="run" value="Run" onclick="paly('<%=algorithmNum%>')" />
 
 		<% if (request.getParameter("codeNum")!=null) //codeNum이 null이 아닐때 == 코드를 불러왔을때
 		{ 
@@ -181,12 +184,16 @@ body {
 		</script>
 <% } %>
 
+	<div class="head1">
 		<select name="selectCodeType" id="selectCodeType" onchange="createEdtiorInSelect()">
 			<option value="c">c</option>
 			<option value="java">java</option>
 			<option value="python">python</option>
 			<option value="javascript">javascript</option>
 		</select>
+		
+		<input type="button" name="run" value="Run" onclick="paly('<%=algorithmNum%>')" />
+	</div>
 		
 	</header>
 </body>
