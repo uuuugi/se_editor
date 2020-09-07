@@ -19,21 +19,18 @@ body {
 	margin-top: 0;
 }
 
-.listbutton {
-	
+.sidenav .list{
+	transition : 1s;
+	overflow : hidden;
+	height : 0;
 }
 
-.list {
-	display: none;
+.list a{
+	color :#818181;
+	margin-left:50px;
 }
-
-#menu {
-	margin: 0;
-	padding: 0;
-	width: 40vw;
-	height: 100vw;
-	background-color: red;
-	display: none;
+.list a:hover{
+	color : white;
 }
 
 .sidenav {
@@ -49,7 +46,7 @@ body {
   padding-top: 60px;
 }
 
-.sidenav a {
+.sidenav .category {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -63,6 +60,7 @@ body {
 }
 
 .sidenav .closebtn {
+  color : #818181;
   position: absolute;
   top: 0;
   right: 25px;
@@ -77,14 +75,18 @@ body {
 
 </style>
 <script>
+	var listACheck = 0;
+	
 	function showOrHide(id) {
 		var box = document.getElementById(id);
-		if (box.style.display != 'block')// display 상태가 block이 아니라면 block로 설정 == show
-			box.style.display = "block";
+		if (listACheck%2==0)// display 상태가 block이 아니라면 block로 설정 == show
+				box.style.height = "80px";
 		else
-			// block라면 none로 설정 == hide
-			box.style.display = "none";
+				box.style.height = "0";
+		
+		listACheck++;
 	}
+	
 	function openNav() {
 		  document.getElementById("mySidenav").style.width = "500px";
 		}
@@ -102,36 +104,33 @@ body {
 	ArrayList<algorithmVO> algorithmListA = new ArrayList<algorithmVO>(dao.getAlgorithmList("test"));
 	%>
 
-
-
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#" onclick ="showOrHide('listA')">About</a>
+  <a href="#" class = "category" onclick ="showOrHide('listA')">CategoryA</a>
   <div id="listA" class="list">
 			<%
 				for (int i = 0; i < algorithmListA.size(); i++) {//코드 리스트 출력
 				int result = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
 			%>
-			<form action="algorithmList.jsp" target="_self"
-				id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
-				<input type="hidden" name="num"
-					value='<%=algorithmListA.get(i).getNum()%>'> <a href="#"
-					onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num"value='<%=algorithmListA.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
 				<%
 					if (result == 0)
-					out.println("실패");
+					out.println("<span style='color:red;'>X</span>");
 				else if (result == 1)
-					out.println("성공");
+					out.println("<span style='color:green'>O</span>");
 				%>
+				
 			</form>
 			<%
 				}
 			%>
 		</div>
 			
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="#" class = "category">CategoryB</a>
+  <a href="#" class = "category">CategoryC</a>
+  <a href="#" class = "category">CategoryD</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
