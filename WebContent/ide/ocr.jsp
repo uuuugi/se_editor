@@ -72,6 +72,7 @@
 		
 		%>
 		<div class="code">
+			<img src="/usr/local/apache/share/<%=imgUrl %>">
 			<%=ocrCode%>
 		</div>
 
