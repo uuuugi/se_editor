@@ -134,6 +134,24 @@ body {
 	function closeNav() {
 		document.getElementById("mySidenav").style.width = "0";
 	}
+	function toIDE(num){
+		 var form = document.createElement("form");//폼 생성
+	   	  
+		 form.setAttribute("charset", "UTF-8");//인코딩 타입
+		 form.setAttribute("method", "Post");  //전송 방식
+		 form.setAttribute("target", "editor"); //타겟
+		 form.setAttribute("action", "editorForAlgorithm.jsp"); //요청 보낼 주소
+		   	  
+		 var hiddenField = document.createElement("input"); // input 버튼 생성
+		 hiddenField.setAttribute("type", "hidden");
+		 hiddenField.setAttribute("name", "algorithmNum");
+		 hiddenField.setAttribute("value", num);
+		 form.appendChild(hiddenField);// form에 추가
+		   	  
+		 document.body.appendChild(form);//form을 body에 생성
+		 form.submit(); //submit
+		
+	}
 </script>
 </head>
 <body>
@@ -152,11 +170,9 @@ body {
 				for (int i = 0; i < algorithmListA.size(); i++) {//코드 리스트 출력
 				int result = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
 			%>
-			<form action="algorithmList.jsp" target="_self"
-				id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
-				<input type="hidden" name="num"
-					value='<%=algorithmListA.get(i).getNum()%>'> <a href="#"
-					onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num" value='<%=algorithmListA.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
 				<%
 					if (result == 0)
 					out.println("<span style='color:red;'>X</span>");
@@ -186,6 +202,11 @@ body {
 		vo = dao.getAlgorithm(algorithmNum);
 	%>
 
+<script>
+window.onload=function(){ // 문제 클릭시 ide에 자동으로 문제번호 넘겨줌
+	toIDE('<%=algorithmNum%>');
+}
+</script>
 	<div class="main">
 
 		<!-- 알고리즘 설명 div -->
@@ -206,10 +227,6 @@ body {
 				<%=vo.getExOutput()%>
 			</div>
 		</div>
-		<form action="editorForAlgorithm.jsp" target="editor" method="post">
-			<input type="hidden" name="algorithmNum" value='<%=algorithmNum%>'>
-			<input type="submit" value="도전">
-		</form>
 	</div>
 
 	<hr>
@@ -224,8 +241,7 @@ body {
 	%>
 	<div class="source">
 		<!-- 소스보기 옆에 결과를 같이 출력해줌 소스보기 클릭시 코드내용 출력 -->
-		<span onclick="showOrHide('<%=userCodeList.get(i).getCodeNum()%>')">
-			소스보기 </span>
+		<span onclick="showOrHide('<%=userCodeList.get(i).getCodeNum()%>')"> 소스보기 </span>
 		<%
 			if (userCodeList.get(i).getResult() == 1)
 			out.println("성공");
@@ -238,17 +254,16 @@ body {
 			<br>
 			<%=userCodeList.get(i).getCode()%>
 			<form action="editorForAlgorithm.jsp" target="editor" method="post">
-				<input type="hidden" name="codeNum"
-					value='<%=userCodeList.get(i).getCodeNum()%>'> <input
-					type="submit" value="에디터로 옮기기">
+				<input type="hidden" name="codeNum" value='<%=userCodeList.get(i).getCodeNum()%>'> 
+				<input type="submit" value="에디터로 옮기기">
 			</form>
 		</div>
 	</div>
 	<%
 		}
 	}
-	}
-	%>
+}
+%>
 
 </body>
 </html>
