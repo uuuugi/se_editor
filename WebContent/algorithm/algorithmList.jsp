@@ -15,7 +15,6 @@ a, a:link, a:visited {
 }
 
 body {
-	margin-left: 0;
 	margin-top: 0;
 }
 
@@ -92,13 +91,16 @@ body {
 }
 
 .ex{
+	padding-left:3px;
+	padding-right:5px;
+	width:100%;
 	height : 150px;
 	positon:absolute;
 }
 
 .exinput{
 	position:relative;
-	width : 47%;
+	width : 48%;
 	height : 100%;
 	display: inline-block;
 	border : 2px solid black;
@@ -107,17 +109,27 @@ body {
 
 .exoutput{
 	position:relative;
-	width:47%;
+	width:48%;
 	height : 100%;
 	display: inline-block;
 	border : 2px solid black;
 	border-radius:2px;
 }
+
+/* 소스관련 */
+
+.toEditor{
+	display:inline;
+}
+
+.source{
+	display:none;
+}
 </style>
 <script>
 	var listACheck = 0;
 
-	function showOrHide(id) {
+	function category(id) {
 		var box = document.getElementById(id);
 		if (listACheck % 2 == 0)// display 상태가 block이 아니라면 block로 설정 == show
 			box.style.height = "80px";
@@ -126,7 +138,15 @@ body {
 
 		listACheck++;
 	}
-
+	
+	function showOrHide(id){
+		var box = document.getElementById(id);
+		if(box.style.display!='block')// display 상태가 block이 아니라면 block로 설정 == show
+			box.style.display="block";
+		else// block라면 none로 설정 == hide
+			box.style.display="none";
+	}
+	
 	function openNav() {
 		document.getElementById("mySidenav").style.width = "500px";
 	}
@@ -164,7 +184,7 @@ body {
 
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="#" class="category" onclick="showOrHide('listA')">CategoryA</a>
+		<a href="#" class="category" onclick="category('listA')">CategoryA</a>
 		<div id="listA" class="list">
 			<%
 				for (int i = 0; i < algorithmListA.size(); i++) {//코드 리스트 출력
@@ -229,40 +249,41 @@ window.onload=function(){ // 문제 클릭시 ide에 자동으로 문제번호 �
 		</div>
 	</div>
 
-	<hr>
-	source 추후 수정 예정
 	<%
 		if (dao.doesUserTry(id, algorithmNum) != -1) // user가 시도한적이 있다면 작성했었던 코드리스트 출력
 	{
 		ArrayList<userAlgorithmCodeVO> userCodeList = new ArrayList<userAlgorithmCodeVO>();
 		userCodeList = dao.getAlgorithmCodeList(id, algorithmNum);
-
-		for (int i = 0; i < userCodeList.size(); i++) {
 	%>
-	<div class="source">
-		<!-- 소스보기 옆에 결과를 같이 출력해줌 소스보기 클릭시 코드내용 출력 -->
-		<span onclick="showOrHide('<%=userCodeList.get(i).getCodeNum()%>')"> 소스보기 </span>
+		<h2> 소스리스트 </h2>
+		<hr>
+		<div id="sourceList">
+		
+	<%	for (int i = 0; i < userCodeList.size(); i++) { %>
+
+		<!-- 소스보기 옆에 결과를 같이 출력해줌 // 소스보기 클릭시 코드내용 출력 -->
+		<div> 
 		<%
-			if (userCodeList.get(i).getResult() == 1)
-			out.println("성공");
+		if (userCodeList.get(i).getResult() == 1)
+			out.println("<span style = 'color: green; '> O</span>");
 		else
-			out.println("실패");
+			out.println("<span style = 'color: red; '> X</span>");
 		%>
-		<div id='<%=userCodeList.get(i).getCodeNum()%>'>
-			사용언어 :
-			<%=userCodeList.get(i).getCodeType()%>
+		<a href="#" onclick="showOrHide('c<%=userCodeList.get(i).getCodeNum()%>')">소스보기</a>
+		<form action="editorForAlgorithm.jsp" target="editor" method="post" class = "toEditor">
+			<input type="hidden" name="codeNum" value='<%=userCodeList.get(i).getCodeNum()%>'> 
+			<input type="submit" value="에디터로 옮기기">
+		</form>
+		<div id='c<%=userCodeList.get(i).getCodeNum()%>' class="source">
+			사용언어 : <%=userCodeList.get(i).getCodeType()%>
 			<br>
 			<%=userCodeList.get(i).getCode()%>
-			<form action="editorForAlgorithm.jsp" target="editor" method="post">
-				<input type="hidden" name="codeNum" value='<%=userCodeList.get(i).getCodeNum()%>'> 
-				<input type="submit" value="에디터로 옮기기">
-			</form>
 		</div>
-	</div>
-	<%
-		}
+		</div>
+	<% } %>
+		</div>
+	<% }
 	}
-}
 %>
 
 </body>
