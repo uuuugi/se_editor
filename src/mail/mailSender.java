@@ -32,8 +32,8 @@ public class mailSender {
     String fromUsername = "SE HomePage Manager";// 보내는이 이릅
     String toEmail = vo.getMail(); // 받는 주소
     
-    final String username = "id";   // gmail id      
-    final String password = "pw"; // gmail pw
+    final String username = "hhjjkk7186@gmail.com";   // gmail id      
+    final String password = "hoq159dks"; // gmail pw
     
     // 메일에 출력할 텍스트
     String url="http://localhost:8080/se_editor/changePwForm.jsp?id="+vo.getId();
