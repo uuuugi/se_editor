@@ -11,20 +11,6 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <title>Insert title here</title>
-<script>
-	function logOut(){
-		location.href="logout.jsp";//로그아웃 jsp로 이동해서 세션 삭제
-	}
-	function openIDE(){
-		window.open("IDE.jsp");// editor 열기
-	}
-	function modify(){
-		location.href="pwCheckForModify.jsp"; // modify.jsp로 이동
-	}
-	function goBulletinBoard(){
-		location.href="../bulletinBoard\\bulletinBoard.jsp";
-	}
-</script>
 </head>
 <body>
 <%
@@ -54,8 +40,8 @@ request.setCharacterEncoding("utf-8");
 					<form method="post">
 					<br/>
 						<span class="txt1">Let's</span> &nbsp; <a class="txt1" href="join/join.jsp">Sign up</a>          
-						<a class="txt2" href='findIdPw/findPw.jsp'> PW forget?</a>
-						<a class="txt2" href='findIdPw/findId.jsp'>ID /</a>
+						<a class="txt2" href='findIdPw/findPw.jsp'> PW</a>
+						<a class="txt2" href='findIdPw/findId.jsp'>forget? ID /</a>
 					</form>
 					</div>
 					

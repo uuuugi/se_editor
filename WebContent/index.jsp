@@ -39,9 +39,13 @@
 											<li><a href="ide/IDE.jsp" target="_blank">SE IDE</a></li>
 											<li><a href="algorithm/algorithm.jsp" target="_blank">Algorithm</a></li>
 											<li><a href="bulletinBoard/bulletinBoardList.jsp">BulletinBoard</a></li>
-											<%if( session.getAttribute("id")==null){
+											<% 	
+											if("master".equals( (String)session.getAttribute("authority")) ){%>
+											<li><a href="inquiry\\inquiryMasterMode.jsp">문의 답변</a></li>
+											<li><a href="algorithm\\algorithmBoard.jsp">알고리즘 추가</a></li>
+											<%}if( session.getAttribute("id")==null){
 												%>
-											<li><a href="LoginForm.jsp">Login</a></li>
+											<li><a href="./loginForm.jsp">Login</a></li>
 											<% }else{ %>
 											<li><a href="userinfo/modifyForm.jsp">Modifycation</a></li>
 											<li><a href="#" onclick="logOut()">logout</a></li>
