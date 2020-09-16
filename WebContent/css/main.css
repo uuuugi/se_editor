@@ -120,7 +120,7 @@ h3 {
     background-color: #08a600;
     font-size: 20px;
     font-weight: 400;
-    font-family: Dotum,'µ¸¿ò',Helvetica,sans-serif;
+    font-family: Dotum,'ï¿½ï¿½ï¿½ï¿½',Helvetica,sans-serif;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -798,7 +798,7 @@ iframe {
     background-color: #08a600;
     font-size: 20px;
     font-weight: 400;
-    font-family: Dotum,'µ¸¿ò',Helvetica,sans-serif;
+    font-family: Dotum,'ï¿½ï¿½ï¿½ï¿½',Helvetica,sans-serif;
 }
 
 .aaa{
@@ -806,7 +806,7 @@ iframe {
 }
 
 .bbb{
-	width: 365px; height: 35px; padding-top:9px; padding-left:10px; background: #f9f9f9; border: none; font-size: 11pt; float: left; color: #63717f; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+	width: 400px; height: 35px; padding-top:9px; padding-left:10px; background: #f9f9f9; border: none; font-size: 11pt; float: left; color: #63717f; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
 }
 
 
@@ -815,13 +815,13 @@ select.sel {
     border: 0px solid ;
     font-size:11px;
     background-color: #f9f9f9;
-    font-family: "±¼¸²Ã¼";
+    font-family: "ï¿½ï¿½ï¿½ï¿½Ã¼";
 }
 
 /*//////////////////////////////////////////////////////////////////
 
 
-[ °Ô½ÃÆÇ ¸®½ºÆ® ¸ñ·Ï Æû ] */
+[ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ ] */
 
 .write{padding:3px; border:2px solid #d2e1e7; background:#f9f9f9}
 
@@ -831,6 +831,6 @@ select.sel {
 
 /*//////////////////////////////////////////////////////////////////
 
-[ °Ô½ÃÆÇ ±Û¾²±â Æû ] */
+[ ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ ] */
 
 

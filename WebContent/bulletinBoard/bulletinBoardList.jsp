@@ -74,7 +74,7 @@ input[type="submit"]{font-family:FontAwesome;}
 					&nbsp;
 					<input type="text" name="text" placeholder="Search.." style="width:260px; background-color:#f9f9f9;">
 					&nbsp;
-					<input type="submit" value="&#128269;" style="background-color:#f9f9f9;">
+					<input type="submit" value="&#128269;" style="background-color:#f9f9f9;float:right; margin-right:5px;">
 			</form>
  			</div>
  			</div>
