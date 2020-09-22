@@ -12,7 +12,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	LogDAO dao = new LogDAO();
-	ArrayList <LogVO> list = new ArrayList <LogVO>(dao.getLogAll());
+	ArrayList <LogVO> list = new ArrayList <LogVO>(dao.getLogById("null"));
 	
 	for(int i=0; i<list.size(); i++)
 	{

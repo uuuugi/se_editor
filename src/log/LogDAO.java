@@ -5,7 +5,7 @@ import java.io.*;
 
 public class LogDAO {
 
-	public ArrayList<LogVO> getLogAll() {
+	public ArrayList<LogVO> getLogAll() {//로그 전체 반환
 
 		ArrayList<LogVO> list = new ArrayList<LogVO>();
 
@@ -24,7 +24,7 @@ public class LogDAO {
 			
 			while ((line = bufReader.readLine()) != null) {
 				LogVO vo = new LogVO();
-				System.out.println(line);
+
 				String[] tmp = line.split("/");
 				vo.setId(tmp[0]);
 				vo.setId2(tmp[1]);
@@ -48,22 +48,15 @@ public class LogDAO {
 		return list;
 	}
 	
-	public ArrayList<LogVO> getLogById(String id){
+	public ArrayList<LogVO> getLogById(String id){//id값에 맞는 로그 반환
 		
 		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
 		ArrayList<LogVO> list = new ArrayList<LogVO>();
 		
 		for(int i=0; i<tmpList.size(); i++)
-			if(id.equals(tmpList.get(i).getId()))
+			if(id.equals(tmpList.get(i).getId().replace(" ","")))
 			{
-				LogVO tmp = new LogVO();
-				tmp.setId(list.get(i).getId());
-				tmp.setId2(list.get(i).getId2());
-				tmp.setSession1(list.get(i).getSession1());
-				tmp.setSession2(list.get(i).getSession2());
-				tmp.setContainerId(list.get(i).getContainerId());
-				tmp.setLanguage(list.get(i).getLanguage());
-				tmp.setResult(list.get(i).getResult());
+				LogVO tmp = tmpList.get(i);
 				
 				list.add(tmp);
 			}
