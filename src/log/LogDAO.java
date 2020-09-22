@@ -63,4 +63,20 @@ public class LogDAO {
 		
 		return list;
 	}
+	
+	public ArrayList<LogVO> getLogByLanguage(String language){
+		
+		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
+		ArrayList<LogVO> list = new ArrayList<LogVO>();
+		
+		for(int i=0; i<tmpList.size(); i++)
+			if(language.equals(tmpList.get(i).getLanguage().replace(" ", "")))
+			{
+				LogVO tmp = tmpList.get(i);
+				
+				list.add(tmp);
+			}
+		
+		return list;
+	}
 }
