@@ -47,4 +47,27 @@ public class LogDAO {
 		}
 		return list;
 	}
+	
+	public ArrayList<LogVO> getLogById(String id){
+		
+		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
+		ArrayList<LogVO> list = new ArrayList<LogVO>();
+		
+		for(int i=0; i<tmpList.size(); i++)
+			if(id.equals(tmpList.get(i).getId()))
+			{
+				LogVO tmp = new LogVO();
+				tmp.setId(list.get(i).getId());
+				tmp.setId2(list.get(i).getId2());
+				tmp.setSession1(list.get(i).getSession1());
+				tmp.setSession2(list.get(i).getSession2());
+				tmp.setContainerId(list.get(i).getContainerId());
+				tmp.setLanguage(list.get(i).getLanguage());
+				tmp.setResult(list.get(i).getResult());
+				
+				list.add(tmp);
+			}
+		
+		return list;
+	}
 }
