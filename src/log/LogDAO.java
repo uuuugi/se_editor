@@ -94,21 +94,23 @@ public class LogDAO {
 		return date;	
 	}
 	
-	public ArrayList<LogVO> getLogByDate(String date){
-		//Tue Aug 18 01:33:18 PDT 2020 형식으로 바꿔야 한다.
-		// Aug nn 2020 세개만 놔두고 다 죽여야 함.
-		// 자리수가 정규화 되어있음
-		// SubString 으로 규칙적으로 밀면 가능할 듯?
+	public ArrayList<LogVO> getLogByDate(String date){// 날짜로 로그 찍기
 
 		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
 		ArrayList<LogVO> list = new ArrayList<LogVO>();
 		
 		for(int i=0; i<tmpList.size(); i++)
 		{
+			LogVO tmp = tmpList.get(i);
+			String tlqkf = tmp.getSession1().substring(5,8)+".";
+			tlqkf+= tmp.getSession1().substring(9,11)+".";
+			tlqkf+= tmp.getSession1().substring(25,29);
 			
+			if(date.equals(tlqkf))
+				list.add(tmp);
 		}
 		
 		return list;
 	}
-		
+	
 }
