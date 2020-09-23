@@ -40,7 +40,7 @@
 				<h2 style="margin-left:15px;">문의 입력</h2>
 			</div>
 			<div class="tableid">
-				<h4 class="h4id"><p class="spacebar">ID aa</span></p></h4>
+				<h4 class="h4id"><p class="spacebar">ID <%=(String)session.getAttribute("id") %></span></p></h4>
 			</div>
 			<div class="tablebody">
 				<h4 class="h4body">제목</h4>
