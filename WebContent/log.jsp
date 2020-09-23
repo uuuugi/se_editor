@@ -15,8 +15,8 @@
 	if((String)session.getAttribute("authority")==null)//관리자가 아닐경우 index로 돌아감
 		response.sendRedirect("../index.jsp");
 
-	LogDAO dao = new LogDAO();
-	ArrayList <LogVO> list = new ArrayList <LogVO>(dao.getLogById("null"));
+	LogDAO Ldao = new LogDAO();
+	ArrayList <LogVO> list = new ArrayList <LogVO>(Ldao.getLogById("null"));
 	
 /* 	for(int i=0; i<list.size(); i++)
 	{
@@ -33,7 +33,8 @@
 	if(request.getParameter("date")!=null)
 		{
 			date=request.getParameter("date");
-			dao.changeDate(date);
+			date = Ldao.changeDate(date);
+			
 		}
 %>
 <%=date %>
