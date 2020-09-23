@@ -79,4 +79,44 @@ public class LogDAO {
 		
 		return list;
 	}
+	
+	public ArrayList<LogVO> getLogByDate(String date){// 요일 월 날짜 시간 으로 구분되어있는데 흐음.......
+		
+		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
+		ArrayList<LogVO> list = new ArrayList<LogVO>();
+		
+		for(int i=0; i<tmpList.size(); i++)
+			if(date.equals(tmpList.get(i).getLanguage().replace(" ", "")))
+			{
+				LogVO tmp = tmpList.get(i);
+				
+				list.add(tmp);
+			}
+		
+		return list;
+	}
+	
+	public void changeDate(String beforeDate) {
+		//Tue Aug 18 01:33:18 PDT 2020 형식으로 바꿔야 한다.
+		// Aug nn 2020 세개만 놔두고 다 죽여야 함.
+		// 자리수가 정규화 되어있음
+		// SubString 으로 규칙적으로 밀면 가능할 듯?
+		
+		
+		// input 값은 2020-09-03
+		// output 은 Aug 03 2020
+		// tmp[0] 2020;                                 tmp[1] = 09;                                  tmp[2]= 03
+		String date="";
+		String monthArray[]= {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+		
+		String tmp[] = beforeDate.split("-");
+		
+		date+=monthArray[ Integer.parseInt(tmp[1])-1 ];
+		date+="."+tmp[2];
+		date+="."+tmp[0];
+		
+		System.out.println(date);
+		//return date;
+		
+	}
 }
