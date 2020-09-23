@@ -68,6 +68,7 @@ iframe {
 </style>
 </head>
 <body>
+
 	<div id ="frame">
 		<div id="top">
 			<iframe id="workSpaceList" name="workSpaceList" src="workSpaceList.jsp"> </iframe>
