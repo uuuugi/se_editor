@@ -64,7 +64,7 @@ public class LogDAO {
 		return list;
 	}
 	
-	public ArrayList<LogVO> getLogByLanguage(String language){
+	public ArrayList<LogVO> getLogByLanguage(String language){// 언어별로 로그 반환
 		
 		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
 		ArrayList<LogVO> list = new ArrayList<LogVO>();
@@ -80,32 +80,8 @@ public class LogDAO {
 		return list;
 	}
 	
-	public ArrayList<LogVO> getLogByDate(String date){// 요일 월 날짜 시간 으로 구분되어있는데 흐음.......
+	public String changeDate(String beforeDate) { // 날짜별로 로그를 반환하기 위해 필요 형식으로 날짜를 변환
 		
-		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
-		ArrayList<LogVO> list = new ArrayList<LogVO>();
-		
-		for(int i=0; i<tmpList.size(); i++)
-			if(date.equals(tmpList.get(i).getLanguage().replace(" ", "")))
-			{
-				LogVO tmp = tmpList.get(i);
-				
-				list.add(tmp);
-			}
-		
-		return list;
-	}
-	
-	public void changeDate(String beforeDate) {
-		//Tue Aug 18 01:33:18 PDT 2020 형식으로 바꿔야 한다.
-		// Aug nn 2020 세개만 놔두고 다 죽여야 함.
-		// 자리수가 정규화 되어있음
-		// SubString 으로 규칙적으로 밀면 가능할 듯?
-		
-		
-		// input 값은 2020-09-03
-		// output 은 Aug 03 2020
-		// tmp[0] 2020;                                 tmp[1] = 09;                                  tmp[2]= 03
 		String date="";
 		String monthArray[]= {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 		
@@ -115,8 +91,24 @@ public class LogDAO {
 		date+="."+tmp[2];
 		date+="."+tmp[0];
 		
-		System.out.println(date);
-		//return date;
-		
+		return date;	
 	}
+	
+	public ArrayList<LogVO> getLogByDate(String date){
+		//Tue Aug 18 01:33:18 PDT 2020 형식으로 바꿔야 한다.
+		// Aug nn 2020 세개만 놔두고 다 죽여야 함.
+		// 자리수가 정규화 되어있음
+		// SubString 으로 규칙적으로 밀면 가능할 듯?
+
+		ArrayList<LogVO> tmpList = new ArrayList<LogVO>(getLogAll());
+		ArrayList<LogVO> list = new ArrayList<LogVO>();
+		
+		for(int i=0; i<tmpList.size(); i++)
+		{
+			
+		}
+		
+		return list;
+	}
+		
 }
