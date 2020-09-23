@@ -4,28 +4,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script>
-function checkValue()
-{    
-    // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
-    if(document.modifyForm.password.value != document.modifyForm.passwordcheck.value ){
-        alert("비밀번호를 동일하게 입력하세요.");
-        return false;
-    }
-}</script>
+function pwCheck(){
+	if(document.userInfo.password.value != document.userInfo.passwordcheck.value ){
+    alert("비밀번호를 동일하게 입력하세요.");
+    return false;
+}
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="../css/util.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+ <script type="text/javascript">
+ function goIndex() {
+     location.href="../index.jsp";
+ }
+ </script>
+<title>Insert title here</title>
 </head>
 <body>
-<%
-	// 회원정보 수정 form page
+	<%
 	memberVO vo = new memberVO();
 	memberDAO dao = new memberDAO();
 	vo.setId((String) session.getAttribute("id"));
 	vo.setPw((String) request.getParameter("pw"));
-
 	String loginResult = dao.dologin(vo);
-
 	if ("pwMiss".equals(loginResult)) {
 	%>
 	out.println("<script>alert('비밀번호가 틀렸습니다.'); history.back();</script>");
@@ -36,20 +41,40 @@ function checkValue()
 		else{
 	vo = dao.getMemberVO(vo.getId());
 	%>
-	<form action="doModify.jsp" name="modifyForm" method="post" onsubmit="return checkValue()">
-	이름
-	<input type="text" name ="name" value="<%=vo.getName()%>"><br>
-	메일주소
-	<input type="text" name="mail" value="<%=vo.getMail()%>"><br>
-	자기소개
-	<input type="text" name="info" value="<%=vo.getInfo()%>"><br>
-	비밀번호
-	<input type="password" name="password" maxlength="50">
-	비밀번호 확인
-	<input type="password" name="passwordcheck" maxlength="50">
-	<br>
-	<input type="submit" value="정보 수정">
-	</form>
+	<div class="container-login100">
+		<div class="wrap-Join p-t-50 p-b-90">
+			<span class="login100-form-title p-b-51">Modifycation</span> 
+			<form action="doModify.jsp" method="post" name="userInfo" onsubmit="return pwCheck()" >
+				<table>
+					<tr>
+						<td>이름</td>
+						<td><input type="text" name ="name" value="<%=vo.getName()%>" class="joininput"></td>
+					</tr>
+					<tr>
+						<td>메일주소</td>
+						<td><input type="text" name="mail" value="<%=vo.getMail()%>" class="joininput"></td>
+					</tr>
+					<tr>
+						<td>자기소개</td>
+						<td><input type="text" name="info" value="<%=vo.getInfo()%>" class="joininput"></td>
+					</tr>
+					<tr>
+						<td>비번변경</td> 
+						<td><input type="password" name="password" value="" class="joininput"></td>
+					</tr>
+					<tr>
+						<td>비번확인</td>
+						<td><input type="password" name="passwordcheck" value="" class="joininput"></td>
+					</tr>
+				</table>
+					
+				<span class="login100-form-title p-b-51">
+	           	<input type="submit" value="Join" class="joinbtn"/>  
+	            <input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+	            </span>
+			</form>
+		</div>
+	</div>
 	<%	}
 	%>
 </body>
