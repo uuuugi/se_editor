@@ -46,7 +46,7 @@
 											<li><a href="algorithm/algorithmBoard.jsp">알고리즘 추가</a></li>
 											<%}if( session.getAttribute("id")==null){
 												%>
-											<li><a href="./loginForm.jsp">Login</a></li>
+											<li><a href="LoginFormServlet">Login</a></li>
 											<% }else{ %>
 											<li><a href="userInfo/pwCheckForModify.jsp">Modifycation</a></li>
 											<li><a href="#" onclick="logOut()">logout</a></li>
@@ -95,25 +95,25 @@
 						<section class="spotlight">
 							<div class="image"><img src="./css/images/pic01.jpg" alt="" /></div><div class="content">
 								<h2>SE LAB</h2>
-								<p>ì´ ì¬ì´í¸ë  SE LAB ííì´ì§ì <br/> ë¶ê°ì ì¸ ê¸°ë¥ì´ë¤.<br /> 
-								ííì´ì§ììë SE LABì ë¤ìí <br />ì ë³´ ë° ìì ë¡ì´ íê²½ì ì ê³µíë¤.<br />
-								ì¬ë¬ ê²ìíë¤ì ì´ì©íì¬<br /> SEë´ì ë¤ìí ì ë³´ë¥¼ ì ê³µíë¤</p>
+								<p>ì´ ì¬ì´í¸ë  SE LAB ííì´ì§ì <br/> ë¶ê°ì ì¸ ê¸°ë¥ì´ë¤.<br /> 
+								ííì´ì§ììë SE LABì ë¤ìí <br />ì ë³´ ë° ìì ë¡ì´ íê²½ì ì ê³µíë¤.<br />
+								ì¬ë¬ ê²ìíë¤ì ì´ì©íì¬<br /> SEë´ì ë¤ìí ì ë³´ë¥¼ ì ê³µíë¤</p>
 							</div>
 						</section>
 						<section class="spotlight">
 							<div class="image"><img src="./css/images/pic02.jpg" alt="" /></div><div class="content">
 								<h2>Web Coding Site</h2>
-								<p>ì´ ì¬ì´í¸ë ê°ì ê°ì¸ì <br /> workspaceë¥¼ ì ê³µíë¤.<br />
+								<p>ì´ ì¬ì´í¸ë ê°ì ê°ì¸ì <br /> workspaceë¥¼ ì ê³µíë¤.<br />
 								WORKSPACEë MONACO <br />EDITORì ì´ì©íì¬ ë§ë¤ì´ì¡ì¼ë©°,
 								<br />C, JAVA, PYTHON, JS 
-								<br />ë±ì ì¸ì´ë¤ì ì¬ì©íì¬ ìì±í ì½ëë¥¼ ì ì¥ ë° ì¤ííë¤.</p>
+								<br />ë±ì ì¸ì´ë¤ì ì¬ì©íì¬ ìì±í ì½ëë¥¼ ì ì¥ ë° ì¤ííë¤.</p>
 							</div>
 						</section>
 						<section class="spotlight">
 							<div class="image"><img src="./css/images/pic03.jpg" alt="" /></div><div class="content">
 								<h2>BulletinBoard</h2>
-								<p>ì´ ì¬ì´í¸ë¥¼ ì´ì©íë ì¸ìì´<br/> ìíµí ì ìë ê²ìíì ì ê³µíë¤.
-								ì½ë©ì ì¬ì©íë¤ ë°ìíë ë¬¸ì , í¹ì <br/> íìí ë´ì©ë¤ì ìíµê°ë¥íê² íê³ ì íë¤.</p>
+								<p>ì´ ì¬ì´í¸ë¥¼ ì´ì©íë ì¸ìì´<br/> ìíµí ì ìë ê²ìíì ì ê³µíë¤.
+								ì½ë©ì ì¬ì©íë¤ ë°ìíë ë¬¸ì , í¹ì <br/> íìí ë´ì©ë¤ì ìíµê°ë¥íê² íê³ ì íë¤.</p>
 							</div>
 						</section>
 					</section>
