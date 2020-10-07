@@ -31,7 +31,7 @@ function go(){
 </script>
 </head>
 <body>
-<input type="button" onclick="location.href='index.jsp'" value="홈"> 
+<input type="button" onclick="location.href='../index.jsp'" value="홈"> 
 
 <%
 	request.setCharacterEncoding("UTF-8");
