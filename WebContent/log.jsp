@@ -44,7 +44,6 @@
 <input type="submit" value="언어로 검색">
 </form>
 
-
 <hr>
 <%
 ArrayList<LogVO> list = new ArrayList<LogVO>();

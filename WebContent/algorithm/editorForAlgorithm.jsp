@@ -75,7 +75,7 @@ float:right;
    	  
    	  form.setAttribute("charset", "UTF-8");//인코딩 타입
    	  form.setAttribute("method", "Post");  //전송 방식
-   	  form.setAttribute("target", "run");//타겟의 이름
+   	  form.setAttribute("target", "algorithmList");//타겟의 이름
    	  form.setAttribute("action", "test.jsp"); //요청 보낼 주소
    	  
    	  var hiddenField = document.createElement("input"); // input 버튼 생성
