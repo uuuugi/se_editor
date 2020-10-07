@@ -123,7 +123,7 @@
 			imgFileName = id + "_" + fileName;
 
 			item.write(uploadfile);
-			;
+			
 		}
 	%>
 	<script>
