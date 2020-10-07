@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import DBconnection.*;
+import java.util.Collections;
+
 public class bulletinBoardDAO {
 
 	public boolean insertPost(bulletinBoardVO vo) { // 게시글 저장
@@ -79,7 +81,8 @@ public class bulletinBoardDAO {
 				e.printStackTrace();
 			}
 		}
-
+		
+		Collections.reverse(postList);
 		return postList;
 	}
 	public ArrayList<forPostList> getPostList(String id, int n) { 
@@ -120,6 +123,7 @@ public class bulletinBoardDAO {
 			}
 		}
 
+		Collections.reverse(postList);
 		return postList;
 	}
 	public ArrayList<forPostList> getPostList(String title) { // 제목을 통해 검색 했을때 사용/ 객체 List를 반환
@@ -159,6 +163,7 @@ public class bulletinBoardDAO {
 			}
 		}
 
+		Collections.reverse(postList);
 		return postList;
 	}
 	public bulletinBoardVO getPost(int num) { // 글 번호를 받아 글의 모든정보를 반환
