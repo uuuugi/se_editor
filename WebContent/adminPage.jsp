@@ -142,14 +142,14 @@ if(request.getParameter("infoAll")!=null){// 전체저장
 	memberCheck++;
 }
 
-if(request.getParameter("infoId")!=null){// 날짜별 저장
+if(request.getParameter("infoId")!=null){// id별로 저장
 	String id = (String) request.getParameter("infoId");
 	memberList = mdao.getIdListById(id);
 	
 	memberCheck++;
 }
 
-if(request.getParameter("infoName")!=null){// id별로 저장
+if(request.getParameter("infoName")!=null){// 이름별로 저장
 	String name = (String)request.getParameter("infoName");
 	memberList = mdao.getIdListByName(name);
 	
