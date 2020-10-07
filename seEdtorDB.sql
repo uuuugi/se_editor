@@ -103,7 +103,6 @@ output varchar(1000)
 create table user_algorithm_data( -- user가 도전한 알고리즘 리스트 성공/실패 결과값을 들고있음 
 id varchar(20) not null,
 algorithmNum int not null,
-time varchar(20),
 result int not null default 0,
 constraint fk_user_algorithm_data2user foreign key(id) references user(user_id) on update cascade on delete cascade,
 constraint fk_user_algorithm_data2algorithm foreign key(algorithmNum) references algorithm(algorithmNum) on update cascade on delete cascade
@@ -115,6 +114,7 @@ algorithmNum int not null,
 codeNum int not null auto_increment unique,
 code varchar(10000),
 codeType varchar(100),
+time varchar(20),
 result int,
 constraint fk_user_algorithm_code2user foreign key(id) references user(user_id) on update cascade on delete cascade,
 constraint fk_user_algorithm_code2algorithm foreign key(algorithmNum) references algorithm (algorithmNum) on update cascade on delete cascade

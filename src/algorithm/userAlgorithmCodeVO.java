@@ -6,6 +6,13 @@ public class userAlgorithmCodeVO {
 	int codeNum;
 	String code;
 	String codeType;
+	String time;
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	int result;
 	public String getId() {
 		return id;
