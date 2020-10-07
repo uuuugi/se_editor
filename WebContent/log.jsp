@@ -18,6 +18,9 @@
 
 	LogDAO Ldao = new LogDAO();
 %>
+
+<input type="button" onclick="location.href='index.jsp'" value="홈"> 
+
 <form action="log.jsp" method="post" target="_self">
 <input type="hidden" name="all" value="1">
 <input type="submit" value="로그 전체보기">
