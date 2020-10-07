@@ -42,7 +42,7 @@ function goIndex() {
 				<br/>
 				<span class="login100-form-title p-b-51">
            	 	<input type="submit" value="go Email" class="joinbtn"/>  
-           	 	<input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+           	 	<input type="button" value="Cancel" onclick="goIndex()" class="join2btn"/>
             	</span>
 			</form>
 		</div>
