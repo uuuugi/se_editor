@@ -44,7 +44,7 @@
 											if("master".equals( (String)session.getAttribute("authority")) ){%>
 											<li><a href="inquiry/inquiryMasterMode.jsp">문의 답변</a></li>
 											<li><a href="algorithm/algorithmBoard.jsp">알고리즘 추가</a></li>
-											<li><a href="./log.jsp">로그 보기</a></li>
+											<li><a href="./adminPage.jsp">관리자 페이지</a></li>
 											<%}if( session.getAttribute("id")==null){
 												%>
 											<li><a href="LoginFormServlet">Login</a></li>
