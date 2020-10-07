@@ -22,7 +22,7 @@
 	if(dao.checkIdnEmail(vo)==true)// DB의 데이터와 입력값이 같다면 mail로 url전송
 		{
 		mailSender.sendMail(vo);
-		out.println("<script>alert('메일이 전송되었습니다.'); location.href='index.jsp'</script>");
+		out.println("<script>alert('메일이 전송되었습니다.'); location.href='../index.jsp'</script>");
 		}
 	else
 		out.println("<script>alert('입력한 정보와 일치하는 id가 없습니다.'); history.back();</script>");
