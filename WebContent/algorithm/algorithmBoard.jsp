@@ -11,6 +11,11 @@
 div>div{
 	display:none;
 }
+ul li, ul{
+list-style : none;
+padding-left:0px;
+}
+
 </style>
 <script>
 function showOrHide(id){
@@ -26,6 +31,8 @@ function go(){
 </script>
 </head>
 <body>
+<input type="button" onclick="location.href='index.jsp'" value="홈"> 
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	
@@ -39,13 +46,17 @@ function go(){
 	<div>  
 	<span onclick="showOrHide('listA')">ListA</span> <!-- 카테고리별로 생성해야함 -->
 	<div id="listA">
+	<ul>
 	<% for(int i=0; i<algorithmListA.size(); i++){%>
+			<li>
 			<%=algorithmListA.get(i).getName() %>
 			<form action="addAlgorithm.jsp" target="_self" style="display:inline">
 				<input type="hidden" name="algorithmNum" value='<%=algorithmListA.get(i).getNum() %>'>
 				<input type="submit" value="수정하기">
 			</form>
+			</li>
 	<%} %>
+	</ul>
 	</div>
 	</div>
 	<input type="button" value="알고리즘 추가" onclick="go()">
