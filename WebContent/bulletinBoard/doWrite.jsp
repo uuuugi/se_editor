@@ -22,7 +22,7 @@
 	boolean result = dao.insertPost(vo);
 	
 	if(result==true)
-		out.println("<script>alert('작성이 완료되었습니다.'); location.href='bulletinBoard.jsp';</script>");
+		out.println("<script>alert('작성이 완료되었습니다.'); location.href='bulletinBoardList.jsp';</script>");
 else
 		out.println("<script>alert('오류::작성실패 잠시 후 다시 시도하세요'); history.back();</script>");
 %>
