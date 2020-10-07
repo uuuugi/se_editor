@@ -33,23 +33,23 @@ display: inline-block;
 <br>
 
 <div class="log">
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="hidden" name="logAll" value="1">
 <input type="submit" value="로그 전체보기">
 </form>
 
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="text" name="logId" >
 <input type="submit" value="id로 로그보기">
 </form>
 
 
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="date" name="logDate">
 <input type="submit" value="날짜로 로그보기">
 </form>
 
-<form action= "log.jsp" method="post" target="_self">
+<form action= "adminPage.jsp" method="post" target="_self">
 	<select name="logLanguage" class="sel">
 		<option value="c">c</option>
 		<option value="java">java</option>
@@ -62,17 +62,17 @@ display: inline-block;
 
 <div class="userInfo">
 
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="hidden" name="infoAll" value=1 >
 <input type="submit" value="유저리스트 전체 출력">
 </form>
 
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="text" name="infoId" >
 <input type="submit" value="id로 유저 검색">
 </form>
 
-<form action="log.jsp" method="post" target="_self">
+<form action="adminPage.jsp" method="post" target="_self">
 <input type="text" name="infoName" >
 <input type="submit" value="이름으로 유저 검색">
 </form>
