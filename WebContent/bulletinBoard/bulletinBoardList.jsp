@@ -81,13 +81,13 @@ input[type="submit"]{font-family:FontAwesome;}
 <%
 	request.setCharacterEncoding("utf-8");
 	int pageNum=1;
-	if(request.getParameter("pageNum")!=null)
+	if(request.getParameter("pageNum")!=null)// page 번호
 		pageNum=Integer.parseInt(request.getParameter("pageNum"));
 	
 	bulletinBoardDAO dao = new bulletinBoardDAO();
 	ArrayList<forPostList> postList	= new ArrayList <forPostList> ();
 	
-	if(request.getParameter("text")==null)
+	if(request.getParameter("text")==null)// 검색파트 
 		postList=dao.getPostList();
 	else if( "id".equals(request.getParameter("search") ) )
 		postList=dao.getPostList(request.getParameter("text"),1);
@@ -112,6 +112,7 @@ input[type="submit"]{font-family:FontAwesome;}
 			</thead>
 		<tbody>
 	<% 
+	//역순으로 배치해야함 how to reverse?
 	int i= pageNum*10-10;
 	for(; i<pageNum*10; i++){
 		if(i==postList.size())
