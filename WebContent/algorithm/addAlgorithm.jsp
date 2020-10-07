@@ -36,10 +36,10 @@
 
 <input type="text" name="title" value='<%=vo.getName() %>'>
 <select name="category">
-	<option value="level1">level</option>
+	<option value="level1">level1</option>
 	<option value="level2">level2</option>
 	<option value="level3">level3</option>
-	<option value="level4">level14</option>	
+	<option value="level4">level4</option>	
 </select>
 <hr>
 <textarea name ="explanation" cols="40" rows="8"><%=vo.getExplanation() %></textarea>
