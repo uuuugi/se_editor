@@ -247,7 +247,7 @@ public class algorithmDAO {
 		return result;
 	}
 	
-	public ArrayList<userAlgorithmCodeVO> getAlgorithmCodeList(String id, int num) { // user가 작성한 algorithmCode 불러오기
+	public ArrayList<userAlgorithmCodeVO> getAlgorithmCodeList(String id, int num) { // user가 작성한 algorithmCodeList 불러오기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -268,7 +268,8 @@ public class algorithmDAO {
 					userAlgorithmCodeVO tmp = new userAlgorithmCodeVO();
 					tmp.setCodeNum(rs.getInt("codeNum"));
 					tmp.setCode(rs.getString("code"));
-					tmp.setCodeType(rs.getNString("codeType"));
+					tmp.setCodeType(rs.getString("codeType"));
+					tmp.setTime(rs.getString("time"));
 					tmp.setResult(rs.getInt("result"));
 					algorithmCodeList.add(tmp);
 					}
@@ -289,7 +290,7 @@ public class algorithmDAO {
 		return algorithmCodeList;
 	}
 	
-	public userAlgorithmCodeVO getAlgorithmCode(String id, int codeNum) { // algorithm 내용 불러오기
+	public userAlgorithmCodeVO getAlgorithmCode(String id, int codeNum) { // 유저가 작성한 코드 불러오기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
