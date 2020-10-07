@@ -132,7 +132,7 @@ body {
 	function category(id) {
 		var box = document.getElementById(id);
 		if (listACheck % 2 == 0)// display 상태가 block이 아니라면 block로 설정 == show
-			box.style.height = "80px";
+			box.style.height = "170px";
 		else
 			box.style.height = "0";
 
@@ -179,20 +179,23 @@ body {
 		request.setCharacterEncoding("UTF-8");
 	String id = (String) session.getAttribute("id");
 	algorithmDAO dao = new algorithmDAO();
-	ArrayList<algorithmVO> algorithmListA = new ArrayList<algorithmVO>(dao.getAlgorithmList("test"));
+	ArrayList<algorithmVO> algorithmList1 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level1"));
+	ArrayList<algorithmVO> algorithmList2 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level2"));
+	ArrayList<algorithmVO> algorithmList3 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level3"));
+	ArrayList<algorithmVO> algorithmList4 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level4"));
 	%>
 
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="#" class="category" onclick="category('listA')">CategoryA</a>
-		<div id="listA" class="list">
+		<a href="#" class="category" onclick="category('list1')">Level 1</a>
+		<div id="list1" class="list">
 			<%
-				for (int i = 0; i < algorithmListA.size(); i++) {//코드 리스트 출력
-				int tryCnt = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
+				for (int i = 0; i < algorithmList1.size(); i++) {//코드 리스트 출력
+				int tryCnt = dao.doesUserTry(id, algorithmList1.get(i).getNum());//시도한적이 있는지 체크
 			%>
-			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
-				<input type="hidden" name="num" value='<%=algorithmListA.get(i).getNum()%>'> 
-				<a href="#" onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmList1.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num" value='<%=algorithmList1.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmList1.get(i).getNum()%>').submit();"><%=algorithmList1.get(i).getName()%></a>
 				<%
 				if (tryCnt == 0)
 					out.println("<span style='color:red;'>X</span>");
@@ -206,8 +209,70 @@ body {
 			%>
 		</div>
 
-		<a href="#" class="category">CategoryB</a> <a href="#"
-			class="category">CategoryC</a> <a href="#" class="category">CategoryD</a>
+		<a href="#" class="category" onclick="category('list2')">Level 2</a> 
+				<div id="list2" class="list">
+			<%
+				for (int i = 0; i < algorithmList2.size(); i++) {//코드 리스트 출력
+				int tryCnt = dao.doesUserTry(id, algorithmList2.get(i).getNum());//시도한적이 있는지 체크
+			%>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmList2.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num" value='<%=algorithmList2.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmList2.get(i).getNum()%>').submit();"><%=algorithmList2.get(i).getName()%></a>
+				<%
+				if (tryCnt == 0)
+					out.println("<span style='color:red;'>X</span>");
+				else if (tryCnt == 1)
+					out.println("<span style='color:green'>O</span>");
+				%>
+
+			</form>
+			<%
+				}
+			%>
+		</div>
+		<a href="#" class="category" onclick="category('list3')">Level 3</a> 
+				<div id="list3" class="list">
+			<%
+				for (int i = 0; i < algorithmList3.size(); i++) {//코드 리스트 출력
+				int tryCnt = dao.doesUserTry(id, algorithmList3.get(i).getNum());//시도한적이 있는지 체크
+			%>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmList3.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num" value='<%=algorithmList3.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmList3.get(i).getNum()%>').submit();"><%=algorithmList3.get(i).getName()%></a>
+				<%
+				if (tryCnt == 0)
+					out.println("<span style='color:red;'>X</span>");
+				else if (tryCnt == 1)
+					out.println("<span style='color:green'>O</span>");
+				%>
+
+			</form>
+			<%
+				}
+			%>
+		</div>
+		<a href="#" class="category" onclick="category('list4')">Level 4</a>
+		
+				<div id="listD" class="list">
+			<%
+				for (int i = 0; i < algorithmList4.size(); i++) {//코드 리스트 출력
+				int tryCnt = dao.doesUserTry(id, algorithmList4.get(i).getNum());//시도한적이 있는지 체크
+			%>
+			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmList4.get(i).getNum()%>' method='post'>
+				<input type="hidden" name="num" value='<%=algorithmList4.get(i).getNum()%>'> 
+				<a href="#" onclick="document.getElementById('list<%=algorithmList4.get(i).getNum()%>').submit();"><%=algorithmList4.get(i).getName()%></a>
+				<%
+				if (tryCnt == 0)
+					out.println("<span style='color:red;'>X</span>");
+				else if (tryCnt == 1)
+					out.println("<span style='color:green'>O</span>");
+				%>
+
+			</form>
+			<%
+				}
+			%>
+		</div>
 	</div>
 
 	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
