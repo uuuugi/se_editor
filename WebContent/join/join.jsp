@@ -59,6 +59,20 @@
         	document.userInfo.idDuplication.value = "idUncheck"
         }
 
+        function emailAndPwCheck(){
+        	var email= document.userInfo.mail.value;
+        	if(email.indexOf("@")==-1){	
+        		alert("이메일 형식으로 입력해주세요")
+        		return false;
+        	}
+        	if(document.userInfo.password.value.length<8){
+        		alert("비밀번호를 9글자 이상으로 생성해주세요");
+        		return false
+        	}
+        	
+        	var form = document.userInfo;
+        	form.submit();
+        }
     </script>
 </head>
 <body>
@@ -115,8 +129,8 @@
             </table>
             <br>
             <span class="login100-form-title p-b-51">
-            <input type="submit" value="Join" class="joinbtn"/>  
-            <input type="button" value="Cansle" onclick="goIndex()" class="join2btn"/>
+            <input type="button" value="Join" class="joinbtn" onclick="emailAndPwCheck()"/>  
+            <input type="button" value="Cancel" onclick="goIndex()" class="join2btn"/>
             </span>
         </form>
     </div>
