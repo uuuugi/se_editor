@@ -154,7 +154,7 @@ body{
  글 번호:<%= vo.getNum() %>
 <%
    if(id!=null)
-      if(id.equals( vo.getId() ) ){
+      if(id.equals( vo.getId())|| session.getAttribute("authority")!=null){
 %>
    <input type="button" value = "수정" onclick="update('<%=vo.getNum()%>')">
    <input type="button" value = "삭제" onclick="del('<%=vo.getNum()%>')">
@@ -185,7 +185,7 @@ body{
    
    for(int i=0; i<commentList.size(); i++){//댓글 출력 loop
       out.print(commentList.get(i).getId());//id출력
-      if(id.equals(commentList.get(i).getId()))//댓글 작성자만 삭제버튼 생성
+      if(id.equals(commentList.get(i).getId()) || session.getAttribute("authority")!=null)//댓글 작성자 혹은 운영자만 삭제버튼 생성
       {%>
          <form action="delComment.jsp" method="post" style="display:inline">
             <input type="hidden" name ="commentNum" value='<%=commentList.get(i).getCommentNum() %>'>
@@ -203,7 +203,7 @@ body{
          <img src="../images/arrow2.png" style="width:20px; float:20px;"></img>
          
           <%=commentList.get(i).getComment2List().get(j).getId() %><!-- 대댓글 작성자 id 출력 -->
-         <% if(id.equals(commentList.get(i).getComment2List().get(j).getId())) { // 대댓글 작성자만 삭제버튼 생성 %>
+         <% if(id.equals(commentList.get(i).getComment2List().get(j).getId()) || session.getAttribute("authority")!=null) { // 댓글 작성자 혹은 운영자만 삭제버튼 생성 %>
          <form action="delComment2.jsp" method="post" style="display:inline">
             <input type="hidden" name ="comment2Num" value='<%=commentList.get(i).getComment2List().get(j).getComment2Num() %>'>
             <input type="hidden" name="postNum" value='<%=postNum %>'>
