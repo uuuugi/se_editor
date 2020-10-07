@@ -188,15 +188,15 @@ body {
 		<div id="listA" class="list">
 			<%
 				for (int i = 0; i < algorithmListA.size(); i++) {//코드 리스트 출력
-				int result = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
+				int tryCnt = dao.doesUserTry(id, algorithmListA.get(i).getNum());//시도한적이 있는지 체크
 			%>
 			<form action="algorithmList.jsp" target="_self" id='list<%=algorithmListA.get(i).getNum()%>' method='post'>
 				<input type="hidden" name="num" value='<%=algorithmListA.get(i).getNum()%>'> 
 				<a href="#" onclick="document.getElementById('list<%=algorithmListA.get(i).getNum()%>').submit();"><%=algorithmListA.get(i).getName()%></a>
 				<%
-					if (result == 0)
+				if (tryCnt == 0)
 					out.println("<span style='color:red;'>X</span>");
-				else if (result == 1)
+				else if (tryCnt == 1)
 					out.println("<span style='color:green'>O</span>");
 				%>
 
@@ -220,6 +220,15 @@ body {
 		algorithmNum = Integer.parseInt(request.getParameter("num"));
 		algorithmVO vo = new algorithmVO();
 		vo = dao.getAlgorithm(algorithmNum);
+
+	if(request.getParameter("result")!=null){
+		int result = Integer.parseInt(request.getParameter("result"));
+		
+		if(result==0)
+			out.print("<script> alret('실패하였습니다.') </script>");
+		else
+			out.print("<script> alret('성공하였습니다.') </script>");
+	}
 	%>
 
 <script>
