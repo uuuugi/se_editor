@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import DBconnection.DBconnection;
 
 public class memberDAO {
@@ -281,4 +281,122 @@ public class memberDAO {
 		return result;
 	}
 	
+	public ArrayList<memberVO> getIdListAll(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+
+		ArrayList<memberVO> list = new ArrayList<memberVO>();
+		
+		try {
+			conn = DBconnection.getConnection();
+
+			String sql="select * from user";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				memberVO vo = new memberVO();
+				
+				vo.setId(rs.getString("user_id"));
+				vo.setName(rs.getString("user_name"));
+				vo.setMail(rs.getString("user_email"));
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+	
+	public ArrayList<memberVO> getIdListById(String id){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+
+		ArrayList<memberVO> list = new ArrayList<memberVO>();
+		
+		try {
+			conn = DBconnection.getConnection();
+
+			String sql="select * from user where user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				memberVO vo = new memberVO();
+				
+				vo.setId(rs.getString("user_id"));
+				vo.setName(rs.getString("user_name"));
+				vo.setMail(rs.getString("user_email"));
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+	
+	public ArrayList<memberVO> getIdListByName(String name){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs;
+
+		ArrayList<memberVO> list = new ArrayList<memberVO>();
+		
+		try {
+			conn = DBconnection.getConnection();
+
+			String sql="select * from user where user_name=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				memberVO vo = new memberVO();
+				
+				vo.setId(rs.getString("user_id"));
+				vo.setName(rs.getString("user_name"));
+				vo.setMail(rs.getString("user_email"));
+				
+				list.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
 }
