@@ -34,8 +34,14 @@ SE_editor의 front/back 제작
         + logout   
             session을 초기화하는 방식을 선택하였다.
         + join   
+<<<<<<< HEAD
             js를 이용하여 pw값 일치하는지 확인
             중복확인 클릭시 idCheck.jsp에서 id가 중복되는지 확인
+=======
+            js를 이용하여 pw값 일치하는지 확인   
+            중복확인 클릭시 idCheck.jsp에서 DBIdlist와 사용자가 입력한 id가 중복되는지 확인   
+            Email 등 기타 정보들을 마저 입력받고 joinPro.jsp를 통해 입력값을 한번 더 확인한 후 회원가입
+>>>>>>> d90997b... readme update
         + openIDE   
 =======
         + login
