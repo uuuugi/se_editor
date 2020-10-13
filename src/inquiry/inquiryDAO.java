@@ -86,6 +86,49 @@ public class inquiryDAO {
 		return vo;
 	}
 	
+	public ArrayList<inquiryVO> getInquiryListAll() { // 문의하기의 글전체를 ArrayList로 반환
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<inquiryVO> inquiryList = new ArrayList<inquiryVO>();
+		
+		try {
+			conn = DBconnection.getConnection();
+
+			String sql = "select * from inquiry";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					
+					inquiryVO tmp = new inquiryVO();
+					tmp.setId(rs.getString("id"));
+					tmp.setTitle(rs.getString("title"));
+					tmp.setText(rs.getString("text"));
+					tmp.setNum(rs.getInt("inquiryNum"));
+					tmp.setComment(rs.getInt("comment"));
+					
+					inquiryList.add(tmp);
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return inquiryList;
+	}
+	
 	public ArrayList<inquiryVO> getInquiryList() { // 문의하기의 글 중 답글이 안달린 것을 모두 반환 -> 관리자가 사용할 것
 		Connection conn = null;
 		PreparedStatement pstmt = null;
