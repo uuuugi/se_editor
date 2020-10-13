@@ -47,6 +47,12 @@
         		alert("이메일 형식으로 입력해주세요")
         		return false;
         	}
+        	
+        	var form = document.userInfo;
+        	var newWinForSave = window.open("joinPro.jsp", "popUpWin", "width=500,height=500");
+        	
+        	form.setAttribute("target","popUpWin");
+        	form.submit();
         }
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
@@ -84,8 +90,7 @@
 					<span class="login100-form-title p-b-51">
 						Register
 					</span> 
-       		 <form method="post" action="joinPro.jsp" name="userInfo" 
-                onsubmit="return checkValue()">
+       		 <form method="post" action="joinPro.jsp" name="userInfo" onsubmit="return checkValue()">
             <table>
 
                 <tr>

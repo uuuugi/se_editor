@@ -9,7 +9,8 @@
     
 	<script type="text/javascript">
         function goIndex() {
-            location.href="../index.jsp";
+            opener.location.href="../index.jsp";
+            window.close();
         }
     	       
     </script>
