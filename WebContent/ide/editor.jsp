@@ -30,7 +30,7 @@ body {
         	if(language=='c')
         		code= "//SE Edtior\n//제목에 공백을 입력하지 말아주세요 \n#include <stdio.h>\n\nint main(void)\n{\n	printf(\"Hello World\");\n	return 0;\n}"; 
         	else if(language=='java')
-        		code= "// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 SELAB으로만 가능\n// 밑의 코드가 Default Code\nclass SELAB {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
+        		code= "// SE Editor\n//제목에 공백을 입력하지 말아주세요 \n//class의 이름을 codeTEST으로만 가능\n// 밑의 코드가 Default Code\nclass codeTEST {\n\n   public static void main(String[] args) {\n      System.out.println(\"Hello World\");\n\n   }\n}";
         	else if(language=='python')
         		code= "#SE Edtior\n#제목에 공백을 입력하지 말아주세요 \nprint('Hello World')";
         	else if(language=='javascript')
@@ -94,7 +94,7 @@ body {
    	 	 form.appendChild(hiddenField);
    	  
    	 	 if(save!=true){
-   				form.setAttribute("action", "shellCompile_basic"); //요청 보낼 주소
+   				form.setAttribute("action", "../shellCompile_basic"); //요청 보낼 주소
    	 	 }
    	  	code=getCode();
    	  	var hiddenField = document.createElement("input");
