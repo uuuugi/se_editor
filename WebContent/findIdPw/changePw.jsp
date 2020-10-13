@@ -20,7 +20,7 @@
 	boolean result= dao.changePw(vo);
 	if(result==true)
 	{
-		out.println("<script>alert('비밀번호가 변경되었습니다. 다시 로그인 해주세요'); location.href='index.jsp'</script>");
+		out.println("<script>alert('비밀번호가 변경되었습니다. 다시 로그인 해주세요'); location.href='../index.jsp'</script>");
 		session.invalidate();// session을 초기화 하고 메인페이지로 이동
 	}
 	else

@@ -32,15 +32,16 @@ public class mailSender {
     String fromUsername = "SE HomePage Manager";// 보내는이 이릅
     String toEmail = vo.getMail(); // 받는 주소
     
-    final String username = "hhjjkk7186@gmail.com";   // gmail id      
-    final String password = "hoq159dks"; // gmail pw
+    final String username = "id";   // gmail id      
+    final String password = "pw"; // gmail pw
     
     // 메일에 출력할 텍스트
-    String url="http://localhost:8080/se_editor/changePwForm.jsp?id="+vo.getId();
+    String url="http://localhost:8080/se_editor/findIdPw/changePwForm.jsp";
     StringBuffer sb = new StringBuffer();
     sb.append("<h3>SE_HOMEPAGE입니다.</h3>\n");
     sb.append("<h4>아래의 링크로 이동하여 비밀번호를 변경해주세요</h4>\n");
     sb.append("<form action=\""+url+"\" name='id' method='post'>");//form post를 이용하여 data를 보이지 않게함
+    sb.append("<input type='hidden' name='id' value=\""+vo.getId()+"\">");
     sb.append("<input type='submit' value='비밀번호 변경'>");
     sb.append("</form>");
     
