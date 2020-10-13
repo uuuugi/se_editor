@@ -34,6 +34,19 @@
                 alert("비밀번호를 동일하게 입력하세요.");
                 return false;
             }
+            
+            // 비밀번호 자릿수 체크
+        	if(document.userInfo.password.value.length<8){
+        		alert("비밀번호를 9글자 이상으로 생성해주세요");
+        		return false
+        	}
+            
+            //이메일 형식 체크
+        	var email= document.userInfo.mail.value;
+        	if(email.indexOf("@")==-1){	
+        		alert("이메일 형식으로 입력해주세요")
+        		return false;
+        	}
         }
         
         // 취소 버튼 클릭시 로그인 화면으로 이동
@@ -58,20 +71,10 @@
         function inputIdChk(){		// id 체크되지 않았음을 값에 저장
         	document.userInfo.idDuplication.value = "idUncheck"
         }
-
-        function emailAndPwCheck(){
-        	var email= document.userInfo.mail.value;
-        	if(email.indexOf("@")==-1){	
-        		alert("이메일 형식으로 입력해주세요")
-        		return false;
-        	}
-        	if(document.userInfo.password.value.length<8){
-        		alert("비밀번호를 9글자 이상으로 생성해주세요");
-        		return false
-        	}
-        	
-        	var form = document.userInfo;
-        	form.submit();
+        
+        function reCheck()
+        {
+        	document.userInfo.idDuplication.value = "idUncheck";
         }
     </script>
 </head>
@@ -87,7 +90,7 @@
 
                 <tr>
                                 <td>ID</td>
-								<td><input type="text" name="id" id="id" onkeydown="inputIdChk()" class="joininput" style="text-decoration:underline;"></td>
+								<td><input type="text" name="id" id="id" onkeydown="inputIdChk()" class="joininput" onchange="reCheck()" style="text-decoration:underline;"></td>
 								<input type="button" value="ID check" onclick="idCheck()" class="checkbtn" style="float:right;">
 								<input type="hidden" name="idDuplication" value="idUncheck">
                 </tr>
@@ -129,7 +132,7 @@
             </table>
             <br>
             <span class="login100-form-title p-b-51">
-            <input type="button" value="Join" class="joinbtn" onclick="emailAndPwCheck()"/>  
+            <input type="submit" value="Join" class="joinbtn"/>  
             <input type="button" value="Cancel" onclick="goIndex()" class="join2btn"/>
             </span>
         </form>
