@@ -94,15 +94,7 @@ body {
    	 	 form.appendChild(hiddenField);
    	  
    	 	 if(save!=true){
-   	  		if(codeType=="c")
-   				form.setAttribute("action", urlForc); //요청 보낼 주소
-   	 		else if(codeType=="java")
-     			form.setAttribute("action", urlForJava); //요청 보낼 주소
-     		else if(codeType=="python")
-       			form.setAttribute("action", urlForPython); //요청 보낼 주소
-      		else if(codeType=="javascript")
-        		form.setAttribute("action", urlForJavascript); //요청 보낼 주소
-   		 
+   				form.setAttribute("action", "basic"); //요청 보낼 주소
    	 	 }
    	  	code=getCode();
    	  	var hiddenField = document.createElement("input");
