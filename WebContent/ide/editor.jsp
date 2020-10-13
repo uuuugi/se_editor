@@ -94,7 +94,7 @@ body {
    	 	 form.appendChild(hiddenField);
    	  
    	 	 if(save!=true){
-   				form.setAttribute("action", "basic"); //요청 보낼 주소
+   				form.setAttribute("action", "shellCompile_basic"); //요청 보낼 주소
    	 	 }
    	  	code=getCode();
    	  	var hiddenField = document.createElement("input");
