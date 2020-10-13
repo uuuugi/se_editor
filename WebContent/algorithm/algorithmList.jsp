@@ -293,6 +293,8 @@ body {
 		
 		if(result==0)
 			out.print("<script> alret('실패하였습니다.') </script>");
+		else if(result==-1)
+			out.print("<script> alret('코드오류입니다.') </script>");
 		else
 			out.print("<script> alret('성공하였습니다.') </script>");
 	}
