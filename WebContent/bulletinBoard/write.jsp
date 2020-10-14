@@ -36,7 +36,7 @@ function goboard() {
 		<th colspan="2" style="background-color: #eeeeee; padding-top:5px;padding-bottom:5px;">내용</th>
 		</tr>
 		<tr>
-		<td><textarea placeholder="글 내용" name="text" rows="20" class="input_txtarea"></textarea></td>
+		<td><textarea placeholder="글 내용" name="text" rows="20" wrap='hard' class="input_txtarea"></textarea></td>
 </tr>
 </tbody>
 </table>

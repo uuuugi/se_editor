@@ -15,7 +15,10 @@
 	bulletinBoardVO vo = new bulletinBoardVO();
 	vo.setId( (String)session.getAttribute("id") );
 	vo.setName( request.getParameter("name") );
-	vo.setText( request.getParameter("text") );
+	
+	String text = (String)request.getParameter("text");
+	text = text.replace("\r\n","<br>");
+	vo.setText(text);
 	
 	bulletinBoardDAO dao = new bulletinBoardDAO();
 	

@@ -15,6 +15,8 @@ String id = (String) session.getAttribute("id");
 String title = request.getParameter("title");
 String text = request.getParameter("text");
 inquiryDAO dao = new inquiryDAO();
+
+text = text.replace("\r\n","<br>");
 if(dao.insertInquiry(id, title, text))
 	out.println("<script>alert('작성이 완료되었습니다.'); location.href='inquiry.jsp';</script>");
 else

@@ -49,7 +49,7 @@
 			<br/>
 			<div class="tablebody">
 				<h4 class="h4body">내용</h4>
-				<textarea name ="text" name ="text" class="textareaform"></textarea>
+				<textarea name ="text" name ="text" wrap='hard' class="textareaform"></textarea>
 			</div>
 			<br/>
 			<input type="submit" value="작성" onclick="inquiryclose()">
