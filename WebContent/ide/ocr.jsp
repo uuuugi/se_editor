@@ -76,7 +76,7 @@
 			<%=ocrCode%>
 		</div>
 
-		<form action="editor.jsp" target="editor" method="post">
+		<form action="./editor.jsp" target="editor" method="post">
 			<input type="hidden" name="ocr" value="1"> 
 			<input type="hidden" name="ocrCode" value='<%=ocrCode%>'> 
 			<input class="button1" type="submit" value="에디터로 코드 옮기기">
