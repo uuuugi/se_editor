@@ -196,13 +196,21 @@ public class codeDAO {
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		String code = "";
+		
+		String splitCode = "SE_uuugi_jjang_jjang,|SE_uuugi_jjang_jjang";// 이 코드를 기점으로 split 실행
+		String[] afterSplitCode = vo.getCode().split(splitCode);//split해서 라인별로 배열에 저장
+		for (int i = 0; i < afterSplitCode.length; i++) {//라인+개행문자를 통해 하나의 변수에 저장
+			code += afterSplitCode[i];
+			code += "\\n";
+		}
+		
 		try {
 			conn = DBconnection.getConnection();
 
 			String sql="UPDATE workspace SET code=?, codeType=? WHERE user_id=? AND codeName=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getCode());
+			pstmt.setString(1, code);
 			pstmt.setString(2, vo.getCodeType());
 			pstmt.setString(3, vo.getUser_id());
 			pstmt.setString(4, vo.getCodeName());
