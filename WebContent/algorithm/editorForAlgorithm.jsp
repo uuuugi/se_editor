@@ -141,7 +141,7 @@ float:right;
 	if(request.getParameter("algorithmNum")!=null)
 		algorithmNum = Integer.parseInt(request.getParameter("algorithmNum"));
 	%>
-
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.16.2/min/vs/loader.js"></script>
 

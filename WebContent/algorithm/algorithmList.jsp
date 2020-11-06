@@ -156,7 +156,7 @@ body {
 	}
 	function toIDE(num){
 		 var form = document.createElement("form");//폼 생성
-	   	  
+	   	 
 		 form.setAttribute("charset", "UTF-8");//인코딩 타입
 		 form.setAttribute("method", "Post");  //전송 방식
 		 form.setAttribute("target", "editor"); //타겟

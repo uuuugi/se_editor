@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="image_container"></div>
-	<form method="post" enctype="multipart/form-data" action="Servlet" target="ocr" id="image" onchange="setThumbnail(event);">
+	<form method="post" enctype="multipart/form-data" action="ocr2.jsp" target="ocr" id="image" onchange="setThumbnail(event);">
 		<p>
 			<input type="file" name="filename"> <br>
 			<input type="hidden" name ="isfile" value=1>
@@ -81,7 +81,6 @@
 		}
 	
 	else if (isfile==1) { // 사진이 있을경우
-		
 	
 		int size = 1024 * 1024 * 10; // 파일 사이즈 설정 : 10M
 	    String originalFileName = "";    //  서버에 중복된 파일 이름이 존재할 경우 처리하기 위해

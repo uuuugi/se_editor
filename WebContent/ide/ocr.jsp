@@ -75,12 +75,42 @@
 			<img src="/usr/local/apache/share/<%=imgUrl %>">
 			<%=ocrCode%>
 		</div>
+	<script>
 
-		<form action="./editor.jsp" target="editor" method="post">
+window.onload = function () {
+
+	 var form = document.createElement("form");//폼 생성
+	   	  
+	 form.setAttribute("charset", "UTF-8");//인코딩 타입
+	 form.setAttribute("method", "Post");  //전송 방식
+	 form.setAttribute("action", "editor.jsp"); //요청 보낼 주소
+	 form.setAttribute("target","editor")
+	   	  
+	 var hiddenField = document.createElement("input"); // input 버튼 생성
+	 hiddenField.setAttribute("type", "hidden");
+	 hiddenField.setAttribute("name", "ocr");
+	 hiddenField.setAttribute("value", "1");
+	 form.appendChild(hiddenField);// form에 추가
+	 
+	 var hiddenField = document.createElement("input"); // input 버튼 생성
+	 hiddenField.setAttribute("type", "hidden");
+	 hiddenField.setAttribute("name", "ocrCode");
+	 hiddenField.setAttribute("value", '<%=ocrCode%>');
+	 form.appendChild(hiddenField);// form에 추가
+	 
+	 document.body.appendChild(form);//form을 body에 생성
+	 form.submit(); //submit
+	   	
+}
+</script>
+
+
+
+<%-- 		<form action="./editor.jsp" target="editor" method="post">
 			<input type="hidden" name="ocr" value="1"> 
 			<input type="hidden" name="ocrCode" value='<%=ocrCode%>'> 
 			<input class="button1" type="submit" value="에디터로 코드 옮기기">
-		</form>
+		</form> --%>
 	<%
 		return ;
 		}

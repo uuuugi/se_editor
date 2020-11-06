@@ -95,7 +95,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = DBconnection.getConnection();
 
-			String sql = "select name, postNum from board where id=?";
+			String sql = "select * from board where id=?";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      pstmt.setString(1, id);
@@ -135,7 +135,7 @@ public class bulletinBoardDAO {
 		try {
 			conn = DBconnection.getConnection();
 
-			String sql = "select name, postNum from board where name=?";
+			String sql = "select * from board where name=?";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      pstmt.setString(1, title);
