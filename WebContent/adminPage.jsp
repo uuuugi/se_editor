@@ -91,13 +91,22 @@ if(request.getParameter("logAll")!=null){// 전체저장
 
 if(request.getParameter("logDate")!=null){// 날짜별 저장
 	String date="";
-	
+
 	date=request.getParameter("logDate");
-	date = Ldao.changeDate(date);
+	if(date.length()!=10){%>
+		<script>
+			window.onload= function(){
+				alert("날짜를 선택해주세요");
+			}
+		</script>
+	<% }
+	else{
+		date = Ldao.changeDate(date);
 	
-	logList = Ldao.getLogByDate(date);
+		logList = Ldao.getLogByDate(date);
 	
-	logCheck++;
+		logCheck++;
+	}
 }
 
 if(request.getParameter("logId")!=null){// id별로 저장
