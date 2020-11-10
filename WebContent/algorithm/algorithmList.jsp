@@ -185,14 +185,14 @@ body {
 	ArrayList<algorithmVO> algorithmList4 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level4"));
 	
 	if(request.getParameter("algoResult")!=null){
-		int result;
-		String resultTime= (String)request.getParameter("algoTime");
-		result = Integer.parseInt(request.getParameter("algoResult"));
+		int algoResult;
+		algoResult = Integer.parseInt(request.getParameter("algoResult"));
+		String algoTime= (String)request.getParameter("algoTime");
 		
-		if(result==1)
-			out.println("<script>alert('성공, 시간: "+resultTime+"'); </script>");
+		if(algoResult==1)
+			out.println("<script>alert('성공, 시간: "+algoTime+"'); </script>");
 		else
-			out.println("<script>alert('실패, 시간: "+resultTime+"'); </script>");
+			out.println("<script>alert('실패, 시간: "+algoTime+"'); </script>");
 	}
 	%>
 
