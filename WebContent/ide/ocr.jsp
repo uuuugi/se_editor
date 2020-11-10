@@ -28,6 +28,8 @@
 </style>
 </head>
 <body>
+<% if(request.getParameter("ocrCode")==null){
+%>
 	<div id="image_container"></div>
 	<form method="post" enctype="multipart/form-data" action="Servlet" target="ocr" id="image" onchange="setThumbnail(event);">
 		<p>
@@ -37,6 +39,7 @@
 			<input class="button1" type="submit" value="전송">
 		</p>
 	</form>
+	<% } %>
 <script>	
 	function setThumbnail(event) { // 이미지 입력시 미리보기
 		var reader = new FileReader(); 
@@ -49,6 +52,7 @@
 			};
 		reader.readAsDataURL(event.target.files[0]);
 	}
+	
 </script>
 
 	<%
@@ -72,6 +76,7 @@
 		
 		%>
 		<div class="code">
+			<input type="button" value="새로고침" onclick="window.location.reload()">
 			<img src="/usr/local/apache/share/<%=imgUrl %>">
 			<%=ocrCode%>
 		</div>
@@ -104,13 +109,11 @@ window.onload = function () {
 }
 </script>
 
-
-
-<%-- 		<form action="./editor.jsp" target="editor" method="post">
+ 		<form action="./editor.jsp" target="editor" method="post">
 			<input type="hidden" name="ocr" value="1"> 
 			<input type="hidden" name="ocrCode" value='<%=ocrCode%>'> 
 			<input class="button1" type="submit" value="에디터로 코드 옮기기">
-		</form> --%>
+		</form>
 	<%
 		return ;
 		}
