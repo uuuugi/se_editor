@@ -29,11 +29,17 @@
 </head>
 <body>
 <% if(request.getParameter("ocrCode")==null){
+	String url="ocr.jsp";
+	
+	if(request.getParameter("retry")!=null)
+		url="ide/ocr.jsp";
+	
 %>
 	<div id="image_container"></div>
-	<form method="post" enctype="multipart/form-data" action="Servlet" target="ocr" id="image" onchange="setThumbnail(event);">
+	<form method="post" enctype="multipart/form-data" action="<%=url%>" target="ocr" id="image" onchange="setThumbnail(event);">
 		<p>
 			<input type="file" name="filename"> <br> (2MB를 넘을 수 없음)
+			<input type="hidden" name="retry" value=1>
 		</p>
 		<p>
 			<input class="button1" type="submit" value="전송">
