@@ -183,6 +183,17 @@ body {
 	ArrayList<algorithmVO> algorithmList2 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level2"));
 	ArrayList<algorithmVO> algorithmList3 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level3"));
 	ArrayList<algorithmVO> algorithmList4 = new ArrayList<algorithmVO>(dao.getAlgorithmList("level4"));
+	
+	if(request.getParameter("algoResult")!=null){
+		int result;
+		String resultTime= (String)request.getParameter("algoTime");
+		result = Integer.parseInt(request.getParameter("algoResult"));
+		
+		if(result==1)
+			out.println("<script>alert('성공, 시간: "+resultTime+"'); </script>");
+		else
+			out.println("<script>alert('실패, 시간: "+resultTime+"'); </script>");
+	}
 	%>
 
 	<div id="mySidenav" class="sidenav">
