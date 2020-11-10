@@ -360,7 +360,7 @@ window.onload=function(){ // 문제 클릭시 ide에 자동으로 문제번호 �
 			사용언어 : <%=userCodeList.get(i).getCodeType()%>
 			평균 시간: <%=userCodeList.get(i).getTime() %>
 			<br>
-			<%=userCodeList.get(i).getCode()%>
+			<%=userCodeList.get(i).getCode().replace("\\n","<br>")%>
 		</div>
 		</div>
 	<% } %>
