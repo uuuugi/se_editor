@@ -191,8 +191,11 @@ body {
 		
 		if(algoResult==1)
 			out.println("<script>alert('성공, 시간: "+algoTime+"'); </script>");
+		else if (algoResult== -1)
+			out.println("<script>alert('에러'); </script>");
 		else
 			out.println("<script>alert('실패, 시간: "+algoTime+"'); </script>");
+		
 	}
 	%>
 
@@ -299,16 +302,6 @@ body {
 		algorithmVO vo = new algorithmVO();
 		vo = dao.getAlgorithm(algorithmNum);
 
-	if(request.getParameter("result")!=null){
-		int result = Integer.parseInt(request.getParameter("result"));
-		
-		if(result==0)
-			out.print("<script> alret('실패하였습니다.') </script>");
-		else if(result==-1)
-			out.print("<script> alret('코드오류입니다.') </script>");
-		else
-			out.print("<script> alret('성공하였습니다.') </script>");
-	}
 	%>
 
 <script>
