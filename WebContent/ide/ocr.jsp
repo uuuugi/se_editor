@@ -28,18 +28,23 @@
 </style>
 </head>
 <body>
-<% if(request.getParameter("ocrCode")==null){
-	String url="ocr.jsp";
+<% 
 	
-	if(request.getParameter("retry")!=null)
-		url="ide/ocr.jsp";
-	
-%>
+	if(request.getParameter("retry")!=null){ %>
 	<div id="image_container"></div>
-	<form method="post" enctype="multipart/form-data" action="<%=url%>" target="ocr" id="image" onchange="setThumbnail(event);">
+	<form method="post" enctype="multipart/form-data" action="../ide/ocr.jsp" target="ocr" id="image" onchange="setThumbnail(event);">
 		<p>
 			<input type="file" name="filename"> <br> (2MB를 넘을 수 없음)
-			<input type="hidden" name="retry" value=1>
+		</p>
+		<p>
+			<input class="button1" type="submit" value="전송">
+		</p>
+	</form>
+	<% }else{%>
+	<div id="image_container"></div>
+	<form method="post" enctype="multipart/form-data" action="ocr.jsp" target="ocr" id="image" onchange="setThumbnail(event);">
+		<p>
+			<input type="file" name="filename"> <br> (2MB를 넘을 수 없음)
 		</p>
 		<p>
 			<input class="button1" type="submit" value="전송">
@@ -82,8 +87,10 @@
 		
 		%>
 		<div class="code">
-			<input type="button" value="새로고침" onclick="window.location.reload()">
-			<img src="/usr/local/apache/share/<%=imgUrl %>">
+			<form>
+				<input type="hidden" name="retry" value=1>
+				<input type="submit" value="새로고침">
+			</form>
 			<%=ocrCode%>
 		</div>
 	<script>
